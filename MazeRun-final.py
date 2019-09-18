@@ -126,6 +126,41 @@ def DFS(maze, root_x=0, root_y=0, stack=None, path=None):
     return DFS(maze, prev[0], prev[1], stack, path)
 
 
+def DFS_iter(maze):
+    stack = [(0, 0)]
+    path = [(0, 0)]
+
+    maze[0][0] = VISITED
+
+    n = len(maze)-1
+    while stack and maze[n][n] != VISITED:
+
+        if maze[0][0] == FAILED:
+            print("No-solution")
+            return maze, path, len(path)
+
+        x, y = stack.pop()
+        for dx, dy in dirs:
+            i = x + dx
+            j = y + dy
+            c = len(stack)
+            if isValid(maze, i, j) and maze[i][j] != VISITED:
+                stack.append((i, j))
+                path.append((i, j))
+                maze[i][j] = VISITED
+                break
+        if c == len(stack):
+            path.remove((x, y))
+            if not path:
+                print("No-Solution")
+                return maze, path, len(path)
+            stack.append(path[-1])
+            maze[x][y] = FAILED
+
+    print("Found-Solution")
+    return maze, path, len(path)
+
+
 def BFS(maze, root_x=0, root_y=0, ):
     # enqueue starting point and mark it as visited
     q = collections.deque()
@@ -396,7 +431,7 @@ wall_probability = 0.3
 algo = 'BFS'
 num_trials = 5
 
-algoTrialDriver(dim, wall_probability, algo, num_trials)
+# algoTrialDriver(dim, wall_probability, algo, num_trials)
 
 '''Uncomment this to test BFS vs DFS head-to-head on the same maze'''
 '''
@@ -416,10 +451,9 @@ print('\n\n')
 print('BFS')
 result2 = BFS(maze2)
 printMaze(result2)
-
-maze = generateMaze(15,0.3)
-result = DFS(maze)
+'''
+maze = generateMaze(150, 0.33)
+result = DFS_iter(maze)
 print(result)
 printMaze(result[0])
 print((result[0] == 1).sum())
-'''
