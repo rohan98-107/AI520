@@ -26,7 +26,7 @@ def resetMaze(maze):
 
     return res
 
-def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, heuristic = dist_manhattan, init_maxsize = 0, fixed_dim=110, fixed_p=0.31):
+def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, init_maxsize = 0, fixed_dim=110, fixed_p=0.31):
 
     result_maze = None
     result_path = None
@@ -80,8 +80,8 @@ print()
 start2 = generateMaze(10,0.3)
 printMaze(start2)
 print()
-start2_solved, path = A_star(start2,dist_manhattan)
+start2_solved, path = A_star_manhattan(start2)
 printMaze(start2_solved)
-res = makeHarder(start2_solved,path,'nodes_expanded',A_star)
+res = makeHarder(start2_solved,path,'nodes_expanded',A_star_manhattan)
 printMaze(res[0])
 print(res[1])

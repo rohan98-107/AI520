@@ -166,7 +166,7 @@ def DFS_leftUp(maze):
     #print("Found-Solution")
     return maze, path
 
-def BFS(maze, root_x=0, root_y=0, ):
+def BFS(maze, root_x=0, root_y=0):
     # enqueue starting point and mark it as visited
     q = collections.deque()
     q.append((root_x, root_y))
@@ -230,7 +230,6 @@ def dist_euclid(x1, y1, x2, y2):
 
 def dist_manhattan(x1, y1, x2, y2):
     return abs(x1 - x2) + abs(y1 - y2)
-
 
 def A_star(maze, heuristic):
     dim = len(maze)
@@ -319,16 +318,22 @@ def A_star(maze, heuristic):
 
     return maze, None
 
+def A_star_euclid(maze):
+    return A_star(maze, dist_euclid)
+
+def A_star_manhattan(maze):
+    return A_star(maze, dist_manhattan)
 
 def bdBFS(maze):
     dim = len(maze)
     parents = [[(-1, -1)] * dim for t in range(dim)]
     maze[0][0] = VISITED
     maze[dim - 1][dim - 1] = TARGET_VISITED
-    s_q = collections.deque([(0, 0)])
-    t_q = collections.deque([(dim - 1, dim - 1)])
+    s_q = collections.deque([(0, 0)]) #source BFS queue
+    t_q = collections.deque([(dim - 1, dim - 1)]) #target BFS queue
     s_path_terminal = None
     t_path_terminal = None
+    maxFringe = 2
     while s_q and t_q and not s_path_terminal:
         x1, y1 = s_q.popleft()
         x2, y2 = t_q.popleft()
@@ -354,14 +359,15 @@ def bdBFS(maze):
             if isValid(maze, newX2, newY2) and not maze[newX2][newY2] == TARGET_VISITED:
                 # if source has been there and coming from target we have full path
                 if maze[newX2][newY2] == VISITED:
-                    t_path_terminal = (x2, y2)
-                    s_path_terminal = (newX2, newY2)
+                    t_path_terminal = (x2, y2) #target BFS ended here
+                    s_path_terminal = (newX2, newY2) #met source BFS at
                     break
                 # else add to target fringe to continue search
                 else:
                     maze[newX2][newY2] = TARGET_VISITED
                     parents[newX2][newY2] = (x2, y2)
                     t_q.append((newX2, newY2))
+        maxFringe = max(maxFringe,s_q.count() + t_q.count())
     if not s_path_terminal:
         # mark all visited paths as failures
         for i in range(dim):
@@ -369,7 +375,7 @@ def bdBFS(maze):
                 if maze[i][j] > 0:
                     maze[i][j] = FAILED
         #print("No-Solution")
-        return maze, None
+        return maze, None, maxFringe
     #print("Found-Solution")
 
     # need to annotate maze successes & failures
@@ -399,7 +405,7 @@ def bdBFS(maze):
                     maze[i][j] = FAILED
                 elif maze[i][j] == TARGET_VISITED:
                     maze[i][j] = TARGET_FAILED
-    return maze, path
+    return maze, path, maxFringe
 
 
 # simple utility driver to run multiple trials of one algo at a time
@@ -421,10 +427,10 @@ def algoTrialDriver(dim, wall_probability, algo, num_trials):
 
         if(algo == 'A_STAR_EUCLID'):
             start = time.time()
-            result, path = A_star(maze, dist_euclid)
+            result, path = A_star_euclid(maze)
         elif(algo == 'A_STAR_MANHATTAN'):
             start = time.time()
-            result, path = A_star(maze, dist_manhattan)
+            result, path = A_star_manhattan(maze)
         elif(algo == 'DFS'):
             start = time.time()
             result, path = DFS(maze)
@@ -465,11 +471,11 @@ def aStarTrialDriver(dim, wall_probability, success_sample_size):
         mz_y = deepcopy(mz)
 
         euc_start = time.time()
-        euc_mz, euc_path = A_star(mz_x, dist_euclid)
+        euc_mz, euc_path = A_star_euclid(mz_x)
         euc_time = time.time() - euc_start
 
         man_start = time.time()
-        man_mz, man_path = A_star(mz_y, dist_manhattan)
+        man_mz, man_path = A_star_manhattan(mz_y)
         man_time = time.time() - man_start
 
         if (euc_path is not None) & (man_path is not None):
