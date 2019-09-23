@@ -95,6 +95,12 @@ def numVisited(maze):
                 res += 1
     return res
 
+def printMazeHM_orig(result):
+    plt.figure(dpi=100)
+    sns.heatmap(result, vmin=-4, vmax=4, linewidth=0.5, square=True, cbar=False, xticklabels=False, yticklabels=False,
+                cmap='PiYG')
+    plt.show()
+
 
 def isValid(maze, cell_x, cell_y):
     dim = len(maze)
