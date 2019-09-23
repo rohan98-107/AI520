@@ -73,9 +73,17 @@ def printMaze(result):
 
 
 def printMazeHM(result):
-    plt.figure(dpi=100)
-    sns.heatmap(result, vmin=-4, vmax=4, linewidth=0.5, square=True, cbar=False, xticklabels=False, yticklabels=False,
-                cmap='PiYG')
+    if len(result) < 50:
+        size = 3
+    elif len(result) < 100:
+        size = 5
+    elif len(result) < 150:
+        size = 7
+    else:
+        size = 10
+
+    plt.figure(figsize=(size,size), dpi=1000)
+    sns.heatmap(result, vmin=-4, vmax=4, square=True, cbar=False, xticklabels=False, yticklabels=False, cmap='PiYG')
     plt.show()
 
 
@@ -137,7 +145,6 @@ def DFS(maze):
     # print("Found-Solution")
     return maze, path, max_stack_length
 
-
 def DFS_revised(maze):
     stack = [(0, 0)]
     path = []
@@ -191,18 +198,17 @@ def DFS_revised(maze):
     # print("Found-Solution")
     return maze, path, max_stack_length
 
-
 def DFS_leftUp(maze):
     stack = [(0, 0)]
     path = [(0, 0)]
 
     maze[0][0] = VISITED
 
-    n = len(maze) - 1
+    n = len(maze)-1
     while stack and maze[n][n] != VISITED:
 
         if maze[0][0] == FAILED:
-            # print("No-solution")
+            #print("No-solution")
             return maze, None
 
         x, y = stack.pop()
@@ -218,16 +224,15 @@ def DFS_leftUp(maze):
         if c == len(stack):
             path.remove((x, y))
             if not path:
-                # print("No-Solution")
+                #print("No-Solution")
                 return maze, None
             stack.append(path[-1])
             maze[x][y] = FAILED
 
-    # print("Found-Solution")
+    #print("Found-Solution")
     return maze, path
 
-
-def BFS(maze, root_x=0, root_y=0):
+def BFS(maze, root_x=0, root_y=0, ):
     # enqueue starting point and mark it as visited
     q = collections.deque()
     q.append((root_x, root_y))
@@ -246,7 +251,7 @@ def BFS(maze, root_x=0, root_y=0):
                 for j in range(dim + 1):
                     if maze[i][j] == VISITED:
                         maze[i][j] = FAILED
-            # print("No-Solution")
+            #print("No-Solution")
             return maze, None
 
         # dequeue
@@ -263,12 +268,12 @@ def BFS(maze, root_x=0, root_y=0):
                 parents[i][j] = (x, y)
 
     # if the loop is terminated via the terminating condition, there was a solution
-    # print("Found-Solution")
+    #print("Found-Solution")
 
     # need to annotate maze successes & failures
     # 1. retrace final path via parents matrix
     path = []
-    parent_i = dim
+    parent_i = dim;
     parent_j = dim
     while (parent_i >= 0) & (parent_j >= 0):
         path.append((parent_i, parent_j))
@@ -306,6 +311,7 @@ def A_star(maze, heuristic):
 
     # enqueue (0,0) with distance 0 from S
     heapq.heappush(fringe_hp, (0, (0, 0)))
+    max_hp_size = len(fringe_hp)
 
     # loop until either the goal is found or the fringe is empty
     while len(fringe_hp) > 0:
@@ -318,12 +324,12 @@ def A_star(maze, heuristic):
 
         # termination case: solution was found at goal
         if (i == dim - 1) & (j == dim - 1):
-            # print('Found-Solution')
+            #print('Found-Solution')
 
             # annotate maze with solution information:
             # 1. retrace solved path
             path = []
-            s = i;
+            s = i
             t = j
             while (s >= 0) & (t >= 0):
                 maze[s][t] = VISITED
@@ -340,7 +346,7 @@ def A_star(maze, heuristic):
                 t = bad_block[1]
                 maze[s][t] = FAILED
 
-            return maze, path
+            return maze, path, max_hp_size
 
         for dx, dy in dirs:
             child = (i + dx, j + dy)  # if not solution, then check all children (L,R,U,D)
@@ -350,7 +356,7 @@ def A_star(maze, heuristic):
 
                 # calculate path length from S for heuristic purposes - inefficient, I know
                 path_length = 0
-                parent_i = child[0];
+                parent_i = child[0]
                 parent_j = child[1]
                 while (parent_i >= 0) & (parent_j >= 0):
                     parent = parents[parent_i][parent_j]
@@ -361,16 +367,33 @@ def A_star(maze, heuristic):
                 # calculate distance heuristic h based on param (checked already)
                 h = heuristic(child[0], child[1], dim - 1, dim - 1)
 
+                pushNeeded = True
+
                 # if child already in fringe & no update needed, then skip
-                for q in fringe_hp:
-                    if (q[1] == (child[0], child[1])) & (path_length + h > q[0]):
-                        continue
+                # else delete child so you can push it in again
+                for q in range(len(fringe_hp)):
+                    elt_wt = (fringe_hp[q])[0]
+                    elt_i = ((fringe_hp[q])[1])[0]
+                    elt_j = ((fringe_hp[q])[1])[1]
+
+                    if (elt_i == child[0]) & (elt_j == child[1]):
+                        if((path_length + h) > elt_wt):
+                            pushNeeded = False
+                        else:
+                            fringe_hp[q] = fringe_hp[0]
+                            garbage = heapq.heappop(fringe_hp)
+                            heapq.heapify(fringe_hp)
+                        break
 
                 # insert new child or update child in fringe
-                heapq.heappush(fringe_hp, (path_length + h, (child[0], child[1])))
+                if pushNeeded:
+                    heapq.heappush(fringe_hp, (path_length + h, (child[0], child[1])))
+
+        if len(fringe_hp) > max_hp_size:
+            max_hp_size = len(fringe_hp)
 
     # if fringe is empty without reaching goal, this was a failure
-    # print("No-Solution")
+    #print("No-Solution")
 
     # annotate bad path blocks (visited but not in final path)
     for bad_block in visited:
@@ -378,8 +401,7 @@ def A_star(maze, heuristic):
         t = bad_block[1]
         maze[s][t] = FAILED
 
-    return maze, None
-
+    return maze, None, max_hp_size
 
 def A_star_euclid(maze):
     return A_star(maze, dist_euclid)
@@ -388,17 +410,15 @@ def A_star_euclid(maze):
 def A_star_manhattan(maze):
     return A_star(maze, dist_manhattan)
 
-
 def bdBFS(maze):
     dim = len(maze)
     parents = [[(-1, -1)] * dim for t in range(dim)]
     maze[0][0] = VISITED
     maze[dim - 1][dim - 1] = TARGET_VISITED
-    s_q = collections.deque([(0, 0)])  # source BFS queue
-    t_q = collections.deque([(dim - 1, dim - 1)])  # target BFS queue
+    s_q = collections.deque([(0, 0)])
+    t_q = collections.deque([(dim - 1, dim - 1)])
     s_path_terminal = None
     t_path_terminal = None
-    maxFringe = 2
     while s_q and t_q and not s_path_terminal:
         x1, y1 = s_q.popleft()
         x2, y2 = t_q.popleft()
@@ -424,24 +444,23 @@ def bdBFS(maze):
             if isValid(maze, newX2, newY2) and not maze[newX2][newY2] == TARGET_VISITED:
                 # if source has been there and coming from target we have full path
                 if maze[newX2][newY2] == VISITED:
-                    t_path_terminal = (x2, y2)  # target BFS ended here
-                    s_path_terminal = (newX2, newY2)  # met source BFS at
+                    t_path_terminal = (x2, y2)
+                    s_path_terminal = (newX2, newY2)
                     break
                 # else add to target fringe to continue search
                 else:
                     maze[newX2][newY2] = TARGET_VISITED
                     parents[newX2][newY2] = (x2, y2)
                     t_q.append((newX2, newY2))
-        maxFringe = max(maxFringe, s_q.count() + t_q.count())
     if not s_path_terminal:
         # mark all visited paths as failures
         for i in range(dim):
             for j in range(dim):
                 if maze[i][j] > 0:
                     maze[i][j] = FAILED
-        # print("No-Solution")
-        return maze, None, maxFringe
-    # print("Found-Solution")
+        #print("No-Solution")
+        return maze, None
+    #print("Found-Solution")
 
     # need to annotate maze successes & failures
     # 1. retrace final path via parents matrix
@@ -470,17 +489,18 @@ def bdBFS(maze):
                     maze[i][j] = FAILED
                 elif maze[i][j] == TARGET_VISITED:
                     maze[i][j] = TARGET_FAILED
-    return maze, path, maxFringe
+    return maze, path
 
 
 # simple utility driver to run multiple trials of one algo at a time
 
 def algoTrialDriver(dim, wall_probability, algo, num_trials):
+
     num_successes = 0
     total_time = 0
     success_time = 0
 
-    for i in range(1, num_trials + 1):
+    for i in range(1, num_trials+1):
         # print('\n', '-' * 20)
         # print('TRIAL ', i, ' OF ', num_trials)
         # print()
@@ -489,39 +509,38 @@ def algoTrialDriver(dim, wall_probability, algo, num_trials):
 
         # print('Running...', algo, '\n')
 
-        if (algo == 'A_STAR_EUCLID'):
+        if(algo == 'A_STAR_EUCLID'):
             start = time.time()
-            result, path = A_star_euclid(maze)
-        elif (algo == 'A_STAR_MANHATTAN'):
+            result, path = A_star(maze, dist_euclid)
+        elif(algo == 'A_STAR_MANHATTAN'):
             start = time.time()
-            result, path = A_star_manhattan(maze)
-        elif (algo == 'DFS'):
+            result, path = A_star(maze, dist_manhattan)
+        elif(algo == 'DFS'):
             start = time.time()
             result, path = DFS(maze)
-        elif (algo == 'BFS'):
+        elif(algo == 'BFS'):
             start = time.time()
             result, path = BFS(maze)
-        elif algo == 'BD_BFS':
+        elif(algo == 'BD_BFS'):
             start = time.time()
             result, path = bdBFS(maze)
         else:
-            result = None;
-            path = None
+            result = None; path = None
 
         end = time.time()
 
         if path is not None:
             num_successes += 1
 
-        total_time += (end - start)
+        total_time += (end-start)
 
         # printMaze(result)
         # print('\n', '-' * 20)
 
     return (num_successes / num_trials), (total_time / num_trials)
 
-
 def aStarTrialDriver(dim, wall_probability, success_sample_size):
+
     num_successes = 0
 
     total_visited_AEuc = 0
@@ -529,17 +548,19 @@ def aStarTrialDriver(dim, wall_probability, success_sample_size):
     total_visited_AMan = 0
     total_time_AMan = 0
 
-    while num_successes < 50:
+    while (num_successes < success_sample_size):
         mz = generateMaze(dim, wall_probability)
         mz_x = deepcopy(mz)
         mz_y = deepcopy(mz)
 
         euc_start = time.time()
-        euc_mz, euc_path = A_star_euclid(mz_x)
+        # add param max_fringe_size in returned if needed -- took out here to save runtime
+        euc_mz, euc_path = A_star(mz_x, dist_euclid)
         euc_time = time.time() - euc_start
 
         man_start = time.time()
-        man_mz, man_path = A_star_manhattan(mz_y)
+        # see above comment
+        man_mz, man_path = A_star(mz_y, dist_manhattan)
         man_time = time.time() - man_start
 
         if (euc_path is not None) & (man_path is not None):
@@ -549,11 +570,12 @@ def aStarTrialDriver(dim, wall_probability, success_sample_size):
             total_visited_AMan += numVisited(man_mz)
             total_time_AMan += man_time
 
-    return ((total_visited_AEuc / success_sample_size) / (dim ** 2)), (total_time_AEuc / success_sample_size), \
-           ((total_visited_AMan / success_sample_size) / (dim ** 2)), (total_time_AMan / success_sample_size)
+    return ((total_visited_AEuc/success_sample_size)/(dim**2)), (total_time_AEuc/success_sample_size), \
+           ((total_visited_AMan/success_sample_size)/(dim**2)), (total_time_AMan/success_sample_size)
 
 
 def dfsTrialDriver(dim, wall_probability, num_trials):
+
     total_time_RD = 0
     total_time_LU = 0
 
@@ -570,10 +592,11 @@ def dfsTrialDriver(dim, wall_probability, num_trials):
         total_time_RD += time.time() - RD_start
         total_visited_RD += numVisited(rd_mz)
 
+
         LU_start = time.time()
         lu_mz, lu_path = DFS_leftUp(mz_y)
         total_time_LU += time.time() - LU_start
         total_visited_LU += numVisited(lu_mz)
 
-    return (total_time_RD / num_trials), (total_time_LU / num_trials), \
-           ((total_visited_RD / num_trials) / (dim ** 2)), ((total_visited_LU / num_trials) / (dim ** 2))
+    return (total_time_RD/num_trials), (total_time_LU/num_trials), \
+           ((total_visited_RD/num_trials)/(dim**2)), ((total_visited_LU/num_trials)/(dim**2))
