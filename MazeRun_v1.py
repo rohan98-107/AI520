@@ -1,23 +1,29 @@
+
 # Assignment 1 - Maze Runner
 # Rohan Rele, Alex Eng & Aakash Raman
+# Problems 1 & 2
+
 import numpy as np
 import random
 from colorama import init, Fore, Back, Style
+import matplotlib.pyplot as plt
+import seaborn as sns
 import math
 import heapq
-from copy import copy, deepcopy
 import collections
 import time
+from copy import deepcopy
 
 init(autoreset=True)
 
 # key for maze
 EMPTY = 0
-BLOCKED = -1
-VISITED = 1
+BLOCKED = -4
+VISITED = 3
+FAILED = -3
 TARGET_VISITED = 2
-FAILED = -2
-TARGET_FAILED = -3
+TARGET_FAILED = -2
+
 dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
 
@@ -69,6 +75,21 @@ def printMaze(result):
     return
 
 
+def printMazeHM(result):
+    plt.figure(dpi=100)
+    sns.heatmap(result, vmin=-4, vmax=4, linewidth=0.5, square=True, cbar=False, xticklabels=False, yticklabels=False, cmap='PiYG')
+    plt.show()
+
+
+def numVisited(maze):
+    res = 0
+    for i in range(len(maze)):
+        for j in range(len(maze)):
+            if maze[i][j] not in [EMPTY, BLOCKED]:
+                res += 1
+    return res
+
+
 def isValid(maze, cell_x, cell_y):
     dim = len(maze)
     if not (0 <= cell_x < dim and 0 <= cell_y < dim):
@@ -80,53 +101,44 @@ def isValid(maze, cell_x, cell_y):
         return True
 
 
-def DFS(maze, root_x=0, root_y=0, stack=None, path=None):
-    # initializing stack
-    if stack is None:
-        stack = []
-    # initializing path
-    if path is None:
-        path = []
+def DFS(maze):
+    stack = [(0, 0)]
+    path = [(0, 0)]
+    max_stack_length = 0
+    maze[0][0] = VISITED
 
-    # if there are no moves from start, there is no solution
-    if maze[0][0] == FAILED:
-        print("No-Solution")
-        return maze, path, len(path)
+    n = len(maze)-1
+    while stack and maze[n][n] != VISITED:
 
-    # if recursion reaches bottom right corner of matrix (maze), we are done
-    if root_x == len(maze) - 1 and root_y == len(maze) - 1:
-        maze[root_x][root_y] = VISITED
-        path.append((root_x, root_y))
-        print("Found-Solution")
-        return maze, path, len(path)
+        if maze[0][0] == FAILED:
+            #print("No-solution")
+            return maze, None
 
-    # at every recursive call, append the cell's coordinates to the stack and mark it as visited
-    stack.append((root_x, root_y))
-    maze[root_x][root_y] = VISITED
-    path.append((root_x, root_y))
+        x, y = stack.pop()
+        for dx, dy in dirs:
+            i = x + dx
+            j = y + dy
+            c = len(stack)
+            if c > max_stack_length:
+                max_stack_length = c
 
-    # checking to see if the recursion can move up, down, left, right, if there is an available move...
-    # ...perform DFS on that move
-    for dx, dy in dirs:
-        i = root_x + dx
-        j = root_y + dy
-        if isValid(maze, i, j) and (i, j) not in stack:
-            return DFS(maze, i, j, stack, path)
-    # if there are no available moves, pop the coordinate on the current recusive step, mark it as failed...
-    # ... and then pop the coordinate underneath it and continue DFS from that point
+            if isValid(maze, i, j) and maze[i][j] != VISITED:
+                stack.append((i, j))
+                path.append((i, j))
+                maze[i][j] = VISITED
+                break
+        if c == len(stack):
+            path.remove((x, y))
+            if not path:
+                #print("No-Solution")
+                return maze, None, max_stack_length
+            stack.append(path[-1])
+            maze[x][y] = FAILED
 
-    stack.remove((root_x, root_y))
-    maze[root_x][root_y] = FAILED
-    path.remove((root_x, root_y))
-    if not stack:
-        prev = (root_x, root_y)
-    else:
-        prev = stack.pop()
-        path.remove((prev[0], prev[1]))
-    return DFS(maze, prev[0], prev[1], stack, path)
+    #print("Found-Solution")
+    return maze, path, max_stack_length
 
-
-def DFS_iter(maze):
+def DFS_leftUp(maze):
     stack = [(0, 0)]
     path = [(0, 0)]
 
@@ -136,11 +148,11 @@ def DFS_iter(maze):
     while stack and maze[n][n] != VISITED:
 
         if maze[0][0] == FAILED:
-            print("No-solution")
-            return maze, path, len(path)
+            #print("No-solution")
+            return maze, None
 
         x, y = stack.pop()
-        for dx, dy in dirs:
+        for dx, dy in dirs[::-1]:
             i = x + dx
             j = y + dy
             c = len(stack)
@@ -152,14 +164,13 @@ def DFS_iter(maze):
         if c == len(stack):
             path.remove((x, y))
             if not path:
-                print("No-Solution")
-                return maze, path, len(path)
+                #print("No-Solution")
+                return maze, None
             stack.append(path[-1])
             maze[x][y] = FAILED
 
-    print("Found-Solution")
-    return maze, path, len(path)
-
+    #print("Found-Solution")
+    return maze, path
 
 def BFS(maze, root_x=0, root_y=0, ):
     # enqueue starting point and mark it as visited
@@ -180,8 +191,8 @@ def BFS(maze, root_x=0, root_y=0, ):
                 for j in range(dim + 1):
                     if maze[i][j] == VISITED:
                         maze[i][j] = FAILED
-            print("No-Solution")
-            return maze
+            #print("No-Solution")
+            return maze, None
 
         # dequeue
         x, y = q.popleft()
@@ -197,7 +208,7 @@ def BFS(maze, root_x=0, root_y=0, ):
                 parents[i][j] = (x, y)
 
     # if the loop is terminated via the terminating condition, there was a solution
-    print("Found-Solution")
+    #print("Found-Solution")
 
     # need to annotate maze successes & failures
     # 1. retrace final path via parents matrix
@@ -216,7 +227,7 @@ def BFS(maze, root_x=0, root_y=0, ):
         for j in range(dim + 1):
             if (maze[i][j] == VISITED) & ((i, j) not in path):
                 maze[i][j] = FAILED
-    return maze
+    return maze, path
 
 
 def dist_euclid(x1, y1, x2, y2):
@@ -235,7 +246,7 @@ def A_star(maze, heuristic):
 
     # fringe (priority heap) will have tuples (priority, (i,j))
     # closed set aka visited list will have tuples (i,j)
-    fringe_hp = [];
+    fringe_hp = []
     visited = []
 
     # enqueue (0,0) with distance 0 from S
@@ -252,7 +263,7 @@ def A_star(maze, heuristic):
 
         # termination case: solution was found at goal
         if (i == dim - 1) & (j == dim - 1):
-            print('Found-Solution')
+            #print('Found-Solution')
 
             # annotate maze with solution information:
             # 1. retrace solved path
@@ -274,11 +285,11 @@ def A_star(maze, heuristic):
                 t = bad_block[1]
                 maze[s][t] = FAILED
 
-            return maze
+            return maze, path
 
         for dx, dy in dirs:
             child = (i + dx, j + dy)  # if not solution, then check all children (L,R,U,D)
-            if isValid(maze, child[0], child[1]) and child not in visited:
+            if (isValid(maze, child[0], child[1])) and (maze[child[0]][child[1]] != VISITED):
                 visited.append(child)
                 parents[child[0]][child[1]] = (i, j)
 
@@ -304,7 +315,7 @@ def A_star(maze, heuristic):
                 heapq.heappush(fringe_hp, (path_length + h, (child[0], child[1])))
 
     # if fringe is empty without reaching goal, this was a failure
-    print("No-Solution")
+    #print("No-Solution")
 
     # annotate bad path blocks (visited but not in final path)
     for bad_block in visited:
@@ -312,7 +323,7 @@ def A_star(maze, heuristic):
         t = bad_block[1]
         maze[s][t] = FAILED
 
-    return maze
+    return maze, None
 
 
 def bdBFS(maze):
@@ -363,9 +374,9 @@ def bdBFS(maze):
             for j in range(dim):
                 if maze[i][j] > 0:
                     maze[i][j] = FAILED
-        print("No-Solution")
-        return maze
-    print("Found-Solution")
+        #print("No-Solution")
+        return maze, None
+    #print("Found-Solution")
 
     # need to annotate maze successes & failures
     # 1. retrace final path via parents matrix
@@ -394,66 +405,113 @@ def bdBFS(maze):
                     maze[i][j] = FAILED
                 elif maze[i][j] == TARGET_VISITED:
                     maze[i][j] = TARGET_FAILED
-    return maze
+    return maze, path
 
 
 # simple utility driver to run multiple trials of one algo at a time
 
 def algoTrialDriver(dim, wall_probability, algo, num_trials):
-    for i in range(1, num_trials + 1):
-        print('\n', '-' * 20)
-        print('TRIAL ', i, ' OF ', num_trials)
-        print()
+
+    num_successes = 0
+    total_time = 0
+    success_time = 0
+
+    for i in range(1, num_trials+1):
+        # print('\n', '-' * 20)
+        # print('TRIAL ', i, ' OF ', num_trials)
+        # print()
 
         maze = generateMaze(dim, wall_probability)
 
-        print('Running...', algo, '\n')
+        # print('Running...', algo, '\n')
 
-        if (algo == 'A_STAR_EUCLID'):
-            result = A_star(maze, dist_euclid)
-        elif (algo == 'A_STAR_MANHATTAN'):
-            result = A_star(maze, dist_manhattan)
-        elif (algo == 'DFS'):
-            result = DFS(maze, stack=None)[0]
-        elif (algo == 'BFS'):
-            result = BFS(maze)
-        elif (algo == 'BD_BFS'):
-            result = bdBFS(maze)
+        if(algo == 'A_STAR_EUCLID'):
+            start = time.time()
+            result, path = A_star(maze, dist_euclid)
+        elif(algo == 'A_STAR_MANHATTAN'):
+            start = time.time()
+            result, path = A_star(maze, dist_manhattan)
+        elif(algo == 'DFS'):
+            start = time.time()
+            result, path, max_backtrack = DFS(maze)
+        elif(algo == 'BFS'):
+            start = time.time()
+            result, path = BFS(maze)
+        elif(algo == 'BD_BFS'):
+            start = time.time()
+            result, path = bdBFS(maze)
+        else:
+            result = None; path = None
 
-        printMaze(result)
+        end = time.time()
 
-        print('\n', '-' * 20)
+        if path is not None:
+            num_successes += 1
 
+        total_time += (end-start)
 
-# algos A_STAR_EUCLID, A_STAR_MANHATTAN, BFS, DFS, BD_BFS'
-dim = 15
-wall_probability = 0.3
-algo = 'BFS'
-num_trials = 5
+        # printMaze(result)
+        # print('\n', '-' * 20)
 
-# algoTrialDriver(dim, wall_probability, algo, num_trials)
+    return (num_successes / num_trials), (total_time / num_trials)
 
-'''Uncomment this to test BFS vs DFS head-to-head on the same maze'''
-'''
-dim = 15
-wall_probability = 0.3
+def aStarTrialDriver(dim, wall_probability, success_sample_size):
 
-maze1 = generateMaze(dim, wall_probability)
-maze2 = deepcopy(maze1)
+    num_successes = 0
 
-print('DFS')
-result1 = DFS(maze1, stack = None)
-printMaze(result1)
+    total_visited_AEuc = 0
+    total_time_AEuc = 0
+    total_visited_AMan = 0
+    total_time_AMan = 0
 
 
-print('\n\n')
+    while (num_successes < 50):
+        mz = generateMaze(dim, wall_probability)
+        mz_x = deepcopy(mz)
+        mz_y = deepcopy(mz)
 
-print('BFS')
-result2 = BFS(maze2)
-printMaze(result2)
-'''
-maze = generateMaze(150, 0.33)
-result = DFS_iter(maze)
-print(result)
-printMaze(result[0])
-print((result[0] == 1).sum())
+        euc_start = time.time()
+        euc_mz, euc_path = A_star(mz_x, dist_euclid)
+        euc_time = time.time() - euc_start
+
+        man_start = time.time()
+        man_mz, man_path = A_star(mz_y, dist_manhattan)
+        man_time = time.time() - man_start
+
+        if (euc_path is not None) & (man_path is not None):
+            num_successes += 1
+            total_visited_AEuc += numVisited(euc_mz)
+            total_time_AEuc += euc_time
+            total_visited_AMan += numVisited(man_mz)
+            total_time_AMan += man_time
+
+    return ((total_visited_AEuc/success_sample_size)/(dim**2)), (total_time_AEuc/success_sample_size), \
+           ((total_visited_AMan/success_sample_size)/(dim**2)), (total_time_AMan/success_sample_size)
+
+
+def dfsTrialDriver(dim, wall_probability, num_trials):
+
+    total_time_RD = 0
+    total_time_LU = 0
+
+    total_visited_RD = 0
+    total_visited_LU = 0
+
+    for i in range(num_trials):
+        mz = generateMaze(dim, wall_probability)
+        mz_x = deepcopy(mz)
+        mz_y = deepcopy(mz)
+
+        RD_start = time.time()
+        rd_mz, rd_path = DFS(mz_x)
+        total_time_RD += time.time() - RD_start
+        total_visited_RD += numVisited(rd_mz)
+
+
+        LU_start = time.time()
+        lu_mz, lu_path = DFS_leftUp(mz_y)
+        total_time_LU += time.time() - LU_start
+        total_visited_LU += numVisited(lu_mz)
+
+    return (total_time_RD/num_trials), (total_time_LU/num_trials), \
+           ((total_visited_RD/num_trials)/(dim**2)), ((total_visited_LU/num_trials)/(dim**2))
