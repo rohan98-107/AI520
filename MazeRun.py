@@ -222,6 +222,10 @@ def DFS_again(maze):
             max_stack_length = max(max_stack_length, len(stack))
 
     if not maze[n][n] == VISITED:
+        for i in range(n + 1):
+            for j in range(n + 1):
+                if (maze[i][j] == VISITED):
+                    maze[i][j] = FAILED
         return maze, None, max_stack_length
     path = []
     parent_i = n
