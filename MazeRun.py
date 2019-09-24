@@ -20,6 +20,7 @@ VISITED = 3
 FAILED = -3
 TARGET_VISITED = 2
 TARGET_FAILED = -2
+FIRE = -8
 
 dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
@@ -48,6 +49,18 @@ def generateMaze(dim, p):
     maze[dim - 1][dim - 1] = EMPTY
     return maze
 
+def resetMaze(maze):
+    res = maze
+    res[res == VISITED] = EMPTY
+    res[res == FAILED] = EMPTY
+    res[res == TARGET_FAILED] = EMPTY
+    res[res == TARGET_VISITED] = EMPTY
+
+    return res
+
+def findNodesExpanded(maze, dim):
+    r = np.array(maze)
+    return dim * dim - ((r == EMPTY).sum() + (r == BLOCKED).sum())
 
 def printMaze(result):
     dim = len(result)
@@ -66,6 +79,8 @@ def printMaze(result):
                 print(Fore.WHITE + Back.WHITE + Style.DIM + str(result[i][j]), end='')
             elif result[i][j] == BLOCKED:
                 print(Fore.RED + Back.RED + Style.BRIGHT + str(result[i][j]), end='')
+            elif result[i][j] == FIRE:
+                print(Fore.MAGENTA + Back.MAGENTA + Style.BRIGHT + str(result[i][j]), end='')
             else:
                 print(Fore.BLACK + Back.BLACK + '+' + str(result[i][j]), end='')
         print()
@@ -189,6 +204,44 @@ def DFS_revised(maze):
             maze[x][y] = FAILED
 
     # print("Found-Solution")
+    return maze, path, max_stack_length
+
+def DFS_again(maze):
+    stack = collections.deque([(0, 0)])
+    max_stack_length = 0
+    n = len(maze) - 1
+    parents = [[(-1, -1)] * (n+1) for t in range(n+1)]
+    while stack and not maze[n][n] == VISITED:
+        x, y = stack.pop()
+        if maze[x][y] == EMPTY:
+            maze[x][y] = VISITED
+            for dx, dy in dirs[::-1]:
+                i = x + dx
+                j = y + dy
+
+                if isValid(maze, i, j) and maze[i][j] != VISITED:
+                    stack.append((i, j))
+                    parents[i][j] = (x,y)
+
+            max_stack_length = max(max_stack_length, len(stack))
+
+    if not maze[n][n] == VISITED:
+        return maze, None, max_stack_length
+    path = []
+    parent_i = n
+    parent_j = n
+    while (parent_i >= 0) & (parent_j >= 0):
+        path.append((parent_i, parent_j))
+        parent = parents[parent_i][parent_j]
+        parent_i = parent[0]
+        parent_j = parent[1]
+    path.reverse()
+    # 2. mark all coordinates visited but not in final path as failures
+    for i in range(n + 1):
+        for j in range(n + 1):
+            if (maze[i][j] == VISITED) & ((i, j) not in path):
+                maze[i][j] = FAILED
+
     return maze, path, max_stack_length
 
 
@@ -419,36 +472,40 @@ def bdBFS(maze):
     while s_q and t_q and not s_path_terminal:
         x1, y1 = s_q.popleft()
         x2, y2 = t_q.popleft()
-        for dx, dy in dirs:
-            newX1 = x1 + dx
-            newX2 = x2 + dx
-            newY1 = y1 + dy
-            newY2 = y2 + dy
-
+        if not maze[x1][y1] == VISITED:
             # source bfs
-            if isValid(maze, newX1, newY1) and not maze[newX1][newY1] == VISITED:
-                # if target has been there and coming from source we have full path
-                if maze[newX1][newY1] == TARGET_VISITED:
-                    s_path_terminal = (x1, y1)
-                    t_path_terminal = (newX1, newY1)
-                    break
-                # else add to source fringe to continue search
-                else:
-                    maze[newX1][newY1] = VISITED
-                    parents[newX1][newY1] = (x1, y1)
-                    s_q.append((newX1, newY1))
+            maze[x1][y1] = VISITED
+            for dx, dy in dirs:
+                newX1 = x1 + dx
+                newY1 = y1 + dy
+                if isValid(maze, newX1, newY1) and not maze[newX1][newY1] == VISITED:
+                    # if target has been there and coming from source we have full path
+                    if maze[newX1][newY1] == TARGET_VISITED:
+                        s_path_terminal = (x1, y1)
+                        t_path_terminal = (newX1, newY1)
+                        break
+                    # else add to source fringe to continue search
+                    else:
+
+                        parents[newX1][newY1] = (x1, y1)
+                        s_q.append((newX1, newY1))
+
+        if not s_path_terminal and not maze[x2][y2] == TARGET_VISITED:
             # target bfs
-            if isValid(maze, newX2, newY2) and not maze[newX2][newY2] == TARGET_VISITED:
-                # if source has been there and coming from target we have full path
-                if maze[newX2][newY2] == VISITED:
-                    t_path_terminal = (x2, y2)
-                    s_path_terminal = (newX2, newY2)
-                    break
-                # else add to target fringe to continue search
-                else:
-                    maze[newX2][newY2] = TARGET_VISITED
-                    parents[newX2][newY2] = (x2, y2)
-                    t_q.append((newX2, newY2))
+            aze[x2][y2] = TARGET_VISITED
+            for dx, dy in dirs:
+                newX2 = x2 + dx
+                newY2 = y2 + dy
+                if isValid(maze, newX2, newY2) and not maze[newX2][newY2] == TARGET_VISITED:
+                    # if source has been there and coming from target we have full path
+                    if maze[newX2][newY2] == VISITED:
+                        t_path_terminal = (x2, y2)
+                        s_path_terminal = (newX2, newY2)
+                        break
+                    # else add to target fringe to continue search
+                    else:
+                        parents[newX2][newY2] = (x2, y2)
+                        t_q.append((newX2, newY2))
     if not s_path_terminal:
         # mark all visited paths as failures
         for i in range(dim):

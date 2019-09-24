@@ -12,22 +12,7 @@
 # Pair 2: A* Manhattan with Maximal Nodes Expanded
 
 from test import *
-
-
-def findNodesExpanded(maze, dim):
-    r = np.array(maze)
-    return dim * dim - ((r == EMPTY).sum() + (r == BLOCKED).sum())
-
-
-def resetMaze(maze):
-    res = maze
-    res[res == VISITED] = EMPTY
-    res[res == FAILED] = EMPTY
-    res[res == TARGET_FAILED] = EMPTY
-    res[res == TARGET_VISITED] = EMPTY
-
-    return res
-
+from MazeRun import *
 
 f = lambda time, p: p * (math.exp(-1 * time))
 
@@ -102,4 +87,3 @@ res = makeHarder(start_solved, path, 'maxsize', DFS_revised, init_maxsize=maxsiz
 printMazeHM_orig(res[0])
 print(res[1])
 print("new maxsize: " + str(res[2]))
-
