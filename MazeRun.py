@@ -51,11 +51,7 @@ def generateMaze(dim, p):
 
 def resetMaze(maze):
     res = maze
-    res[res == VISITED] = EMPTY
-    res[res == FAILED] = EMPTY
-    res[res == TARGET_FAILED] = EMPTY
-    res[res == TARGET_VISITED] = EMPTY
-
+    res[res != BLOCKED] = EMPTY
     return res
 
 def findNodesExpanded(maze, dim):
@@ -367,78 +363,78 @@ def A_star(maze, heuristic):
         min_fringe_elt = heapq.heappop(fringe_hp)
         i = min_fringe_elt[1][0];
         j = min_fringe_elt[1][1]
-        maze[i][j] = VISITED
-        visited.append(min_fringe_elt[1])
+        if not maze[i][j] == VISITED:
+            maze[i][j] = VISITED
+            visited.append(min_fringe_elt[1])
 
-        # termination case: solution was found at goal
-        if (i == dim - 1) & (j == dim - 1):
-            # print('Found-Solution')
+            # termination case: solution was found at goal
+            if (i == dim - 1) & (j == dim - 1):
+                # print('Found-Solution')
 
-            # annotate maze with solution information:
-            # 1. retrace solved path
-            path = []
-            s = i
-            t = j
-            while (s >= 0) & (t >= 0):
-                maze[s][t] = VISITED
-                path.append((s, t))
-                parent = parents[s][t]
-                s = parent[0]
-                t = parent[1]
-            path.reverse()
+                # annotate maze with solution information:
+                # 1. retrace solved path
+                path = []
+                s = i
+                t = j
+                while (s >= 0) & (t >= 0):
+                    maze[s][t] = VISITED
+                    path.append((s, t))
+                    parent = parents[s][t]
+                    s = parent[0]
+                    t = parent[1]
+                path.reverse()
 
-            # 2. mark bad path blocks (visited but not in final path)
-            bad_paths = list(set(visited).difference(set(path)))
-            for bad_block in bad_paths:
-                s = bad_block[0];
-                t = bad_block[1]
-                maze[s][t] = FAILED
+                # 2. mark bad path blocks (visited but not in final path)
+                bad_paths = list(set(visited).difference(set(path)))
+                for bad_block in bad_paths:
+                    s = bad_block[0];
+                    t = bad_block[1]
+                    maze[s][t] = FAILED
 
-            return maze, path, max_hp_size
+                return maze, path, max_hp_size
 
-        for dx, dy in dirs:
-            child = (i + dx, j + dy)  # if not solution, then check all children (L,R,U,D)
-            if (isValid(maze, child[0], child[1])) and (maze[child[0]][child[1]] != VISITED):
-                visited.append(child)
-                parents[child[0]][child[1]] = (i, j)
+            for dx, dy in dirs:
+                child = (i + dx, j + dy)  # if not solution, then check all children (L,R,U,D)
+                if (isValid(maze, child[0], child[1])) and (maze[child[0]][child[1]] != VISITED):
+                    parents[child[0]][child[1]] = (i, j)
 
-                # calculate path length from S for heuristic purposes - inefficient, I know
-                path_length = 0
-                parent_i = child[0]
-                parent_j = child[1]
-                while (parent_i >= 0) & (parent_j >= 0):
-                    parent = parents[parent_i][parent_j]
-                    parent_i = parent[0];
-                    parent_j = parent[1]
-                    path_length += 1
+                    # calculate path length from S for heuristic purposes - inefficient, I know
+                    path_length = 0
+                    parent_i = child[0]
+                    parent_j = child[1]
+                    while (parent_i >= 0) & (parent_j >= 0):
+                        parent = parents[parent_i][parent_j]
+                        parent_i = parent[0];
+                        parent_j = parent[1]
+                        path_length += 1
 
-                # calculate distance heuristic h based on param (checked already)
-                h = heuristic(child[0], child[1], dim - 1, dim - 1)
+                    # calculate distance heuristic h based on param (checked already)
+                    h = heuristic(child[0], child[1], dim - 1, dim - 1)
 
-                pushNeeded = True
+                    pushNeeded = True
 
-                # if child already in fringe & no update needed, then skip
-                # else delete child so you can push it in again
-                for q in range(len(fringe_hp)):
-                    elt_wt = (fringe_hp[q])[0]
-                    elt_i = ((fringe_hp[q])[1])[0]
-                    elt_j = ((fringe_hp[q])[1])[1]
+                    # if child already in fringe & no update needed, then skip
+                    # else delete child so you can push it in again
+                    for q in range(len(fringe_hp)):
+                        elt_wt = (fringe_hp[q])[0]
+                        elt_i = ((fringe_hp[q])[1])[0]
+                        elt_j = ((fringe_hp[q])[1])[1]
 
-                    if (elt_i == child[0]) & (elt_j == child[1]):
-                        if ((path_length + h) > elt_wt):
-                            pushNeeded = False
-                        else:
-                            fringe_hp[q] = fringe_hp[0]
-                            garbage = heapq.heappop(fringe_hp)
-                            heapq.heapify(fringe_hp)
-                        break
+                        if (elt_i == child[0]) & (elt_j == child[1]):
+                            if ((path_length + h) > elt_wt):
+                                pushNeeded = False
+                            else:
+                                fringe_hp[q] = fringe_hp[0]
+                                garbage = heapq.heappop(fringe_hp)
+                                heapq.heapify(fringe_hp)
+                            break
 
-                # insert new child or update child in fringe
-                if pushNeeded:
-                    heapq.heappush(fringe_hp, (path_length + h, (child[0], child[1])))
+                    # insert new child or update child in fringe
+                    if pushNeeded:
+                        heapq.heappush(fringe_hp, (path_length + h, (child[0], child[1])))
 
-        if len(fringe_hp) > max_hp_size:
-            max_hp_size = len(fringe_hp)
+            if len(fringe_hp) > max_hp_size:
+                max_hp_size = len(fringe_hp)
 
     # if fringe is empty without reaching goal, this was a failure
     # print("No-Solution")

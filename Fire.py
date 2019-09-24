@@ -11,10 +11,8 @@ def generateValidFireMaze(dim, p):
         if tpath_p:
             return resetMaze(tmaze_p)
 
-def trySurviving(dim = 110, p = 0.305, algo_choice = A_star_manhattan, q = .5):
-    maze = generateValidFireMaze(dim,p)
-    maze, path, maxsize = algo_choice(maze)
-    resetMaze(maze)
+def trySurviving(maze, path, q):
+    dim = len(maze)
     onFire = set()
     onFire.add((0,dim-1))
     maze[0][0] = VISITED
@@ -30,23 +28,23 @@ def trySurviving(dim = 110, p = 0.305, algo_choice = A_star_manhattan, q = .5):
                     if not maze[spread_x][spread_y] == VISITED:
                         maze[spread_x][spread_y] = FIRE
         if (x, y) in onFire:
-            return False, maze, path, (x,y), onFire
-    return True, maze, path, None, onFire
+            return False, maze, (x,y), onFire
+    return True, maze, None, onFire
 
-data = []
-for q in [0.05 * x for x in range(1,21)]:
-    successes = 0
-    for i in range(100): #probably want this to be > 1000 instead of 100 as there's a good amount of variance with 100
-        success, maze, path, burn_location, fire_at_termination =  trySurviving(dim = 20, q=q)
-        if success:
-            # print(success)
-            successes += 1
-            # print(q)
-            # printMaze(maze)
-            # print(path)
-            # print()
-            # print(burn_location)
-            # print()
-            # print(fire_at_termination)
-    data.append((q,successes))
-print(data)
+def fireDriver(qs = [0.1 * x for x in range(1,11)], dim = 110, p = 0.305, algo_choice = A_star_manhattan, mazes_per_q = 100, trials_per_maze = 5):
+    data = {round(x,2):0 for x in qs}
+    for i in range(mazes_per_q):
+        maze = generateValidFireMaze(dim,p)
+        maze, path, maxsize = algo_choice(maze)
+        maze = resetMaze(maze)
+        for q in data.keys():
+            for _ in range(trials_per_maze):
+                success, maze, burn_location, fire_at_termination =  trySurviving(maze, path, q)
+                if success:
+                    data[q] +=1
+                maze = resetMaze(maze)
+        if (i+1) %10 == 0:
+            print(data)
+    return data
+
+fireDriver()
