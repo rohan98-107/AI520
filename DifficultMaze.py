@@ -12,12 +12,27 @@
 # Pair 2: A* Manhattan with Maximal Nodes Expanded
 
 from test import *
-from MazeRun import *
+
+
+def findNodesExpanded(maze, dim):
+    r = np.array(maze)
+    return dim * dim - ((r == EMPTY).sum() + (r == BLOCKED).sum())
+
+
+def resetMaze(maze):
+    res = maze
+    res[res == VISITED] = EMPTY
+    res[res == FAILED] = EMPTY
+    res[res == TARGET_FAILED] = EMPTY
+    res[res == TARGET_VISITED] = EMPTY
+
+    return res
+
 
 f = lambda time, p: p * (math.exp(-1 * time))
 
 
-def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, init_maxsize=0, fixed_dim=110, fixed_p=0.31):
+def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, fixed_dim, init_maxsize=0):
     result_maze = None
     result_path = None
 
@@ -34,7 +49,7 @@ def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, init_max
 
         for px, py in tpath:
 
-            count *= 1.25
+            count *= 1.75
             tmaze[px][py] = BLOCKED
             tmaze = resetMaze(tmaze)
             tmaze_p, tpath_p, maxsize = algo_choice(tmaze)
@@ -46,7 +61,7 @@ def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, init_max
 
             if not tpath_p:
                 tmaze[px][py] = VISITED
-                if random.random() < f(count, 0.23):
+                if random.random() < f(count, 0.25):
                     for dx, dy in dirs:
                         if not isValid(tmaze, px + dx,
                                        py + dy) and 0 <= px + dx < fixed_dim and 0 <= py + dy < fixed_dim:
@@ -58,32 +73,16 @@ def makeHarder(init_solved_maze, init_path, metric_choice, algo_choice, init_max
                 tmaze = deepcopy(tmaze_p)
                 tpath = tpath_p[1:-1]
             else:
-                if random.random() < f(count, 0.23):
+                if random.random() < f(count, 0.25):
                     F = Fp
                     tmaze = deepcopy(tmaze_p)
                     tpath = tpath_p[1:-1]
+                else:
+                    tmaze[px][py] = VISITED
 
         result_maze = resetMaze(tmaze)
         result, result_path, result_maxsize = algo_choice(result_maze)
-        print("Found local optima")
-        break
 
+    print("Found local optima")
     return result, result_path, result_maxsize
 
-
-while True:
-    start = generateMaze(110, 0.3)
-    printMazeHM_orig(start)
-    #start_solved, path, maxsize = A_star_manhattan(start)
-    start_solved, path, maxsize = DFS_revised(start)
-    printMazeHM_orig(start_solved)
-    if path:
-        break
-    print("No-Solution")
-
-print("original maxsize: " + str(maxsize))
-res = makeHarder(start_solved, path, 'maxsize', DFS_revised, init_maxsize=maxsize)
-#res = makeHarder(start_solved, path, 'nodes_expanded', A_star_manhattan, init_maxsize=maxsize)
-printMazeHM_orig(res[0])
-print(res[1])
-print("new maxsize: " + str(res[2]))
