@@ -83,9 +83,9 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
 algo = 'a'
 algo_choice = DFS_again if algo == 'DFS' else A_star_manhattan
 metric_choice = 'maxsize' if algo == 'DFS' else 'nodes_expanded'
-p = .2 if algo == 'DFS' else .2
-k = 20 if algo == 'DFS' else 20
-sample = 20 if algo == 'DFS' else 10
+p = .2 if algo == 'DFS' else .1
+k = 20 if algo == 'DFS' else 5
+sample = 20 if algo == 'DFS' else 20
 hard_maze, difficulty = beamSearch(k = k, dim = 175, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = True)
 printMazeHM_orig(hard_maze)
 print("best metric: " + str(difficulty))
