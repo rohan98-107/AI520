@@ -1,6 +1,6 @@
 # Assignment 1 - Maze Runner
 # Rohan Rele, Alex Eng & Aakash Raman
-# Problem 1 / Main Script 
+# Problem 1 / Main Script
 
 import numpy as np
 import random
@@ -407,7 +407,9 @@ def A_star_manhattan(maze):
 def bdBFS(maze):
     dim = len(maze)
     parents = [[(-1, -1)] * dim for t in range(dim)]
+    #enqueue start into source queue
     s_q = collections.deque([(0, 0)])
+    #enqueue goal into target queue
     t_q = collections.deque([(dim - 1, dim - 1)])
     s_path_terminal = None
     t_path_terminal = None
@@ -421,14 +423,14 @@ def bdBFS(maze):
                 newX1 = x1 + dx
                 newY1 = y1 + dy
                 if isValid(maze, newX1, newY1) and not maze[newX1][newY1] == VISITED:
-                    # if target has been there and coming from source we have full path
+                    # if target has been to new coordinates we are and coming from source we have full path
+                    # so mark these locations as terminal for the two BFS's
                     if maze[newX1][newY1] == TARGET_VISITED:
                         s_path_terminal = (x1, y1)
                         t_path_terminal = (newX1, newY1)
                         break
                     # else add to source fringe to continue search
                     else:
-
                         parents[newX1][newY1] = (x1, y1)
                         s_q.append((newX1, newY1))
 
@@ -439,7 +441,8 @@ def bdBFS(maze):
                 newX2 = x2 + dx
                 newY2 = y2 + dy
                 if isValid(maze, newX2, newY2) and not maze[newX2][newY2] == TARGET_VISITED:
-                    # if source has been there and coming from target we have full path
+                    # if source has been to new coordinates we are and coming from target we have full path
+                    # so mark these locations as terminal for the two BFS's
                     if maze[newX2][newY2] == VISITED:
                         t_path_terminal = (x2, y2)
                         s_path_terminal = (newX2, newY2)
@@ -448,6 +451,8 @@ def bdBFS(maze):
                     else:
                         parents[newX2][newY2] = (x2, y2)
                         t_q.append((newX2, newY2))
+
+    #check if we found a path before either queue empty
     if not s_path_terminal:
         # mark all visited paths as failures
         for i in range(dim):
@@ -468,6 +473,7 @@ def bdBFS(maze):
         parent = parents[parent_i][parent_j]
         parent_i = parent[0]
         parent_j = parent[1]
+    #do same thing again for target parents
     t_path = []
     parent_i = t_path_terminal[0];
     parent_j = t_path_terminal[1]
@@ -477,7 +483,9 @@ def bdBFS(maze):
         parent_i = parent[0]
         parent_j = parent[1]
     path = s_path[::-1] + t_path
+
     # 2. mark all coordinates visited but not in final path as failures
+    #have different target and source failed notations for visualizations
     for i in range(dim):
         for j in range(dim):
             if (i, j) not in path:
