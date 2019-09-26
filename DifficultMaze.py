@@ -11,7 +11,7 @@
 # Pair 1: DFS w/ maximal fringe (stack) size
 # Pair 2: A* Manhattan with Maximal Nodes Expanded
 
-from test import *
+from MazeRun import *
 
 
 def findNodesExpanded(maze, dim):
@@ -93,16 +93,23 @@ def SimulatedAnnealingDriver(metric_choice, algo_choice, dim=110, p=0.305, numTr
     for i in range(numTrials):
         while True:
             start = generateMaze(dim, p)
-            # start_solved, path, maxsize = A_star_manhattan(start)
             start_solved, path, maxsize = algo_choice(start)
             if path:
                 break
-        s = findNodesExpanded(start_solved, dim)
+        '''
+        while True:
+            start = generateMaze(dim, p)
+            start_solved, path, maxsize = algo_choice(start)
+            s = findNodesExpanded(start_solved, dim)
+            if s >= 20000 and path:
+                break
+        '''
+        
+        # s = findNodesExpanded(start_solved, dim)
         res = makeHarder(start_solved, path, metric_choice, algo_choice, fixed_dim=dim, init_maxsize=maxsize)
         n = findNodesExpanded(res[0], dim)
-        # res = makeHarder(start_solved, path, 'nodes_expanded', A_star_manhattan, init_maxsize=maxsize)
+        # if res[2] > best metric:
         if n > best_metric:
-
             best_metric = n
             resetMaze(res[0])
             best_maze = res[0]
@@ -114,7 +121,9 @@ def SimulatedAnnealingDriver(metric_choice, algo_choice, dim=110, p=0.305, numTr
     return best_maze, best_metric
 
 
-maze, metric = SimulatedAnnealingDriver('nodes_expanded', A_star_manhattan, dim=110, numTrials=10)
+# maze, metric = SimulatedAnnealingDriver('maxsize', DFS, dim=175, numTrials=1)
+maze, metric = SimulatedAnnealingDriver('nodes_expanded', A_star_manhattan, dim=175, numTrials=1)
 print("best metric: " + str(metric))
 printMazeHM_orig(maze)
+# printMazeHM_orig(DFS(maze)[0])
 printMazeHM_orig(A_star_manhattan(maze)[0])
