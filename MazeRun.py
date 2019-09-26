@@ -1,5 +1,7 @@
 # Assignment 1 - Maze Runner
 # Rohan Rele, Alex Eng & Aakash Raman
+# Problem 1 / Main Script 
+
 import numpy as np
 import random
 from colorama import init, Fore, Back, Style
@@ -22,7 +24,7 @@ TARGET_VISITED = 2
 TARGET_FAILED = -2
 FIRE = -8
 
-dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)] # Right, Down, Up, Left
 
 
 def generateMaze(dim, p):
@@ -51,14 +53,15 @@ def generateMaze(dim, p):
 
 def resetMaze(maze):
     res = maze
-    res[res != BLOCKED] = EMPTY
+    res[res != BLOCKED] = EMPTY # set all indices where maze is blocked
     return res
 
 def findNodesExpanded(maze, dim):
     r = np.array(maze)
     return dim * dim - ((r == EMPTY).sum() + (r == BLOCKED).sum())
+    #count all empty and blocked cells, subtract from total
 
-def printMaze(result):
+def printMaze(result): # method to visualize maze in console output
     dim = len(result)
     if not 0 < dim:
         print("error")
@@ -83,7 +86,7 @@ def printMaze(result):
     return
 
 
-def printMazeHM(result):
+def printMazeHM(result): # method to print high dimensional mazes in jupyter notebook
     if len(result) < 50:
         size = 3
     elif len(result) < 100:
@@ -98,14 +101,14 @@ def printMazeHM(result):
     plt.show()
 
 
-def printMazeHM_orig(result):
+def printMazeHM_orig(result): # fast method to visualize a wide range of dimensional mazes
     plt.figure(dpi=100)
     sns.heatmap(result, vmin=-4, vmax=4, linewidth=0.5, square=True, cbar=False, xticklabels=False, yticklabels=False,
                 cmap='PiYG')
     plt.show()
 
 
-def numVisited(maze):
+def numVisited(maze): # count all cells that are not empty or blocked
     res = 0
     for i in range(len(maze)):
         for j in range(len(maze)):
@@ -116,19 +119,23 @@ def numVisited(maze):
 
 def isValid(maze, cell_x, cell_y):
     dim = len(maze)
-    if not (0 <= cell_x < dim and 0 <= cell_y < dim):
+    if not (0 <= cell_x < dim and 0 <= cell_y < dim): # boundaries of maze
         return False
-    # if cell is blocked or is a previously "failed" cell
+    # if cell is blocked, a previously "failed" cell or on fire, return false
     if maze[cell_x][cell_y] < 0:
         return False
     else:
         return True
 
 def DFS(maze):
+
+    # initialize stack and list of parent cells
     stack = collections.deque([(0, 0)])
     max_stack_length = 0
     n = len(maze) - 1
     parents = [[(-1, -1)] * (n+1) for t in range(n+1)]
+
+    # standard DFS algorithm
     while stack and not maze[n][n] == VISITED:
         x, y = stack.pop()
         if maze[x][y] == EMPTY:
@@ -142,13 +149,16 @@ def DFS(maze):
                     parents[i][j] = (x,y)
 
             max_stack_length = max(max_stack_length, len(stack))
+            # compare current length of stack to max length, used later for part 3
 
-    if not maze[n][n] == VISITED:
+    if not maze[n][n] == VISITED: # if while loop terminates before goal visited, stack is empty, no solution
         for i in range(n + 1):
             for j in range(n + 1):
                 if (maze[i][j] == VISITED):
-                    maze[i][j] = FAILED
+                    maze[i][j] = FAILED # mark all visited nodes as failed, no node led to goal
         return maze, None, max_stack_length
+
+    # 1. trace back the successful path to the start using parents list
     path = []
     parent_i = n
     parent_j = n
@@ -166,17 +176,21 @@ def DFS(maze):
 
     return maze, path, max_stack_length
 
-
+# modified DFS with different direction preferences (left first, then up) -
+# - used for comparison/analysis purposes
+# exact same algorithm/ comments as above except for one change
 def DFS_leftUp(maze):
     stack = collections.deque([(0, 0)])
     max_stack_length = 0
     n = len(maze) - 1
     parents = [[(-1, -1)] * (n+1) for t in range(n+1)]
+
     while stack and not maze[n][n] == VISITED:
+
         x, y = stack.pop()
         if maze[x][y] == EMPTY:
             maze[x][y] = VISITED
-            for dx, dy in dirs:
+            for dx, dy in dirs: # directions are re-ordered to prioritize left/up before right/down
                 i = x + dx
                 j = y + dy
 
@@ -192,6 +206,7 @@ def DFS_leftUp(maze):
                 if (maze[i][j] == VISITED):
                     maze[i][j] = FAILED
         return maze, None, max_stack_length
+
     path = []
     parent_i = n
     parent_j = n
@@ -201,14 +216,13 @@ def DFS_leftUp(maze):
         parent_i = parent[0]
         parent_j = parent[1]
     path.reverse()
-    # 2. mark all coordinates visited but not in final path as failures
+
     for i in range(n + 1):
         for j in range(n + 1):
             if (maze[i][j] == VISITED) & ((i, j) not in path):
                 maze[i][j] = FAILED
 
     return maze, path, max_stack_length
-
 
 def BFS(maze, root_x=0, root_y=0, ):
     # enqueue starting point and mark it as visited
@@ -484,23 +498,19 @@ def algoTrialDriver(dim, wall_probability, algo, num_trials):
     success_time = 0
 
     for i in range(1, num_trials + 1):
-        # print('\n', '-' * 20)
-        # print('TRIAL ', i, ' OF ', num_trials)
-        # print()
 
         maze = generateMaze(dim, wall_probability)
 
-        # print('Running...', algo, '\n')
-
         if (algo == 'A_STAR_EUCLID'):
             start = time.time()
-            result, path = A_star(maze, dist_euclid)
+            result, path, maxheap = A_star(maze, dist_euclid)
         elif (algo == 'A_STAR_MANHATTAN'):
             start = time.time()
-            result, path = A_star(maze, dist_manhattan)
+            result, path, maxheap = A_star(maze, dist_manhattan)
         elif (algo == 'DFS'):
             start = time.time()
-            result, path = DFS(maze)
+            r = DFS(maze)
+            result, path = (r[0],r[1])
         elif (algo == 'BFS'):
             start = time.time()
             result, path = BFS(maze)
@@ -518,9 +528,7 @@ def algoTrialDriver(dim, wall_probability, algo, num_trials):
 
         total_time += (end - start)
 
-        # printMaze(result)
-        # print('\n', '-' * 20)
-
+    # return success rate (solvability rate) and total time for n trials
     return (num_successes / num_trials), (total_time / num_trials)
 
 
@@ -544,7 +552,7 @@ def aStarTrialDriver(dim, wall_probability, success_sample_size):
 
         man_start = time.time()
         # see above comment
-        man_mz, man_path = A_star(mz_y, dist_manhattan)
+        man_mz, man_path, man_fringesize = A_star(mz_y, dist_manhattan)
         man_time = time.time() - man_start
 
         if (euc_path is not None) & (man_path is not None):
@@ -558,7 +566,7 @@ def aStarTrialDriver(dim, wall_probability, success_sample_size):
            ((total_visited_AMan / success_sample_size) / (dim ** 2)), (total_time_AMan / success_sample_size)
 
 
-def dfsTrialDriver(dim, wall_probability, num_trials):
+def dfsTrialDriver(dim, wall_probability, num_trials): # function to compare standard DFS to DFS_leftUp
     total_time_RD = 0
     total_time_LU = 0
 
@@ -571,7 +579,7 @@ def dfsTrialDriver(dim, wall_probability, num_trials):
         mz_y = deepcopy(mz)
 
         RD_start = time.time()
-        rd_mz, rd_path = DFS(mz_x)
+        rd_mz, rd_path, rd_maxsize = DFS(mz_x)
         total_time_RD += time.time() - RD_start
         total_visited_RD += numVisited(rd_mz)
 
@@ -580,5 +588,6 @@ def dfsTrialDriver(dim, wall_probability, num_trials):
         total_time_LU += time.time() - LU_start
         total_visited_LU += numVisited(lu_mz)
 
+    # returns success rate of both and total visited nodes for both
     return (total_time_RD / num_trials), (total_time_LU / num_trials), \
            ((total_visited_RD / num_trials) / (dim ** 2)), ((total_visited_LU / num_trials) / (dim ** 2))
