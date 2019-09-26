@@ -1,5 +1,7 @@
 from MazeRun import *
 
+dirs2 = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
 def generateValidFireMaze(dim, p):
     while True:
         maze = generateMaze(dim,p)
@@ -47,8 +49,11 @@ def baseLineFireDriver(qs = [0.1 * x for x in range(1,11)], dim = 40, p = 0.305,
             print(data)
     return data
 
-def manhattan_distance_to_nearest_fire(fires, x , y):
-    return min([abs(x-fx) + abs(y-fy)  for fx, fy in fires])
+def min_manhattan_distance_to_nearest_fire(fires, x , y):
+    return min([dist_manhattan(x,y,fx,fy) for fx, fy in fires])
+
+def min_euclid_distance_to_nearest_fire(fires, x , y):
+    return min([dist_euclid(x,y,fx,fy) for fx, fy in fires])
 
 def A_star_fire(maze, fires, x, y, weight = 0.5):
     n = len(maze)
@@ -58,13 +63,13 @@ def A_star_fire(maze, fires, x, y, weight = 0.5):
     while heap and parents[n-1][n-1] == (-1,-1):
         prio, length,coordinates = heapq.heappop(heap)
         x, y = coordinates
-        for dx, dy in dirs:
+        for dx, dy in dirs2:
             new_x = x + dx
             new_y = y + dy
             if isValid(maze, new_x, new_y) and parents[new_x][new_y] == (-1,-1):
                 parents[new_x][new_y] = (x,y)
                 manhattan_distance_to_goal = (n -1 - new_x + n - 1 - new_y)
-                priority =  length + 1 + manhattan_distance_to_goal - weight * manhattan_distance_to_nearest_fire(fires, new_x, new_y)
+                priority =  length + 1 + manhattan_distance_to_goal - weight * min_manhattan_distance_to_nearest_fire(fires, new_x, new_y)
                 heapq.heappush(heap, (priority,length+1,(new_x,new_y)))
     if parents[n-1][n-1] == (-1,-1):
         return -1, -1, None
@@ -240,6 +245,6 @@ def combinedFireDriver(qs = [0.1 * x for x in range(1,11)], dim = 40, p = 0.305,
             print(data)
     return data
 
-smarterFireDriver(dim = 175, trials = 20, smarterFireFunction = smarterFireSurvivor, weights = [x*.2 for x in range(6)])
+# smarterFireDriver(dim = 20, trials = 200, smarterFireFunction = smarterFireSurvivor, weights = [x*.2 for x in range(6)])
 # baseLineFireDriver(dim=80, trials = 200)
-# combinedFireDriver(dim=20, trials = 500, smarterFireFunction = smarterFireSurvivor, weight = .5)
+combinedFireDriver(dim=40, trials = 500, smarterFireFunction = smarterFireSurvivor, weight = 1)

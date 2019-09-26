@@ -168,38 +168,46 @@ def DFS(maze):
 
 
 def DFS_leftUp(maze):
-    stack = [(0, 0)]
-    path = [(0, 0)]
-
-    maze[0][0] = VISITED
-
+    stack = collections.deque([(0, 0)])
+    max_stack_length = 0
     n = len(maze) - 1
-    while stack and maze[n][n] != VISITED:
-
-        if maze[0][0] == FAILED:
-            # print("No-solution")
-            return maze, None
-
+    parents = [[(-1, -1)] * (n+1) for t in range(n+1)]
+    while stack and not maze[n][n] == VISITED:
         x, y = stack.pop()
-        for dx, dy in dirs[::-1]:
-            i = x + dx
-            j = y + dy
-            c = len(stack)
-            if isValid(maze, i, j) and maze[i][j] != VISITED:
-                stack.append((i, j))
-                path.append((i, j))
-                maze[i][j] = VISITED
-                break
-        if c == len(stack):
-            path.remove((x, y))
-            if not path:
-                # print("No-Solution")
-                return maze, None
-            stack.append(path[-1])
-            maze[x][y] = FAILED
+        if maze[x][y] == EMPTY:
+            maze[x][y] = VISITED
+            for dx, dy in dirs:
+                i = x + dx
+                j = y + dy
 
-    # print("Found-Solution")
-    return maze, path
+                if isValid(maze, i, j) and maze[i][j] != VISITED:
+                    stack.append((i, j))
+                    parents[i][j] = (x,y)
+
+            max_stack_length = max(max_stack_length, len(stack))
+
+    if not maze[n][n] == VISITED:
+        for i in range(n + 1):
+            for j in range(n + 1):
+                if (maze[i][j] == VISITED):
+                    maze[i][j] = FAILED
+        return maze, None, max_stack_length
+    path = []
+    parent_i = n
+    parent_j = n
+    while (parent_i >= 0) & (parent_j >= 0):
+        path.append((parent_i, parent_j))
+        parent = parents[parent_i][parent_j]
+        parent_i = parent[0]
+        parent_j = parent[1]
+    path.reverse()
+    # 2. mark all coordinates visited but not in final path as failures
+    for i in range(n + 1):
+        for j in range(n + 1):
+            if (maze[i][j] == VISITED) & ((i, j) not in path):
+                maze[i][j] = FAILED
+
+    return maze, path, max_stack_length
 
 
 def BFS(maze, root_x=0, root_y=0, ):
@@ -414,7 +422,7 @@ def bdBFS(maze):
 
         if not s_path_terminal and not maze[x2][y2] == TARGET_VISITED:
             # target bfs
-            aze[x2][y2] = TARGET_VISITED
+            maze[x2][y2] = TARGET_VISITED
             for dx, dy in dirs:
                 newX2 = x2 + dx
                 newY2 = y2 + dy

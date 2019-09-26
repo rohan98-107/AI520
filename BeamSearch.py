@@ -2,9 +2,9 @@
 
 from MazeRun import *
 
-def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choice = "maxsize", sample = 20, remove = True):
+def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choice = "maxsize", sample = 20, remove = True, cap = 0):
     fringe = []
-    while len(fringe) < k:
+    while len(fringe) < k * 3:
         new_maze = generateMaze(dim,p)
         tmaze_p, tpath_p, maxsize = algo_choice(new_maze)
         if not tpath_p:
@@ -15,13 +15,10 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
             metric = findNodesExpanded(tmaze_p, dim)
         resetMaze(tmaze_p)
         fringe.append((tmaze_p, metric, tpath_p))
+    fringe = heapq.nlargest(k, fringe, key = lambda x: x[1])
 
     final = fringe[0][0]
     best_metric = fringe[0][1]
-    for maze, metric, path in fringe[1:]:
-        if metric > best_metric:
-            best_metric = metric
-            final = maze
     iters = 0
 
     sample_string = " sample: " + str(sample) if sample > 0 else " not sampling"
@@ -63,8 +60,8 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
                         is_local_optima = False
                         new_fringe.append((tmaze_p,t_metric, tpath_p))
                     resetMaze(tmaze_p)
-            print("largest in current iter: ")
-            print([x[1] for x in heapq.nlargest(k, new_fringe, key = lambda x: x[1])])
+            # print("largest in current iter: ")
+            # print([x[1] for x in heapq.nlargest(k, new_fringe, key = lambda x: x[1])])
 
             if is_local_optima:
                 if metric > best_metric:
@@ -78,15 +75,20 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
         fringe = heapq.nlargest(k, new_fringe, key = lambda x: x[1])
         print([x[1] for x in fringe])
         print()
+        if cap > 0 and iters >= cap:
+            if fringe[0][1] > best_metric:
+                final = fringe[0][0]
+                best_metric = fringe[0][1]
+            break
     return final, best_metric
 
 algo = 'a'
 algo_choice = DFS_again if algo == 'DFS' else A_star_manhattan
 metric_choice = 'maxsize' if algo == 'DFS' else 'nodes_expanded'
-p = .2 if algo == 'DFS' else .1
-k = 20 if algo == 'DFS' else 5
-sample = 20 if algo == 'DFS' else 20
-hard_maze, difficulty = beamSearch(k = k, dim = 175, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = True)
+p = .2 if algo == 'DFS' else .2
+k = 20 if algo == 'DFS' else 10
+sample = 20 if algo == 'DFS' else 5
+hard_maze, difficulty = beamSearch(k = k, dim = 175, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = True, cap = 30)
 printMazeHM_orig(hard_maze)
 print("best metric: " + str(difficulty))
 a,b,c = algo_choice(hard_maze)
