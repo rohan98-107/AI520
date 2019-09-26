@@ -33,10 +33,7 @@ def generateMaze(dim, p):
         print("error, invalid probability")
         return None
 
-    # a probability of 0.53 corresponds to picking a number from 1-53 out of the numbers from 1-100
-    # a probability of 0.1 corresponds to picking the number 1 out of the numbers from 1-10
-    # a probability of p corresponds to picking a number from 1-p*10^h out of the numbers...
-    # ...from 1-10^h where h is the number of nonzero decimal places in p
+    # with probability p, mark a cell as being blocked 
 
     maze = np.zeros((dim, dim))
     for i in range(0, dim):
