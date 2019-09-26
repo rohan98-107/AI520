@@ -407,8 +407,6 @@ def A_star_manhattan(maze):
 def bdBFS(maze):
     dim = len(maze)
     parents = [[(-1, -1)] * dim for t in range(dim)]
-    maze[0][0] = VISITED
-    maze[dim - 1][dim - 1] = TARGET_VISITED
     s_q = collections.deque([(0, 0)])
     t_q = collections.deque([(dim - 1, dim - 1)])
     s_path_terminal = None
