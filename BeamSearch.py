@@ -2,12 +2,11 @@
 
 from MazeRun import *
 
-def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choice = "maxsize", sample = 20, remove = True, cap = 0):
+def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS, metric_choice = "maxsize", sample = 20, remove = True, cap = 0):
     fringe = []
 
     #come up with initial spots for k climbers, k*3 is optional can just use
     #k , but k*3 allows for a little randomness at beginning to help
-
     while len(fringe) < k * 3:
         new_maze = generateMaze(dim,p)
         tmaze_p, tpath_p, maxsize = algo_choice(new_maze)
@@ -29,12 +28,14 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
     best_metric = fringe[0][1]
     iters = 0
 
-    # sample_string = " sample: " + str(sample) if sample > 0 else " not sampling"
-    # remove_string = " removing: " + str(remove)
-    # print("running with metric: " + metric_choice + " dim= " + str(dim) + " p= " + str(p) + " climbers(k) = " + str(k) + sample_string + remove_string)
-    # print("original random fringe metric: ")
-    # print([x[1] for x in fringe])
-    # print()
+    sample_string = " sample: " + str(sample) if sample > 0 else " not sampling"
+    remove_string = " removing: " + str(remove)
+
+    #prints metric values for original k climbers
+    print("running with metric: " + metric_choice + " dim= " + str(dim) + " p= " + str(p) + " climbers(k) = " + str(k) + sample_string + remove_string)
+    print("original random fringe metric: ")
+    print([x[1] for x in fringe])
+    print()
     while True:
         iters += 1
 
@@ -53,7 +54,9 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
             #for next iteration if child metric >= parent. If it was strictly greater we could
             #allow removing and adding blocks in same beam search, but the >= allows for a child to
             #eventually find combinations of adding one block that doesn't help but then a second
-            #that relies on first addition that does help
+            #that relies on first addition that does help. Due to enormous run times did not have
+            #time to check if the tradoff is worth trying to remove and add blocks in same trial
+            #but the code would be fairly trivial
             if remove:
                 for x,y in nodes_to_consider:
                     #for every node in sample or path, we make one child for each
@@ -101,9 +104,10 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
         #get best k children for next iteration
         fringe = heapq.nlargest(k, new_fringe, key = lambda x: x[1])
 
-        #these prints are to monitor progress due to slow run time
-        # print([x[1] for x in fringe])
-        # print()
+        # these prints are to monitor progress due to slow run time
+        # this is metrics of climbers after each iteration
+        print([x[1] for x in fringe])
+        print()
 
         #can optionally cap iterations to reduce run time
         if cap > 0 and iters >= cap:
@@ -116,11 +120,16 @@ def beamSearch(k = 10, dim = 50, p = 0.2, algo_choice = DFS_revised, metric_choi
     return final, best_metric
 
 
-
-def beamDriver(algo = 'A_star'):
+#cap caps number of iterations
+#capping iterations at 30 will allow for it to terminate within a few hours
+#set cap = 0 to iterate until all climbers at local optima
+#if dim == 175 and cap == 0 and sample == 0 then it will take days to run
+#to test this in reasonable time with minimal randomness it is recommended to set
+# sample = 0, k = 20,  dim < 40 (20 might be better), cap = 20
+def beamDriver(algo = 'A_star', cap = 0, dim = 175):
     #we only need to solve for two specific algorithm and metric combinations
     #so just set them
-    algo_choice = DFS_again if algo == 'DFS' else A_star_manhattan
+    algo_choice = DFS if algo == 'DFS' else A_star_manhattan
     metric_choice = 'maxsize' if algo == 'DFS' else 'nodes_expanded'
 
     #this initial p can help find better solutions, our implementation of A_star
@@ -135,22 +144,22 @@ def beamDriver(algo = 'A_star'):
     #at all children. Default is to use a sample because checking all children
     #for dim 175 (min path length 348 and min children 346) will take too long
     sample = 20 if algo == 'DFS' else 5
-
-    #capping iterations at 30 will allow for it to terminate within a few hours
-    #without cap and if sample ==0 then it will take days to run
-    cap = 30
+    # sample = 0
 
     #try both removing or adding blocks, different algorithms will be more suitable for one or the other
-    remove_hard_maze, remove_difficulty = beamSearch(k = k, dim = 175, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = True, cap = cap)
-    add_hard_maze, add_difficulty = beamSearch(k = k, dim = 175, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = False, cap = cap)
+    remove_hard_maze, remove_difficulty = beamSearch(k = k, dim = dim, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = True, cap = cap)
+    add_hard_maze, add_difficulty = beamSearch(k = k, dim = dim, algo_choice = algo_choice, metric_choice = metric_choice, p = p, sample = sample, remove = False, cap = cap)
 
     #pick better of adding and removing
     hard_maze = remove_hard_maze if remove_difficulty > add_difficulty else add_hard_maze
     difficulty = max(remove_difficulty, add_difficulty)
+
+    print("remove metric: " + str(remove_difficulty))
+    print("add metric: " + str(add_difficulty))
 
     printMazeHM_orig(hard_maze)
     print("best metric: " + str(difficulty))
     a,b,c = algo_choice(hard_maze)
     printMazeHM_orig(a)
 
-beamDriver(algo = 'DFS')
+beamDriver(algo = 'DFS', cap = 20, dim = 20)
