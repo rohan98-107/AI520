@@ -1,5 +1,5 @@
 # Assignment 2 - Minesweeper
-# Rohan Rele, Alex Eng & Aakash Raman
+# Rohan Rele, Alex Eng, Aakash Raman, and Adarsh Patel
 # Generation/Setup code
 
 import random
@@ -9,18 +9,10 @@ import seaborn as sns
 
 dirs = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (-1, -1), (-1, 1), (1, -1)]
 
-MINE = -8
+MINE = -6
+DETONATED = -8
 HIDDEN = -1
 SAFE = 0
-
-# initially the player knows nothing & everything is hidden
-class CellData:
-    def __init__(self):
-        self.state = HIDDEN
-        self.numNearbyMinesClue = -1
-        self.numNearbySafe = -1
-        self.numNearbyMines = -1
-        self.numNearbyHidden = -1
 
 class MineSweeper:
     dim = 0
@@ -34,8 +26,8 @@ class MineSweeper:
         self.dim = dim
         self.playerMoves = [[False for _ in range(dim)] for _ in range(dim)]
 
-        # track player knowledge per cell here
-        self.playerKnowledge = [[CellData() for _ in range(dim)] for _ in range(dim)]
+        # track player knowledge per cell: initially all hidden
+        self.playerKnowledge = np.array([[HIDDEN]*dim for _ in range(dim)])
 
         if num_mines < 0 or num_mines > dim**2:
             print("Invalid number of mines specified --> set to 0")
@@ -72,7 +64,7 @@ class MineSweeper:
 
         self.playerMoves[x][y] = True
         for i, j in dirs:
-            if self.playerMoves[x+i][y+j] is False and self.board[x+i][y+j] == 0:
+            if self.playerMoves[x+i][y+j] is False and self.board[x+i][y+j] == SAFE:
                 self.playerMoves[x+i][y+j] = True
 
     def printBoard(self):
@@ -83,8 +75,9 @@ class MineSweeper:
 
         imgsize = int(self.dim / 10)
         fontsize = 12.5 / (self.dim)
+        dpi = 500
 
-        plt.figure(figsize=(imgsize, imgsize), dpi=500)
+        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
         sns.heatmap(self.board, vmin=-8, vmax=8, linewidth=0.01, linecolor='lightgray',
                     annot=True, annot_kws={"size": fontsize},
                     square=True, cbar=False,
@@ -93,11 +86,42 @@ class MineSweeper:
                     cmap='seismic')
         plt.show()
 
+    def saveBoard(self, filename):
+        imgsize = int(self.dim / 10)
+        fontsize = 75 / (self.dim)
+        dpi = 1000
+
+        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
+        sns.heatmap(self.board, vmin=-8, vmax=8, linewidth=0.01, linecolor='lightgray',
+                    annot=True, annot_kws={"size": fontsize},
+                    square=True, cbar=False,
+                    xticklabels=False,
+                    yticklabels=False,
+                    cmap='seismic')
+        plt.savefig('{}.png'.format(filename), dpi=dpi)
+
+
+    def printPlayerKnowledge(self):
+        imgsize = int(self.dim / 10)
+        fontsize = 12.5 / (self.dim)
+        dpi = 500
+
+        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
+        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=8, linewidth=0.01, linecolor='lightgray',
+                    annot=True, annot_kws={"size": fontsize},
+                    square=True, cbar=False,
+                    xticklabels=False,
+                    yticklabels=False,
+                    cmap='plasma')
+        plt.show()
 
 # test board visualizations
+'''
 dim = 30
-density = 0.25
+density = 0.15
 num_mines = int(density*(dim**2))
 
 game = MineSweeper(dim, num_mines)
 game.printBoard()
+#game.saveBoard('test')
+'''
