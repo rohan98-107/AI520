@@ -1,0 +1,5227 @@
+
+BOOM! Mine detonated at 0, 19
+
+
+Revealing cell 0, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 7 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 0, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 9 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 17, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 1 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 3, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 19 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 6, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 10 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 8, 10 must be safe.
+
+Neighbor 8, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 9 flagged as safe and enqueued for next visitation.
+
+Revealing cell 8, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 18 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 9, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 10 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 14, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 7 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 16, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 4, 8
+
+
+Revealing cell 4, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 0 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 3
+
+
+Revealing cell 0, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 0 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 13, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 3 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 14, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 18 safely revealed with clue: 3
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 2, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 16, 8
+
+
+Revealing cell 16, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 5, 5 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 5, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 13 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 4, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 17 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 6, 17 must be safe.
+
+Neighbor 6, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 16 flagged as safe and enqueued for next visitation.
+
+Revealing cell 6, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 2 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 7, 2 must be safe.
+
+Neighbor 7, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 1 flagged as safe and enqueued for next visitation.
+
+Revealing cell 7, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 8 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 0, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 13 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 11, 13 must be safe.
+
+Neighbor 11, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 12 flagged as safe and enqueued for next visitation.
+
+Revealing cell 11, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 12, 15 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 12, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 8 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 18, 8 must be safe.
+
+Neighbor 18, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 7 flagged as safe and enqueued for next visitation.
+
+Revealing cell 18, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 12 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 0, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 12, 2 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 12, 2 must be safe.
+
+Neighbor 12, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 1 flagged as safe and enqueued for next visitation.
+
+Revealing cell 12, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 11 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 4, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 14 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 0, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 14 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 14, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 14 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+All neighbors of 9, 14 must be safe.
+
+Neighbor 9, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 13 flagged as safe and enqueued for next visitation.
+
+Revealing cell 9, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 5, 19 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 5, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 9 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 0, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 7 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 1
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 3, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 13 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 15, 13 must be safe.
+
+Neighbor 15, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 12 flagged as safe and enqueued for next visitation.
+
+Revealing cell 15, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 11 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 3, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 5 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+All neighbors of 13, 5 must be safe.
+
+Neighbor 13, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 4 flagged as safe and enqueued for next visitation.
+
+Revealing cell 13, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 4 safely revealed with clue: 2
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 15, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 6 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 10, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 15 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 11, 15 must be safe.
+
+Neighbor 11, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 14 flagged as safe and enqueued for next visitation.
+
+Revealing cell 11, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 8 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 1, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 1 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 0, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 11 safely revealed with clue: 2
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 16, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 2 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 16, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 7 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+All neighbors of 13, 7 must be safe.
+
+Neighbor 13, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 6 flagged as safe and enqueued for next visitation.
+
+Revealing cell 13, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 12, 9 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+All neighbors of 12, 9 must be safe.
+
+Neighbor 12, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 8 flagged as safe and enqueued for next visitation.
+
+Revealing cell 12, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 10 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+All neighbors of 6, 10 must be safe.
+
+Neighbor 6, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 9 flagged as safe and enqueued for next visitation.
+
+Revealing cell 6, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 6 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 2, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 0 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 9, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 17, 3
+
+
+Revealing cell 17, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 7 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 15, 7 must be safe.
+
+Neighbor 15, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 6 flagged as safe and enqueued for next visitation.
+
+Revealing cell 15, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 2 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 1, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 19 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 10, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 1 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 4, 1 must be safe.
+
+Neighbor 4, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 0 flagged as safe and enqueued for next visitation.
+
+Revealing cell 4, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 17 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 15, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 3, 17
+
+
+Revealing cell 3, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 6 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+All neighbors of 18, 6 must be safe.
+
+Neighbor 18, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 5 flagged as safe and enqueued for next visitation.
+
+Revealing cell 18, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 5, 14 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 5, 14 must be safe.
+
+Neighbor 5, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 13 flagged as safe and enqueued for next visitation.
+
+Revealing cell 5, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 13 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 3, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 2 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+All neighbors of 17, 2 must be safe.
+
+Neighbor 17, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 1 flagged as safe and enqueued for next visitation.
+
+Revealing cell 17, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 19 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 15, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 0 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 14, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 19 safely revealed with clue: 0
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 13, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 19 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell 18, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 18 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+All neighbors of 3, 18 must be safe.
+
+Neighbor 3, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 17 flagged as safe and enqueued for next visitation.
+
+Revealing cell 3, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 13 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 0, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 13, 16
+
+
+Revealing cell 13, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 10 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 15, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 17 safely revealed with clue: 1
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 18, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 18 safely revealed with clue: 3
+	# safe neighbors: 0
+	# mine neighbors: 1
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 0, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 4 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 18, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 19 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 9, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 10 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 3, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 10 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 2, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 18 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 11, 18 must be safe.
+
+Neighbor 11, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 17 flagged as safe and enqueued for next visitation.
+
+Revealing cell 11, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 16 safely revealed with clue: 0
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+All neighbors of 17, 16 must be safe.
+
+Neighbor 17, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 15 flagged as safe and enqueued for next visitation.
+
+Revealing cell 17, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 1, 17
+
+
+Revealing cell 1, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 4 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 8
+
+
+Revealing cell 11, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 14 safely revealed with clue: 2
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 2, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 11 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+All neighbors of 1, 11 must be safe.
+
+Neighbor 1, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 0, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 0, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 0, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 10 flagged as safe and enqueued for next visitation.
+
+Revealing cell 1, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 1 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 1, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 10, 5
+
+
+Revealing cell 10, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 12 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 6, 12 must be safe.
+
+Neighbor 6, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 11 flagged as safe and enqueued for next visitation.
+
+Revealing cell 6, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 7 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 8, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 7 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+All neighbors of 2, 7 must be safe.
+
+Neighbor 2, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 6 flagged as safe and enqueued for next visitation.
+
+Revealing cell 2, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 3 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 1, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 0 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 10, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 3 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 2, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 17, 10
+
+
+Revealing cell 17, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 8 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 9, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 2 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 10, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 13 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 17, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 17 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 1
+	# hidden neighbors: 4
+	# total neighbors: 8
+
+
+All neighbors of 13, 17 must be safe.
+
+Neighbor 13, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 16 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 16 flagged as safe and enqueued for next visitation.
+
+Revealing cell 13, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 3, 12
+
+
+Revealing cell 3, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 16 safely revealed with clue: 3
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 1, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 14 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 13, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 4, 3
+
+
+Revealing cell 4, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 7 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 9, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 5 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 16, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 11 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 1
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 18, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 5 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 2, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 3 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 19, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 0 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 7, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 4 safely revealed with clue: 2
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+Revealing cell 9, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 2, 9
+
+
+Revealing cell 2, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 17 safely revealed with clue: 2
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 8
+
+
+Revealing cell 8, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 3 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 10, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 4 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 1, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 10 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 4, 10 must be safe.
+
+Neighbor 4, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 9 flagged as safe and enqueued for next visitation.
+
+Revealing cell 4, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 0 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 2, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 5, 6 safely revealed with clue: 2
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell 5, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 0 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 15, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 9 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 10, 9 must be safe.
+
+Neighbor 10, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 8 flagged as safe and enqueued for next visitation.
+
+Revealing cell 10, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 19 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 5
+
+
+Revealing cell 17, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 4 safely revealed with clue: 2
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 10, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 9, 17
+
+
+Revealing cell 9, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 10, 11
+
+
+Revealing cell 10, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 5 safely revealed with clue: 2
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 8
+	# total neighbors: 8
+
+
+Revealing cell 7, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 5 safely revealed with clue: 2
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 6, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 8, 8
+
+
+Revealing cell 8, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 8 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+All neighbors of 6, 8 must be safe.
+
+Neighbor 6, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 7 flagged as safe and enqueued for next visitation.
+
+Revealing cell 6, 8 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 11 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 11, 11 must be safe.
+
+Neighbor 11, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 12, 10 flagged as safe and enqueued for next visitation.
+
+Revealing cell 11, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 5, 3 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 5, 3 must be safe.
+
+Neighbor 5, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 5, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 3 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 4, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 6, 2 flagged as safe and enqueued for next visitation.
+
+Revealing cell 5, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 13, 13
+
+
+Revealing cell 13, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 5 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 4, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 0 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 16, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 15 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 14, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 14 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 3, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 6, 6
+
+
+Revealing cell 6, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 5 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 3, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 9 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 1
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 16, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 4 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 2, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 14 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 17, 14 must be safe.
+
+Neighbor 17, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 14 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 15 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 13 flagged as safe and enqueued for next visitation.
+
+Revealing cell 17, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 2 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+All neighbors of 19, 2 must be mines.
+
+Neighbor 19, 3 flagged as a mine.
+
+Neighbor 19, 1 flagged as a mine.
+
+Neighbor 18, 2 flagged as a mine.
+
+Neighbor 18, 1 flagged as a mine.
+
+Neighbor 18, 3 flagged as a mine.
+
+Revealing cell 19, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 4, 6
+
+
+Revealing cell 4, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 0 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 11, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 16 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 9, 16 must be mines.
+
+Neighbor 9, 17 flagged as a mine.
+
+Neighbor 9, 15 flagged as a mine.
+
+Neighbor 10, 16 flagged as a mine.
+
+Neighbor 8, 16 flagged as a mine.
+
+Neighbor 10, 17 flagged as a mine.
+
+Neighbor 8, 15 flagged as a mine.
+
+Neighbor 8, 17 flagged as a mine.
+
+Neighbor 10, 15 flagged as a mine.
+
+Revealing cell 9, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 19 safely revealed with clue: 0
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+Revealing cell 14, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 13, 15 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 13, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 18 safely revealed with clue: 3
+	# safe neighbors: 4
+	# mine neighbors: 2
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 1, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 12 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 19, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 14, 2
+
+
+Revealing cell 14, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 12, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 12, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 3, 4 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 3, 4 must be mines.
+
+Neighbor 3, 5 flagged as a mine.
+
+Neighbor 3, 3 flagged as a mine.
+
+Neighbor 4, 4 flagged as a mine.
+
+Neighbor 2, 4 flagged as a mine.
+
+Neighbor 4, 5 flagged as a mine.
+
+Neighbor 2, 3 flagged as a mine.
+
+Neighbor 2, 5 flagged as a mine.
+
+Neighbor 4, 3 flagged as a mine.
+
+Revealing cell 3, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 7 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 4, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 11 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 14, 11 must be safe.
+
+Neighbor 14, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 14, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 13, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 10 flagged as safe and enqueued for next visitation.
+
+Revealing cell 14, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 4 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 4
+	# total neighbors: 8
+
+
+Revealing cell 8, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 3 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 1
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 15, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 15 safely revealed with clue: 2
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 0, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 16, 4
+
+
+Revealing cell 16, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 5 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 8
+
+
+Revealing cell 8, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 12 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 8, 12 must be safe.
+
+Neighbor 8, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 12 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 7, 13 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 11 flagged as safe and enqueued for next visitation.
+
+Revealing cell 8, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 14 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+Revealing cell 7, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 15 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 7, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 9 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 15, 9 must be mines.
+
+Neighbor 15, 10 flagged as a mine.
+
+Neighbor 15, 8 flagged as a mine.
+
+Neighbor 16, 9 flagged as a mine.
+
+Neighbor 14, 9 flagged as a mine.
+
+Neighbor 16, 10 flagged as a mine.
+
+Neighbor 14, 8 flagged as a mine.
+
+Neighbor 14, 10 flagged as a mine.
+
+Neighbor 16, 8 flagged as a mine.
+
+Revealing cell 15, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 16, 18 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+All neighbors of 16, 18 must be safe.
+
+Neighbor 16, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 16, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 18 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 17 flagged as safe and enqueued for next visitation.
+
+Neighbor 15, 19 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 17 flagged as safe and enqueued for next visitation.
+
+Revealing cell 16, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 1 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 10, 1 must be safe.
+
+Neighbor 10, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 0 flagged as safe and enqueued for next visitation.
+
+Revealing cell 10, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 3, 15
+
+
+Revealing cell 3, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 15, 5
+
+
+Revealing cell 15, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 19 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 7, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 0, 16
+
+
+Revealing cell 0, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 11 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 19, 11 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 0 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 2
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 18, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 13 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 1, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 3 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 0, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 4 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 0, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 1, 14
+
+
+Revealing cell 1, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 2, 2
+
+
+Revealing cell 2, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 15 safely revealed with clue: 3
+	# safe neighbors: 4
+	# mine neighbors: 2
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 1, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 18 safely revealed with clue: 1
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell 19, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 2, 16
+
+
+Revealing cell 2, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 15 safely revealed with clue: 4
+	# safe neighbors: 4
+	# mine neighbors: 3
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 2, 15 must be mines.
+
+Neighbor 2, 16 flagged as a mine.
+
+Neighbor 2, 14 flagged as a mine.
+
+Neighbor 3, 15 flagged as a mine.
+
+Neighbor 1, 15 flagged as a mine.
+
+Neighbor 3, 16 flagged as a mine.
+
+Neighbor 1, 14 flagged as a mine.
+
+Neighbor 1, 16 flagged as a mine.
+
+Neighbor 3, 14 flagged as a mine.
+
+Revealing cell 2, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 8, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 9, 5 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 1
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 9, 5 must be safe.
+
+Neighbor 9, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 5 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 4 flagged as safe and enqueued for next visitation.
+
+Neighbor 8, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 4 flagged as safe and enqueued for next visitation.
+
+Revealing cell 9, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 15, 16
+
+
+Revealing cell 15, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 14, 1 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 1
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+Revealing cell 14, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 6, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 6, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 2 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 0, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 0 safely revealed with clue: 0
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 17, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 15 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 15, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 16 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell 19, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 17 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+All neighbors of 19, 17 must be mines.
+
+Neighbor 19, 18 flagged as a mine.
+
+Neighbor 19, 16 flagged as a mine.
+
+Neighbor 18, 17 flagged as a mine.
+
+Neighbor 18, 16 flagged as a mine.
+
+Neighbor 18, 18 flagged as a mine.
+
+Revealing cell 19, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 7, 6
+
+
+Revealing cell 7, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 10, 7 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 10, 7 must be safe.
+
+Neighbor 10, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 10, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 7 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 6 flagged as safe and enqueued for next visitation.
+
+Neighbor 9, 8 flagged as safe and enqueued for next visitation.
+
+Neighbor 11, 6 flagged as safe and enqueued for next visitation.
+
+Revealing cell 10, 7 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 15, 2 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 15, 2 must be mines.
+
+Neighbor 15, 3 flagged as a mine.
+
+Neighbor 15, 1 flagged as a mine.
+
+Neighbor 16, 2 flagged as a mine.
+
+Neighbor 14, 2 flagged as a mine.
+
+Neighbor 16, 3 flagged as a mine.
+
+Neighbor 14, 1 flagged as a mine.
+
+Neighbor 14, 3 flagged as a mine.
+
+Neighbor 16, 1 flagged as a mine.
+
+Revealing cell 15, 2 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 19 safely revealed with clue: 0
+	# safe neighbors: 4
+	# mine neighbors: 0
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+Revealing cell 8, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 0 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 3
+
+
+Revealing cell 19, 0 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 12 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 8
+
+
+Revealing cell 18, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 19, 13
+
+
+Revealing cell 19, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 4, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 17, 4 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 17, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 17 safely revealed with clue: 2
+	# safe neighbors: 2
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 0, 17 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 1, 19
+
+
+Revealing cell 1, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 15 safely revealed with clue: 0
+	# safe neighbors: 2
+	# mine neighbors: 2
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+Revealing cell 19, 15 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 1 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 8
+
+
+All neighbors of 2, 1 must be safe.
+
+Neighbor 2, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 2, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 1 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 0 flagged as safe and enqueued for next visitation.
+
+Neighbor 1, 2 flagged as safe and enqueued for next visitation.
+
+Neighbor 3, 0 flagged as safe and enqueued for next visitation.
+
+Revealing cell 2, 1 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 2, 13 safely revealed with clue: 2
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 2, 13 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 17, 12
+
+
+Revealing cell 17, 12 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 1, 5
+
+
+Revealing cell 1, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+BOOM! Mine detonated at 9, 3
+
+
+Revealing cell 9, 3 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 19 safely revealed with clue: 1
+	# safe neighbors: 1
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 3
+
+
+Revealing cell 19, 19 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 4 safely revealed with clue: 0
+	# safe neighbors: 3
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 19, 4 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 11, 5 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 11, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 18, 10 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 1
+	# hidden neighbors: 2
+	# total neighbors: 8
+
+
+All neighbors of 18, 10 must be safe.
+
+Neighbor 18, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 18, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 10 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 9 flagged as safe and enqueued for next visitation.
+
+Neighbor 17, 11 flagged as safe and enqueued for next visitation.
+
+Neighbor 19, 9 flagged as safe and enqueued for next visitation.
+
+Revealing cell 18, 10 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 5 safely revealed with clue: 1
+	# safe neighbors: 3
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+Revealing cell 0, 5 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 19, 14 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 19, 14 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 1, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 1, 9 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 4, 16 safely revealed with clue: 3
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 4, 16 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 8, 18 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+Revealing cell 8, 18 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 0, 6 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+Revealing cell 0, 6 led to no conclusive next move. Will randomly reveal a cell next.
+
+
+Cell 7, 4 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 9 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 17, 11 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 9 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 11 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+BOOM! Mine detonated at 17, 10
+
+
+
+Cell 19, 10 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 18, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 11 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 1, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 3, 2 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 1 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 1 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 2, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+BOOM! Mine detonated at 2, 2
+
+
+
+Cell 11, 6 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 6 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 7 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 6 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 4 safely revealed with clue: 2
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 4 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 6 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 5 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 10, 5
+
+
+
+Cell 9, 4 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 9, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 11, 2 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 10, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 17 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 15, 17 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 19 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 15, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 18 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 17 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 9, 11 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 12 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 10 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 10 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 11 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 11 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 13 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 15 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 13 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 15 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 14 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 13 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 15 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 2 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 4 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 2 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 4 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 4, 3
+
+
+
+Cell 6, 3 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 4 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 12 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 10 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 10, 11
+
+
+
+Cell 12, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 7 safely revealed with clue: 3
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 7 safely revealed with clue: 3
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 7 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 9 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 9 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 11 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 9 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 11 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 16 safely revealed with clue: 2
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 16 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 17 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 17 safely revealed with clue: 2
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 13, 16
+
+
+
+Cell 13, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 6 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 6 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 8 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 7 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 2, 6 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 2, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 2, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 0, 12 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 0, 10 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 2, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 0, 11 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 2, 11 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 1, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 15 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 17 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 15 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 17 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 16 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 16 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 15 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 17 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 17 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 10, 17 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 10, 18 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 17 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 4, 17 safely revealed with clue: 2
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 2, 19 safely revealed with clue: 1
+	# safe neighbors: 4
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 2, 17 safely revealed with clue: 4
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 2, 18 safely revealed with clue: 3
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 18 safely revealed with clue: 1
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 3, 17
+
+
+
+Cell 3, 19 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 18, 1 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 3 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 1 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 3 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 2 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 2 safely revealed with clue: 2
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 17, 3
+
+
+
+Cell 6, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 15 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 13 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 15 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 14 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 15 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 5 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 17, 7 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 5 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 7 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 17, 6 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 6 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 18, 5 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 3, 2 safely revealed with clue: 2
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 5, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 3, 1 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 4, 0 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 4, 2 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 8 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+BOOM! Mine detonated at 16, 8
+
+
+
+Cell 14, 7 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 7 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 8 safely revealed with clue: 2
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 9 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 9 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 8 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 6 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 6 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 8 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 14 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 16 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 14 safely revealed with clue: 0
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 16 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 15 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 15 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 16 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 4 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 6 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 4 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 6 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 5 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 5 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 4 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 6 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 14 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 14, 13 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 16, 13 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 12 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 15, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 15 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 15 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 14 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 14 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 15 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 1 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 3 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 3 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 2 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 13, 2 safely revealed with clue: 1
+	# safe neighbors: 5
+	# mine neighbors: 3
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 3 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 7 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 17, 9 safely revealed with clue: 2
+	# safe neighbors: 4
+	# mine neighbors: 4
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 17, 7 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 9 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 17, 8 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 19, 8 safely revealed with clue: 0
+	# safe neighbors: 5
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+
+Cell 18, 7 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 18, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 14 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 10, 13 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 12, 13 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 12 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 11, 14 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 3 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 3 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 2 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 2 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 1 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 3 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 16 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 16 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 18 safely revealed with clue: 0
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 5, 17 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 17 safely revealed with clue: 1
+	# safe neighbors: 6
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 16 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 6, 18 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 11 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 7, 10 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 9, 10 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 9 safely revealed with clue: 1
+	# safe neighbors: 7
+	# mine neighbors: 1
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+Cell 8, 11 safely revealed with clue: 0
+	# safe neighbors: 8
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 8
+
+
+
+
+GAME OVER
+
+Successful undetonated mine detection rate:0.75
