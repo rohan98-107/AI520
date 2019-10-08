@@ -4,12 +4,15 @@
 
 from MineSweeper import *
 from collections import deque
+from copy import deepcopy
+import sys
+import time
 
 def solveBaseline(game):
     # use a queue of next cells (x,y) to visit
     q = deque()
     # randomly add a hidden cell to the queue
-    q.appendleft(addRandomHiddenCell(game))
+    q.append(addRandomHiddenCell(game))
 
     while len(q) != 0:
         (x, y) = q.popleft()
@@ -17,44 +20,47 @@ def solveBaseline(game):
         # if it's a mine, mark as detonated
         if game.board[x][y] == MINE:
             game.playerKnowledge[x][y] = DETONATED
-            print('\nBOOM! Mine detonated at {}, {}\n\n'.format(x, y))
+            print('\nBOOM! Mine detonated at ({}, {}).\n\n'.format(x, y))
         # otherwise mark as safe, get clue & metadata, and infer safety/non-safety of nbrs if possible
         else:
             game.playerKnowledge[x][y] = SAFE
             clue = game.board[x][y]
-            print('\nCell {}, {} safely revealed with clue: {}'.format(x, y, clue))
+            print('\nCell ({}, {}) safely revealed with clue: {}.'.format(x, y, clue))
             numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = getCellNeighborData(game, x, y)
             print('\t# safe neighbors: {}\n\t# mine neighbors: {}\n\t# hidden neighbors: {}\n\t# total neighbors: {}\n\n'\
                   .format(numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs))
 
             # if no neighbors are hidden, then we can't deduce any more new info about them
             if numHiddenNbrs == 0:
+                print('All neighbors of ({}, {}) are already revealed; nothing to infer.\n'.format(x, y))
                 pass
             # case when all hidden nbrs must be mines: mark as mine and fall through to adding a random hidden cell
             elif (clue - numMineNbrs) == numHiddenNbrs:
-                print('All neighbors of {}, {} must be mines.\n'.format(x, y))
+                print('All neighbors of ({}, {}) must be mines.\n'.format(x, y))
                 for i, j in dirs:
                     if 0 <= x + i < game.dim and 0 <= y + j < game.dim:
                         if game.playerKnowledge[x+i][y+j] == HIDDEN:
                             game.playerKnowledge[x+i][y+j] = MINE
-                            print('Neighbor {}, {} flagged as a mine.\n'.format(x+i, y+j))
-            # case when all hidden nbrs must be safe: mark as safe, add safe cell(s),
+                            print('\tNeighbor ({}, {}) flagged as a mine.\n'.format(x+i, y+j))
+            # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q,
             # and DON'T fall through to adding a random hidden cell
             elif (8 - clue - numSafeNbrs) == numHiddenNbrs:
-                print('All neighbors of {}, {} must be safe.\n'.format(x, y))
+                print('All neighbors of ({}, {}) must be safe.\n'.format(x, y))
                 for i, j in dirs:
                     if 0 <= x + i < game.dim and 0 <= y + j < game.dim:
                         if game.playerKnowledge[x+i][y+j] == HIDDEN:
                             game.playerKnowledge[x+i][y+j] = SAFE
-                            q.appendleft((x+i, y+j))
-                            print('Neighbor {}, {} flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
-                            continue
+                            q.append((x+i, y+j))
+                            print('\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
 
-        # add random hidden cell iff we detonated a mine or we detecting all nbrs were mines
-        # if no hidden cells remaining, do nothing and keep clearing the queue
-        if numHiddenCells(game) != 0:
-            q.appendleft(addRandomHiddenCell(game))
-            print('Revealing cell {}, {} led to no conclusive next move. Will randomly reveal a cell next.\n'.format(x, y))
+
+        # add random hidden cell iff we detonated a mine or we inferred all nbrs were mines
+        # if no hidden cells remaining, do nothing
+        if numHiddenCells(game) != 0 and len(q) == 0:
+            q.append(addRandomHiddenCell(game))
+            print('Revealing cell ({}, {}) led to no conclusive next move. Will randomly reveal a cell next.\n'.format(x, y))
+
+        print('-'*40)
 
     return game
 
@@ -83,17 +89,41 @@ def addRandomHiddenCell(game):
 def numHiddenCells(game):
     return (game.playerKnowledge == HIDDEN).sum()
 
-# test game
+# utility function to run game, save initial & solved boards, and print play-by-play to log txt file
+# game metrics: mine safe detection rate and solve time calculated here; outputted to log
+def baselineGameDriver(dim, density, logFileName):
+    sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
+
+    num_mines = int(density*(dim**2))
+
+    print('\n\n***** GAME STARTING *****\n\n{} by {} board with {} mines\n\n'.format(dim, dim, num_mines))
+
+    game = MineSweeper(dim, num_mines)
+    game.saveBoard('{}_init_board'.format(logFileName))
+
+    start = time.time()
+    solvedGame = solveBaseline(deepcopy(game))
+    total_time = time.time() - start
+
+    num_undetonated_mines = (solvedGame.playerKnowledge == MINE).sum()
+
+    print('\n\n***** GAME OVER *****\n\nGame ended in {} seconds\n\nSafely detected (without detonating) {}% of mines'.format(total_time, (num_undetonated_mines / num_mines) * 100))
+
+    solvedGame.savePlayerKnowledge('{}_solved_board'.format(logFileName))
+
+
+# test game driver
 dim = 20
-density = 0.25
-num_mines = int(density*(dim**2))
+density = 0.10
+trialFileName = 'test'
 
-game = MineSweeper(dim, num_mines)
-game.saveBoard('test_init_board')
+baselineGameDriver(dim, density, trialFileName)
 
-solvedGame = solveBaseline(game)
-num_undetonated_mines = (solvedGame.playerKnowledge == MINE).sum()
 
-print('\n\nGAME OVER\n\nSafely detected (without detonating) {}% of mines'.format((num_undetonated_mines / num_mines)*100))
 
-solvedGame.savePlayerKnowledge('test_solved_board')
+
+
+
+
+
+
