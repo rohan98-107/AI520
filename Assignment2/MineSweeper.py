@@ -102,18 +102,37 @@ class MineSweeper:
 
 
     def printPlayerKnowledge(self):
+        # Color Legend:
+        # green (0): safely identified safe cells
+        # orange/pink (-6): safely identified (undetonated) mine cells
+        # red (-8): detonated mine cells
+
         imgsize = int(self.dim / 10)
         fontsize = 12.5 / (self.dim)
         dpi = 500
 
         plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
-        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=8, linewidth=0.01, linecolor='lightgray',
+        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=0, linewidth=0.01, linecolor='lightgray',
                     annot=True, annot_kws={"size": fontsize},
                     square=True, cbar=False,
                     xticklabels=False,
                     yticklabels=False,
-                    cmap='plasma')
+                    cmap='RdYlGn')
         plt.show()
+
+    def savePlayerKnowledge(self, filename):
+        imgsize = int(self.dim / 10)
+        fontsize = 75 / (self.dim)
+        dpi = 1000
+
+        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
+        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=0, linewidth=0.01, linecolor='lightgray',
+                    annot=True, annot_kws={"size": fontsize},
+                    square=True, cbar=False,
+                    xticklabels=False,
+                    yticklabels=False,
+                    cmap='RdYlGn')
+        plt.savefig('{}.png'.format(filename), dpi=dpi)
 
 # test board visualizations
 '''

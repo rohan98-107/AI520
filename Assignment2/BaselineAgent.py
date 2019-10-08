@@ -35,18 +35,20 @@ def solveBaseline(game):
                 print('All neighbors of {}, {} must be mines.\n'.format(x, y))
                 for i, j in dirs:
                     if 0 <= x + i < game.dim and 0 <= y + j < game.dim:
-                        game.playerKnowledge[x+i][y+j] = MINE
-                        print('Neighbor {}, {} flagged as a mine.\n'.format(x+i, y+j))
+                        if game.playerKnowledge[x+i][y+j] == HIDDEN:
+                            game.playerKnowledge[x+i][y+j] = MINE
+                            print('Neighbor {}, {} flagged as a mine.\n'.format(x+i, y+j))
             # case when all hidden nbrs must be safe: mark as safe, add safe cell(s),
             # and DON'T fall through to adding a random hidden cell
             elif (8 - clue - numSafeNbrs) == numHiddenNbrs:
                 print('All neighbors of {}, {} must be safe.\n'.format(x, y))
                 for i, j in dirs:
                     if 0 <= x + i < game.dim and 0 <= y + j < game.dim:
-                        game.playerKnowledge[x+i][y+j] = SAFE
-                        q.append((x+i, y+j))
-                        print('Neighbor {}, {} flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
-                        continue
+                        if game.playerKnowledge[x+i][y+j] == HIDDEN:
+                            game.playerKnowledge[x+i][y+j] = SAFE
+                            q.append((x+i, y+j))
+                            print('Neighbor {}, {} flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
+                            continue
 
         # add random hidden cell iff we detonated a mine or we detecting all nbrs were mines
         if numHiddenCells(game) != 0:
@@ -58,7 +60,10 @@ def solveBaseline(game):
 
 # utility function to grab relevant metadata given game, (x,y) coordinates
 def getCellNeighborData(game, x, y):
-    numSafeNbrs = 0;    numMineNbrs = 0;    numHiddenNbrs = 0;  numTotalNbrs = 0
+    numSafeNbrs = 0
+    numMineNbrs = 0
+    numHiddenNbrs = 0
+    numTotalNbrs = 0
     for i, j in dirs:
         if 0 <= x + i < game.dim and 0 <= y + j < game.dim:
             numTotalNbrs += 1
@@ -85,10 +90,11 @@ density = 0.10
 num_mines = int(density*(dim**2))
 
 game = MineSweeper(dim, num_mines)
-game.saveBoard('test')
+game.saveBoard('test_init_board')
 
 solvedGame = solveBaseline(game)
-
 num_undetonated_mines = (solvedGame.playerKnowledge == MINE).sum()
 
 print('\n\nGAME OVER\n\nSuccessful undetonated mine detection rate:{}'.format(num_undetonated_mines / num_mines))
+
+solvedGame.savePlayerKnowledge('test_solved_board')
