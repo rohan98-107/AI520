@@ -143,7 +143,7 @@ class agent:
 
         # don't need to recrunch for the first enqueue
         if (recrunch is False) or (safesFound is False):
-            if safesFound is False:
+            if recrunch is True:
                 print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
             (x_tuple, y_tuple) = np.where(self.playerKnowledge == HIDDEN)
             i = np.random.randint(len(x_tuple))
