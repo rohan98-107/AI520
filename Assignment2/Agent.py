@@ -64,7 +64,7 @@ class agent:
 
                 # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q,
                 # and DON'T fall through to adding a random hidden cell
-                elif (8 - clue - numSafeNbrs) == numHiddenNbrs:
+                elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
                     print('All neighbors of ({}, {}) must be safe.\n'.format(x, y))
                     for i, j in dirs:
                         if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
@@ -130,7 +130,7 @@ class agent:
                                         self.playerKnowledge[x + i][y + j] = MINE; self.numFlaggedMines += 1
                                         print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
                         # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
-                        elif (8 - clue - numSafeNbrs) == numHiddenNbrs:
+                        elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
                             print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
                             for i, j in dirs:
                                 if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
