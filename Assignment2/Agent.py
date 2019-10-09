@@ -23,14 +23,13 @@ class agent:
         self.mineFlagRate = 0
         self.totalSolveTime = 0
 
-
     def solveBaseline(self):
         start = time.time()
 
         # use a queue of next cells (x,y) to visit
         q = deque()
-        # randomly add a hidden cell to the queue
-        q.append(self.addRandomHiddenCell(check=False))
+        # randomly add a hidden cell to the queue; right now the best possible happens to be random choice
+        self.enqueueBestPossibleCells(False, q)
 
         while len(q) != 0:
             (x, y) = q.popleft()
@@ -71,18 +70,17 @@ class agent:
                         if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                             if self.playerKnowledge[x + i][y + j] == HIDDEN:
                                 self.playerKnowledge[x + i][y + j] = SAFE
+                                q.append((x+i, y+j))
+                                print('\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
 
-                                print('\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'\
-                                      .format(x + i, y + j))
-
-            # add random hidden cell iff we detonated a mine or we inferred all nbrs were mines
-            # and make sure the random hidden cell is not a mine
+            # if we detonated a mine or we inferred all nbrs were mines, then enqueue the next best possible cell(s)
+            # i.e. re-crunch KB and try to mark new safes (and mines), enqueue safes; else randomly choose
             # if no hidden cells remaining, do nothing
             if self.numHiddenCells() != 0 and len(q) == 0:
-                print('Revealing cell ({}, {}) led to no conclusive next move (either DETONATED or all neighbors MINES).\n\
-                                      Will randomly reveal a cell next.\n'.format(x, y))
-                self.addRandomHiddenCell(check=True)
-
+                print('Revealing cell ({}, {}) led to no conclusive next move (either DETONATED or all neighbors MINES).\n'.format(x, y))
+                print('Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,\n')
+                print('or add random if none available.\n')
+                self.enqueueBestPossibleCells(True, q)
 
             print('-' * 40)
 
@@ -104,51 +102,53 @@ class agent:
                     numHiddenNbrs += 1
         return numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs
 
-    # utility function to return a random x,y from the game's currently hidden cells
-    # randomly select a hidden cell, and then re-check all its neighbors
-    # goal is to see if we can deterministically predict that this random x,y is a mine
-    # if so, mark as such and don't 'pick' it (i.e. add to queue); else add to queue
-    def addRandomHiddenCell(self, check):
-        if check:
-            while True:
-                (x_tuple, y_tuple) = np.where(self.playerKnowledge == HIDDEN)
-                i = np.random.randint(len(x_tuple))
-                x = x_tuple[i]; y = y_tuple[i]
+    # utility function to return a random x,y from the game's currently hidden cells iff no new safe cells can be recovered
+    # i.e. re-perform (recrunch) inference on all cells; if new safe cells found, enqueue them;
+    # else randomly choose
+    def enqueueBestPossibleCells(self, recrunch, q):
+        safesFound = False;
+        if recrunch:
+            for x in range(self.game.dim):
+                for y in range(self.game.dim):
+                    # if it's not safe, then there's no need to check all its neighbors (nothing to deduce if mine/hidden)
+                    if self.playerKnowledge[x][y] != SAFE:
+                        pass
+                    # otherwise do inference using neighbors
+                    else:
+                        clue = self.game.board[x][y]
+                        numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
 
-                # for each safe neighbor of this random cell, try to see if this random cell is deterministically mine/safe
-                # by updating information of each safe neighbor
-                # (cannot use information of hidden neighbors as this would constitute revealing them)
-                for i, j in dirs:
-                    if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim and self.playerKnowledge[x+i][y+j] == SAFE:
-                        clue = self.game.board[x+i][y+j]
-                        numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x+i, y+j)
-                        # note at least one neighbor (the one randomly selected) must be hidden
-                        # case when all hidden nbrs must be mines: mark as mine
-                        if (clue - numMineNbrs) == numHiddenNbrs:
-                            print('\tRANDOMLY SELECTED ({}, {}), and all other neighbors of ({}, {}), must be mines.\n'.format(x, y, x+i, y+j))
-                            for k, l in dirs:
-                                if 0 <= x + i + k < self.game.dim and 0 <= y + j + l < self.game.dim:
-                                    if self.playerKnowledge[x + i + k][y + j + l] == HIDDEN:
-                                        self.playerKnowledge[x + i + k][y + j + l] = MINE;  self.numFlaggedMines += 1
-                                        print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i + k, y + j + l))
-                            print('\tSince we can infer from current KB that the RANDOMLY SELECTED ({}, {}) is a mine, we randomly select another.\n',format(x, y))
-                            continue
-                        # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q, break loop
+                        # if no neighbors are hidden, then we can't deduce any more new info about them
+                        if numHiddenNbrs == 0:
+                            pass
+                        # case when all hidden nbrs must be mines: mark as such
+                        elif (clue - numMineNbrs) == numHiddenNbrs:
+                            print('\tRe-processing KB found that: All neighbors of ({}, {}) must be mines.\n'.format(x, y))
+                            for i, j in dirs:
+                                if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                    if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                        self.playerKnowledge[x + i][y + j] = MINE; self.numFlaggedMines += 1
+                                        print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
+                        # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
                         elif (8 - clue - numSafeNbrs) == numHiddenNbrs:
-                            print('\tRANDOMLY SELECTED ({}, {}), and all other neighbors of ({}, {}), must be safe.\n'.format(x, y, x+i, y+j))
-                            for k, l in dirs:
-                                if 0 <= x + i + k < self.game.dim and 0 <= y + j + l < self.game.dim:
-                                    if self.playerKnowledge[x + i + k][y + j + l] == HIDDEN:
-                                        self.playerKnowledge[x + i + k][y + j + l] = SAFE
+                            print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
+                            for i, j in dirs:
+                                if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                    if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                        self.playerKnowledge[x + i][y + j] = SAFE
+                                        q.append((x+i, y+j))
                                         print('\t\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
-                            print('\tSince we can infer from current KB that the RANDOMLY SELECTED ({}, {}) is safe, we enqueue it and proceed.\n'.format(x, y))
-                            return None
-        # don't need to check for the first enqueue
-        else:
+                            safesFound = True
+
+
+        # don't need to recrunch for the first enqueue
+        if (recrunch is False) or (safesFound is False):
+            if safesFound is False:
+                print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
             (x_tuple, y_tuple) = np.where(self.playerKnowledge == HIDDEN)
             i = np.random.randint(len(x_tuple))
             x = x_tuple[i]; y = y_tuple[i]
-            return (x, y)
+            q.append((x, y))
 
     # utility function to return the number of hidden cells remaining
     def numHiddenCells(self):
@@ -188,8 +188,6 @@ class agent:
         plt.savefig('{}.png'.format(filename), dpi=dpi)
 
 
-
-
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
 def baselineGameDriver(dim, density, logFileName):
@@ -213,17 +211,8 @@ def baselineGameDriver(dim, density, logFileName):
 
 
 # test game driver
-dim = 20
-density = 0.1
+dim = 50
+density = 0.25
 trialFileName = 'test'
 
 baselineGameDriver(dim, density, trialFileName)
-
-
-
-
-
-
-
-
-
