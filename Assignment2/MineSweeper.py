@@ -18,7 +18,7 @@ class MineSweeper:
     dim = 0
     board = [[]]
     playerMoves = [[]]
-    playerKnowledge = [[]]
+
     gameOver = False
     success = False
 
@@ -26,12 +26,10 @@ class MineSweeper:
         self.dim = dim
         self.playerMoves = [[False for _ in range(dim)] for _ in range(dim)]
 
-        # track player knowledge per cell: initially all hidden
-        self.playerKnowledge = np.array([[HIDDEN]*dim for _ in range(dim)])
-
         if num_mines < 0 or num_mines > dim**2:
             print("Invalid number of mines specified --> set to 0")
             num_mines = 0
+        self.num_mines = num_mines
 
         board = [[0 for _ in range(dim)] for _ in range(dim)]
 
@@ -56,10 +54,10 @@ class MineSweeper:
 
         self.board = temp.tolist()
 
+
     def revealSquare(self,x,y):
         if self.board[x][y] == MINE:
             print("Boom!")
-            self.playerKnowledge[x][y].state = MINE
             self.gameOver = True
 
         self.playerMoves[x][y] = True
@@ -100,39 +98,6 @@ class MineSweeper:
                     cmap='seismic')
         plt.savefig('{}.png'.format(filename), dpi=dpi)
 
-
-    def printPlayerKnowledge(self):
-        # Color Legend:
-        # green (0): safely identified safe cells
-        # orange/pink (-6): safely identified (undetonated) mine cells
-        # red (-8): detonated mine cells
-
-        imgsize = int(self.dim / 10)
-        fontsize = 12.5 / (self.dim)
-        dpi = 500
-
-        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
-        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=0, linewidth=0.01, linecolor='lightgray',
-                    annot=True, annot_kws={"size": fontsize},
-                    square=True, cbar=False,
-                    xticklabels=False,
-                    yticklabels=False,
-                    cmap='RdYlGn')
-        plt.show()
-
-    def savePlayerKnowledge(self, filename):
-        imgsize = int(self.dim / 10)
-        fontsize = 75 / (self.dim)
-        dpi = 1000
-
-        plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
-        sns.heatmap(self.playerKnowledge, vmin=-8, vmax=0, linewidth=0.01, linecolor='lightgray',
-                    annot=True, annot_kws={"size": fontsize},
-                    square=True, cbar=False,
-                    xticklabels=False,
-                    yticklabels=False,
-                    cmap='RdYlGn')
-        plt.savefig('{}.png'.format(filename), dpi=dpi)
 
 # test board visualizations
 '''
