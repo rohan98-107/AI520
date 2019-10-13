@@ -1,7 +1,3 @@
-# Assignment 2 - Minesweeper
-# Rohan Rele, Alex Eng, Aakash Raman, and Adarsh Patel
-# Generation/Setup code
-
 import random
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,15 +12,13 @@ SAFE = 0
 
 class MineSweeper:
     dim = 0
+    num_mines = 0
     board = [[]]
-    playerMoves = [[]]
-
     gameOver = False
     success = False
-
+    
     def __init__(self, dim, num_mines):
         self.dim = dim
-        self.playerMoves = [[False for _ in range(dim)] for _ in range(dim)]
 
         if num_mines < 0 or num_mines > dim**2:
             print("Invalid number of mines specified --> set to 0")
@@ -55,15 +49,16 @@ class MineSweeper:
         self.board = temp.tolist()
 
 
-    def revealSquare(self,x,y):
+    def isMine(self,x,y):
         if self.board[x][y] == MINE:
             print("Boom!")
             self.gameOver = True
 
-        self.playerMoves[x][y] = True
-        for i, j in dirs:
-            if self.playerMoves[x+i][y+j] is False and self.board[x+i][y+j] == SAFE:
-                self.playerMoves[x+i][y+j] = True
+    def keepScore():
+        '''
+        fill this in
+        '''
+        return
 
     def printBoard(self):
         # Color Legend:
@@ -104,7 +99,6 @@ class MineSweeper:
 dim = 30
 density = 0.15
 num_mines = int(density*(dim**2))
-
 game = MineSweeper(dim, num_mines)
 game.printBoard()
 #game.saveBoard('test')
