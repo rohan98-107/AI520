@@ -230,7 +230,7 @@ class agent:
             cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
             if cell not in to_exclude:
                 return cell
-        cell = self.int_to_cell(self.order[self.current_in_order]) 
+        cell = self.int_to_cell(self.order[self.current_in_order])
         self.current_in_order += 1
         return cell
     # utility function to return the number of hidden cells remaining
@@ -293,11 +293,3 @@ def baselineGameDriver(dim, density, logFileName):
           .format(baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100))
 
     baselineAgent.savePlayerKnowledge('{}_solved_board'.format(logFileName))
-
-
-# # test game driver
-# dim = 20
-# density = 0.25
-# trialFileName = 'test'
-#
-# baselineGameDriver(dim, density, trialFileName)

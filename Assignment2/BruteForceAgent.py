@@ -9,7 +9,6 @@ from LinAlg import *
 class brute_force_agent(lin_alg_agent):
     def __init__(self, game, useMineCount, order):
         lin_alg_agent.__init__(self,game,useMineCount,order)
-        self.current_iter_configs = []
 
     def confirm_full_consistency(self, board, cells):
         dim = self.game.dim
@@ -36,8 +35,7 @@ class brute_force_agent(lin_alg_agent):
 
     def confirm_consistency(self, board, x, y):
         clue = self.game.board[x][y]
-        # print()
-        # print("{},{}, with clue:{}".format(x,y,clue))
+        dim = self.game.dim
         numSafeNbrs = 0
         numMineNbrs = 0
         numHiddenNbrs = 0
@@ -53,22 +51,11 @@ class brute_force_agent(lin_alg_agent):
                     numSafeNbrs += 1
                 elif board[nx][ny] == HIDDEN:
                     numHiddenNbrs += 1
-        # print("num safe: {}, num mines: {}, num hidden: {}, total: {}".format(numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs))
         if numMineNbrs <= clue:
             return True
-        # print("rejected for consistency")
         return False
 
     def probability_method(self):
-        # print("probability_method")
-        # print()
-        # print("board")
-        # print(np.array(self.game.board))
-        # print()
-        # print("knowledge")
-        # print(self.playerKnowledge)
-        # print()
-        self.current_iter_configs = []
         dim = self.game.dim
         consistency_cells = []
         config_cells = set()
@@ -83,41 +70,38 @@ class brute_force_agent(lin_alg_agent):
 
         config_cells = sorted(list(config_cells), key = lambda x: x[0] * dim + x[1])
 
-
+        configs = []
         if len(config_cells) <= 20:
             start_search_time = time.time()
-            self.get_configs(config_cells, consistency_cells)
+            configs = self.get_configs(config_cells, consistency_cells)
             # print("len(config_cells)={}, took {} seconds to compute".format(len(config_cells), round(time.time() - start_search_time,2)))
 
-        if len(consistency_cells) == 0 or len(self.current_iter_configs) == 0:
+        if len(consistency_cells) == 0 or len(configs) == 0:
             return self.get_next_random(set())
 
         counts = {x:0 for x in config_cells}
 
         min_mine_count = len(config_cells)
         # print("found configs:")
-        for config in self.current_iter_configs:
+        for config in configs:
             # print(config)
             for coordinates in config:
                 counts[coordinates] += 1
             min_mine_count = min(min_mine_count, len(config))
 
         best_cell = None
-        best_count = len(self.current_iter_configs)
+        best_count = len(configs)
 
         for cell, count in counts.items():
             if count <= best_count:
                 best_count = count
                 best_cell = cell
 
-        # print()
-        # print("best cell: {},{}".format(best_cell[0], best_cell[1]))
-        # print()
         other_cells = self.numHiddenCells() - len(config_cells)
         mines_left = self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines
         max_mines_in_hidden_cells_not_in_config_Cells = mines_left - min_mine_count
         other_cell_max_probability = 1 if other_cells == 0 else max_mines_in_hidden_cells_not_in_config_Cells / other_cells
-        if best_count / len(self.current_iter_configs) < other_cell_max_probability:
+        if best_count / len(configs) < other_cell_max_probability:
             assert best_cell is not None
             return best_cell
         else:
@@ -129,6 +113,7 @@ class brute_force_agent(lin_alg_agent):
         # print("config cells:")
         # print(configCells)
         # print()
+        out = []
         while configs:
             # print("current iter configs:")
             # for _,i,config in configs:
@@ -143,7 +128,7 @@ class brute_force_agent(lin_alg_agent):
                     if self.confirm_full_consistency(current_board, consistency_cells):
                         # print("found config")
                         # print(current_config)
-                        self.current_iter_configs.append(current_config)
+                        out.append(current_config)
                     continue
                 cell = configCells[index]
                 current_config.append(cell)
@@ -168,6 +153,7 @@ class brute_force_agent(lin_alg_agent):
                         next_set.append((current_board,i,current_config))
 
             configs = next_set
+        return out
 
 def baselineVsBruteComparisonGameDriver(dim, density, trials):
     num_mines = int(density*(dim**2))
@@ -206,23 +192,11 @@ def linalgVsBruteComparisonGameDriver(dim, density, trials):
         la_agent = lin_alg_agent(game, True, order)
         brute_agent.solve()
         la_agent.solve()
-        # print('Trial {}:\n\tLin alg finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
-        #       .format(i+1, la_agent.totalSolveTime, la_agent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
+        print('Trial {}:\n\tLin alg finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
+              .format(i+1, la_agent.totalSolveTime, la_agent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
         la_cumulative_time+=la_agent.totalSolveTime
         la_cumulative_rate+=la_agent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
     print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
           .format(i+1, la_cumulative_time/trials, la_cumulative_rate/trials, brute_cumulative_time/trials, brute_cumulative_rate/trials))
-
-
-dim = 50
-density = 0.25
-trialFileName = 'brute_force'
-
-# baselineVsBruteComparisonGameDriver(dim,density,50)
-linalgVsBruteComparisonGameDriver(dim,density,20)
-linalgVsBruteComparisonGameDriver(dim,density,20)
-linalgVsBruteComparisonGameDriver(dim,density,20)
-linalgVsBruteComparisonGameDriver(dim,density,20)
-linalgVsBruteComparisonGameDriver(dim,density,20)

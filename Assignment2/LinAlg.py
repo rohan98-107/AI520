@@ -211,12 +211,3 @@ def baselineVsLinAlgComparisonGameDriver(dim, density, trials):
         lin_alg_cumulative_rate+=la_agent.mineFlagRate*100
     print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
           .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, lin_alg_cumulative_time/trials, lin_alg_cumulative_rate/trials))
-
-
-# # # test game driver
-# dim = 30
-# density = 0.25
-# trialFileName = 'lin_alg'
-#
-# # linearAlgebraGameDriver(dim, density, trialFileName)
-# baselineVsLinAlgComparisonGameDriver(dim,density,100)
