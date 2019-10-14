@@ -177,11 +177,11 @@ class lin_alg_agent(agent):
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
 def linearAlgebraGameDriver(dim, density, logFileName):
-    # sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
+    #sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
 
     num_mines = int(density*(dim**2))
 
-    print('\n\n***** GAME STARTING *****\n\n{} by {} board with {} mines\n\nSolving with BASELINE strategy\n\n'\
+    print('\n\n***** GAME STARTING *****\n\n{} by {} board with {} mines\n\nSolving with LINEAR ALGEBRA strategy\n\n'\
           .format(dim, dim, num_mines))
 
     game = MineSweeper(dim, num_mines)
@@ -210,13 +210,13 @@ def comparisonGameDriver(dim, density, trials):
         baselineAgent = agent(game)
         la_agent.solveBaseline()
         baselineAgent.solveBaseline()
-        print('Trial {}:\n\tBaseline finished in {} seconds detcting {}% of mines\n\tLin alg finished in {} seconds detcting {}% of mines'\
+        print('Trial {}:\n\tBaseline finished in {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
               .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, la_agent.totalSolveTime, la_agent.mineFlagRate*100))
         baseline_cumulative_time+=baselineAgent.totalSolveTime
         baseline_cumulative_rate+=baselineAgent.mineFlagRate*100
         lin_alg_cumulative_time+=la_agent.totalSolveTime
         lin_alg_cumulative_rate+=la_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tLin alg finished in {} seconds detcting {}% of mines'\
+    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
           .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, lin_alg_cumulative_time/trials, lin_alg_cumulative_rate/trials))
 
 
