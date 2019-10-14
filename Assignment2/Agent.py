@@ -265,13 +265,17 @@ class agent:
             if self.uncertaintyType == 'optimistic':
                 if numMineNbrs < self.game.board[x][y]:
                     return random.randint(numMineNbrs, self.game.board[x][y])
-                else:
+                elif numMineNbrs == self.game.board[x][y]:
                     return self.game.board[x][y]
+                else:
+                    return -1
             elif self.uncertaintyType == 'cautious':
                 if self.game.board[x][y] < numMineNbrs + numHiddenNbrs:
                     return random.randint(self.game.board[x][y], numMineNbrs + numHiddenNbrs)
-                else:
+                elif self.game.board[x][y] == numMineNbrs + numHiddenNbrs:
                     return self.game.board[x][y]
+                else:
+                    return -1
             else:
                 return -1
 
@@ -353,7 +357,6 @@ def baselineUncertaintyDriver(dim, density):
         baselineAgent.uncertaintyType = u
         #baselineAgent.enableLogging()
         baselineAgent.solve()
-
         solveTimes.append(baselineAgent.totalSolveTime)
         solveRates.append(baselineAgent.mineFlagRate)
 
