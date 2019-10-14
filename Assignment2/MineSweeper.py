@@ -16,7 +16,7 @@ class MineSweeper:
     board = [[]]
     gameOver = False
     success = False
-    
+
     def __init__(self, dim, num_mines):
         self.dim = dim
 
@@ -27,14 +27,13 @@ class MineSweeper:
 
         board = [[0 for _ in range(dim)] for _ in range(dim)]
 
-        for n in range(num_mines + 1):
+        for n in range(num_mines):
             x = random.randint(0, dim-1)
             y = random.randint(0, dim-1)
-
-            if board[x][y] != MINE:
-                board[x][y] = MINE
-            else:
-                n -= 1
+            while board[x][y] == MINE:
+                x = random.randint(0, dim-1)
+                y = random.randint(0, dim-1)
+            board[x][y] = MINE
 
         temp = np.array(board)
 

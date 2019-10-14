@@ -45,16 +45,9 @@ def rref(matrix):
         col += 1
 
 class lin_alg_agent(agent):
-    def __init__(self, game):
-        agent.__init__(self,game)
-
-        #gets all neighbors surrounding (x,y) that we haven't tested yet
-    def get_hidden_neighbors(self, x, y):
-        neighbors = []
-        for i, j in dirs:
-            if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim and self.playerKnowledge[x + i][y + j] == HIDDEN:
-                neighbors.append((x+i,y+j))
-        return neighbors
+    def __init__(self, game, useMineCount, order):
+        agent.__init__(self,game, order)
+        self.useMineCount = useMineCount
 
     # override agent.py method to use linear algebra to solve system of equations
     # return a random x,y from the game's currently hidden cells iff no new safe cells can be recovered
@@ -63,13 +56,13 @@ class lin_alg_agent(agent):
         dim = self.game.dim
         if recrunch:
             information_cells = []
-            for x in range(self.game.dim):
-                for y in range(self.game.dim):
+            hidden_cells = []
+            for x in range(dim):
+                for y in range(dim):
+                    if self.playerKnowledge[x][y] == HIDDEN:
+                        hidden_cells.append((x,y))
                     # if it's not safe, then there's no clue we can use
-                    if self.playerKnowledge[x][y] != SAFE:
-                        pass
-                    # if we have a clue check if we can possibly do inference using neighbors
-                    else:
+                    if self.playerKnowledge[x][y] == SAFE:
                         clue = self.game.board[x][y]
                         numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
 
@@ -89,22 +82,21 @@ class lin_alg_agent(agent):
                 # the equation for the dim*dim values, constraining each to 1 or 0
                 # we can know if (x,y) is a mine iff the variable corresponding to
                 # the (dim * x + y)th column is 1
-                matrix = np.zeros((len(information_cells), dim*dim + 1), dtype = 'float64')
+                matrix = np.zeros((len(information_cells) + (1 if self.useMineCount else 0), dim*dim + 1), dtype = 'float64')
                 for i in range(len(information_cells)):
                     x, y, clue, mineNeighbors, numHiddenNbrs = information_cells[i]
                     hidden_nbrs = self.get_hidden_neighbors(x,y)
                     for nx, ny in hidden_nbrs:
                         matrix[i][dim * nx + ny] = 1
                     matrix[i][dim * dim] = clue - mineNeighbors
-
+                if self.useMineCount:
+                    for x,y in hidden_cells:
+                        matrix[len(information_cells), dim * x + y] = 1
+                    matrix[len(information_cells),dim*dim] = self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines
                 #row reduce our matrix to solve the system
                 rref(matrix)
                 #keeping track of flags here is purely for debugging purposes
                 flags = []
-                # for row in self.game.board:
-                #     print(row)
-                # print()
-                # print(self.playerKnowledge)
                 for row in matrix:
                     #
                     positives = []
@@ -141,6 +133,7 @@ class lin_alg_agent(agent):
                             # in the list must have value 0 for equation to hold (so everything is safe)
                             # we can do positives + negatives since exactly one has values
                             for x,y,_ in positives + negatives:
+                                # if self.game.board[x][y] == MINE:
                                 assert self.game.board[x][y] != MINE
                                 self.playerKnowledge[x][y] = SAFE
                                 q.append((x,y)) #add the safe cell to the queue to visit next
@@ -155,24 +148,22 @@ class lin_alg_agent(agent):
                         # of the variables in the positive and negative lists can be mines
                         if sum([coeffecient for x,y,coeffecient in positives]) == row[-1]:
                             for x,y,_ in positives:
+                                if self.playerKnowledge[x,y] == MINE:
+                                    continue
                                 assert self.game.board[x][y] == MINE
                                 self.playerKnowledge[x][y] = MINE
                                 flags.append((x,y))
                                 self.numFlaggedMines += 1
-                #
-                # print("found safe " + str(q))
-                # print("flagged " + str(flags))
+
+
 
         # if lin alg didn't give us anything then pick a random cell
         if (recrunch is False) or (safesFound is False):
             if recrunch is True and self.logging:
                 print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
-            (x_tuple, y_tuple) = np.where(self.playerKnowledge == HIDDEN)
-            if len(x_tuple) == 0:
-                return
-            i = np.random.randint(len(x_tuple))
-            x = x_tuple[i]; y = y_tuple[i]
-            q.append((x, y))
+            tuple = self.probability_method()
+            if tuple:
+                q.append(tuple)
 
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
@@ -183,13 +174,13 @@ def linearAlgebraGameDriver(dim, density, logFileName):
 
     print('\n\n***** GAME STARTING *****\n\n{} by {} board with {} mines\n\nSolving with LINEAR ALGEBRA strategy\n\n'\
           .format(dim, dim, num_mines))
-
+    order = random.shuffle([i for i in range(dim**2)])
     game = MineSweeper(dim, num_mines)
     game.saveBoard('{}_init_board'.format(logFileName))
 
-    agent = lin_alg_agent(game)
+    agent = lin_alg_agent(game, order)
     # agent.enableLogging()
-    agent.solveBaseline()
+    agent.solve()
 
     print('\n\n***** GAME OVER *****\n\nGame ended in {} seconds\n\nSafely detected (without detonating) {}% of mines'\
           .format(agent.totalSolveTime, agent.mineFlagRate*100))
@@ -198,7 +189,7 @@ def linearAlgebraGameDriver(dim, density, logFileName):
 
 # compares baseline and lin alg system of equations using same boards and outputs trial by trial time and mine
 # detection percent as well as average over all boards
-def comparisonGameDriver(dim, density, trials):
+def baselineVsLinAlgComparisonGameDriver(dim, density, trials):
     num_mines = int(density*(dim**2))
     baseline_cumulative_time = 0
     baseline_cumulative_rate = 0
@@ -206,10 +197,12 @@ def comparisonGameDriver(dim, density, trials):
     lin_alg_cumulative_rate = 0
     for i in range(trials):
         game = MineSweeper(dim, num_mines)
-        la_agent = lin_alg_agent(game)
-        baselineAgent = agent(game)
-        la_agent.solveBaseline()
-        baselineAgent.solveBaseline()
+        order = [i for i in range(dim**2)]
+        random.shuffle(order)
+        la_agent = lin_alg_agent(game, True, order)
+        baselineAgent = agent(game, order)
+        la_agent.solve()
+        baselineAgent.solve()
         print('Trial {}:\n\tBaseline finished in {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
               .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, la_agent.totalSolveTime, la_agent.mineFlagRate*100))
         baseline_cumulative_time+=baselineAgent.totalSolveTime
@@ -220,10 +213,10 @@ def comparisonGameDriver(dim, density, trials):
           .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, lin_alg_cumulative_time/trials, lin_alg_cumulative_rate/trials))
 
 
-# # test game driver
-dim = 50
-density = 0.25
-trialFileName = 'lin_alg'
-
-# linearAlgebraGameDriver(dim, density, trialFileName)
-comparisonGameDriver(dim,density,50)
+# # # test game driver
+# dim = 30
+# density = 0.25
+# trialFileName = 'lin_alg'
+#
+# # linearAlgebraGameDriver(dim, density, trialFileName)
+# baselineVsLinAlgComparisonGameDriver(dim,density,100)

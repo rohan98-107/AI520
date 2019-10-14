@@ -9,7 +9,7 @@ import sys
 import time
 
 class agent:
-    def __init__(self, game):
+    def __init__(self, game, order):
         # copy game into agent object
         self.game = deepcopy(game)
         # track player knowledge per cell: initially all hidden
@@ -24,10 +24,13 @@ class agent:
         self.totalSolveTime = 0
         self.logging = False
 
+        self.order = order
+        self.current_in_order = 0
+
     def enableLogging(self):
         self.logging = True
 
-    def solveBaseline(self):
+    def solve(self):
         start = time.time()
 
         # use a queue of next cells (x,y) to visit
@@ -40,7 +43,8 @@ class agent:
 
             # if it's a mine, mark as detonated
             if self.game.board[x][y] == MINE:
-                self.playerKnowledge[x][y] = DETONATED; self.numDetonatedMines += 1
+                self.playerKnowledge[x][y] = DETONATED
+                self.numDetonatedMines += 1
                 if self.logging:
                     print('\nBOOM! Mine detonated at ({}, {}).\n\n'.format(x, y))
 
@@ -68,7 +72,11 @@ class agent:
                     for i, j in dirs:
                         if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                             if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                self.playerKnowledge[x + i][y + j] = MINE;  self.numFlaggedMines += 1
+                                if self.logging:
+                                    print(self.playerKnowledge)
+                                assert self.game.board[x + i][y + j] == MINE
+                                self.playerKnowledge[x + i][y + j] = MINE
+                                self.numFlaggedMines += 1
                                 if self.logging:
                                     print('\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
 
@@ -80,6 +88,7 @@ class agent:
                     for i, j in dirs:
                         if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                             if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                assert self.game.board[x + i][y + j] != MINE
                                 self.playerKnowledge[x + i][y + j] = SAFE
                                 q.append((x+i, y+j))
                                 if self.logging:
@@ -102,6 +111,23 @@ class agent:
         self.totalSolveTime = time.time() - start
         self.mineFlagRate = self.numFlaggedMines / self.game.num_mines
 
+        dim = self.game.dim
+
+        for x in range(dim):
+            for y in range(dim):
+                if self.game.board[x][y] == MINE:
+                    if not (self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED):
+                        print(np.array(self.game.board))
+                        print(self.playerKnowledge)
+                        print("error at {},{}".format(x,y))
+                    assert self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED
+                else:
+                    if self.playerKnowledge[x][y] != SAFE:
+                        print(np.array(self.game.board))
+                        print(self.playerKnowledge)
+                        print("error at {},{}".format(x,y))
+                    assert self.playerKnowledge[x][y] == SAFE
+
     # utility function to grab relevant metadata given game, (x,y) coordinates
     def getCellNeighborData(self, x, y):
         numSafeNbrs = 0;    numMineNbrs = 0;    numHiddenNbrs = 0;  numTotalNbrs = 0
@@ -115,6 +141,15 @@ class agent:
                 elif self.playerKnowledge[x + i][y + j] == HIDDEN:
                     numHiddenNbrs += 1
         return numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs
+
+
+    #gets all neighbors surrounding (x,y) that we haven't tested yet
+    def get_hidden_neighbors(self, x, y):
+        neighbors = []
+        for i, j in dirs:
+            if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim and self.playerKnowledge[x + i][y + j] == HIDDEN:
+                neighbors.append((x+i,y+j))
+        return neighbors
 
     # utility function to return a random x,y from the game's currently hidden cells iff no new safe cells can be recovered
     # i.e. re-perform (recrunch) inference on all cells; if new safe cells found, enqueue them;
@@ -142,7 +177,9 @@ class agent:
                             for i, j in dirs:
                                 if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                                     if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                        self.playerKnowledge[x + i][y + j] = MINE; self.numFlaggedMines += 1
+                                        assert self.game.board[x + i][y + j] == MINE
+                                        self.playerKnowledge[x + i][y + j] = MINE
+                                        self.numFlaggedMines += 1
                                         if self.logging:
                                             print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
                         # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
@@ -152,6 +189,7 @@ class agent:
                             for i, j in dirs:
                                 if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                                     if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                        assert self.game.board[x + i][y + j] != MINE
                                         self.playerKnowledge[x + i][y + j] = SAFE
                                         q.append((x+i, y+j))
                                         if self.logging:
@@ -163,13 +201,38 @@ class agent:
         if (recrunch is False) or (safesFound is False):
             if recrunch is True and self.logging:
                 print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
-            (x_tuple, y_tuple) = np.where(self.playerKnowledge == HIDDEN)
-            if len(x_tuple) == 0:
-                return
-            i = np.random.randint(len(x_tuple))
-            x = x_tuple[i]; y = y_tuple[i]
-            q.append((x, y))
+            tuple = self.probability_method()
+            if tuple:
+                q.append(tuple)
 
+    def probability_method(self):
+        tuple = self.get_next_random(set())
+        return tuple
+
+    def int_to_cell(self, x):
+        dim = self.game.dim
+        return (x//dim, x % dim)
+
+    def get_next_random(self, to_exclude):
+        dim = self.game.dim
+        while self.current_in_order < dim ** 2:
+            cell = self.int_to_cell(self.order[self.current_in_order])
+            if self.playerKnowledge[cell[0]][cell[1]] == HIDDEN:
+                break
+            self.current_in_order += 1
+        if self.current_in_order == dim ** 2:
+            return None
+        cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
+        if cell not in to_exclude:
+            self.current_in_order += 1
+            return cell
+        for i in range(self.current_in_order + 1, dim**2):
+            cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
+            if cell not in to_exclude:
+                return cell
+        cell = self.int_to_cell(self.order[self.current_in_order]) 
+        self.current_in_order += 1
+        return cell
     # utility function to return the number of hidden cells remaining
     def numHiddenCells(self):
         return (self.playerKnowledge == HIDDEN).sum()
@@ -220,10 +283,11 @@ def baselineGameDriver(dim, density, logFileName):
 
     game = MineSweeper(dim, num_mines)
     game.saveBoard('{}_init_board'.format(logFileName))
-
-    baselineAgent = agent(game)
+    order = [i for i in range(dim**2)]
+    random.shuffle(order)
+    baselineAgent = agent(game, order)
     baselineAgent.enableLogging()
-    baselineAgent.solveBaseline()
+    baselineAgent.solve()
 
     print('\n\n***** GAME OVER *****\n\nGame ended in {} seconds\n\nSafely detected (without detonating) {}% of mines'\
           .format(baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100))
