@@ -345,6 +345,7 @@ def baselineUncertaintyDriver(dim, density):
     solveTimes = []
     solveRates = []
 
+    # to change randomReveal probability, change param p=? in getClue(...)
     uncertainties = ['none', 'randomReveal', 'optimistic', 'cautious']
 
     for u in uncertainties:
