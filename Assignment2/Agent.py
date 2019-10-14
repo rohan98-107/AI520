@@ -7,6 +7,7 @@ from collections import deque
 from copy import deepcopy
 import sys
 import time
+import random
 
 class agent:
     def __init__(self, game, order):
@@ -26,6 +27,8 @@ class agent:
 
         self.order = order
         self.current_in_order = 0
+
+        self.uncertaintyType = 'none'
 
     def enableLogging(self):
         self.logging = True
@@ -51,48 +54,53 @@ class agent:
             # otherwise mark as safe, get clue & metadata, and infer safety/non-safety of nbrs if possible
             else:
                 self.playerKnowledge[x][y] = SAFE
-                clue = self.game.board[x][y]
-                if self.logging:
-                    print('\nCell ({}, {}) safely revealed with clue: {}.'.format(x, y, clue))
-                numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
-                if self.logging:
-                    print('\t# safe neighbors: {}\n\t# mine neighbors: {}\n\t# hidden neighbors: {}\n\t# total neighbors: {}\n\n'\
-                      .format(numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs))
+                clue = self.getClue(x, y)
+                if clue != -1:
 
-                # if no neighbors are hidden, then we can't deduce any more new info about them
-                if numHiddenNbrs == 0:
-                    if self.logging:
-                        print('All neighbors of ({}, {}) are already revealed; nothing to infer.\n'.format(x, y))
-                    pass
 
-                # case when all hidden nbrs must be mines: mark as mine and fall through to adding a random hidden cell
-                elif (clue - numMineNbrs) == numHiddenNbrs:
                     if self.logging:
-                        print('All neighbors of ({}, {}) must be mines.\n'.format(x, y))
-                    for i, j in dirs:
-                        if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
-                            if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                if self.logging:
-                                    print(self.playerKnowledge)
-                                assert self.game.board[x + i][y + j] == MINE
-                                self.playerKnowledge[x + i][y + j] = MINE
-                                self.numFlaggedMines += 1
-                                if self.logging:
-                                    print('\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
+                        print('\nCell ({}, {}) safely revealed with clue: {}.'.format(x, y, clue))
+                    numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
+                    if self.logging:
+                        print('\t# safe neighbors: {}\n\t# mine neighbors: {}\n\t# hidden neighbors: {}\n\t# total neighbors: {}\n\n'\
+                          .format(numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs))
 
-                # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q,
-                # and DON'T fall through to adding a random hidden cell
-                elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
-                    if self.logging:
-                        print('All neighbors of ({}, {}) must be safe.\n'.format(x, y))
-                    for i, j in dirs:
-                        if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
-                            if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                assert self.game.board[x + i][y + j] != MINE
-                                self.playerKnowledge[x + i][y + j] = SAFE
-                                q.append((x+i, y+j))
-                                if self.logging:
-                                    print('\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
+                    # if no neighbors are hidden, then we can't deduce any more new info about them
+                    if numHiddenNbrs == 0:
+                        if self.logging:
+                            print('All neighbors of ({}, {}) are already revealed; nothing to infer.\n'.format(x, y))
+                        pass
+
+                    # case when all hidden nbrs must be mines: mark as mine and fall through to adding a random hidden cell
+                    elif (clue - numMineNbrs) == numHiddenNbrs:
+                        if self.logging:
+                            print('All neighbors of ({}, {}) must be mines.\n'.format(x, y))
+                        for i, j in dirs:
+                            if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                    #if self.logging:
+                                    #    print(self.playerKnowledge)
+                                    if self.uncertaintyType == 'none':
+                                        assert self.game.board[x + i][y + j] == MINE
+                                    self.playerKnowledge[x + i][y + j] = MINE
+                                    self.numFlaggedMines += 1
+                                    if self.logging:
+                                        print('\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
+
+                    # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q,
+                    # and DON'T fall through to adding a random hidden cell
+                    elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
+                        if self.logging:
+                            print('All neighbors of ({}, {}) must be safe.\n'.format(x, y))
+                        for i, j in dirs:
+                            if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                    if self.uncertaintyType == 'none':
+                                        assert self.game.board[x + i][y + j] != MINE
+                                    self.playerKnowledge[x + i][y + j] = SAFE
+                                    q.append((x+i, y+j))
+                                    if self.logging:
+                                        print('\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
 
             # if we detonated a mine or we inferred all nbrs were mines, then enqueue the next best possible cell(s)
             # i.e. re-crunch KB and try to mark new safes (and mines), enqueue safes; else randomly choose
@@ -111,22 +119,24 @@ class agent:
         self.totalSolveTime = time.time() - start
         self.mineFlagRate = self.numFlaggedMines / self.game.num_mines
 
-        dim = self.game.dim
+        if self.uncertaintyType == 'none':
+            dim = self.game.dim
+            for x in range(dim):
+                for y in range(dim):
+                    if self.game.board[x][y] == MINE:
+                        if not (self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED):
+                            print(np.array(self.game.board))
+                            print(self.playerKnowledge)
+                            print("error at {},{}".format(x,y))
+                        assert self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED
+                    else:
+                        if self.playerKnowledge[x][y] != SAFE:
+                            print(np.array(self.game.board))
+                            print(self.playerKnowledge)
+                            print("error at {},{}".format(x,y))
+                        assert self.playerKnowledge[x][y] == SAFE
 
-        for x in range(dim):
-            for y in range(dim):
-                if self.game.board[x][y] == MINE:
-                    if not (self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED):
-                        print(np.array(self.game.board))
-                        print(self.playerKnowledge)
-                        print("error at {},{}".format(x,y))
-                    assert self.playerKnowledge[x][y] == MINE or self.playerKnowledge[x][y] == DETONATED
-                else:
-                    if self.playerKnowledge[x][y] != SAFE:
-                        print(np.array(self.game.board))
-                        print(self.playerKnowledge)
-                        print("error at {},{}".format(x,y))
-                    assert self.playerKnowledge[x][y] == SAFE
+
 
     # utility function to grab relevant metadata given game, (x,y) coordinates
     def getCellNeighborData(self, x, y):
@@ -164,37 +174,40 @@ class agent:
                         pass
                     # otherwise do inference using neighbors
                     else:
-                        clue = self.game.board[x][y]
-                        numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
+                        clue = self.getClue(x, y)
+                        if clue != -1:
+                            numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
 
-                        # if no neighbors are hidden, then we can't deduce any more new info about them
-                        if numHiddenNbrs == 0:
-                            pass
-                        # case when all hidden nbrs must be mines: mark as such
-                        elif (clue - numMineNbrs) == numHiddenNbrs:
-                            if self.logging:
-                                print('\tRe-processing KB found that: All neighbors of ({}, {}) must be mines.\n'.format(x, y))
-                            for i, j in dirs:
-                                if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
-                                    if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                        assert self.game.board[x + i][y + j] == MINE
-                                        self.playerKnowledge[x + i][y + j] = MINE
-                                        self.numFlaggedMines += 1
-                                        if self.logging:
-                                            print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
-                        # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
-                        elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
-                            if self.logging:
-                                print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
-                            for i, j in dirs:
-                                if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
-                                    if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                        assert self.game.board[x + i][y + j] != MINE
-                                        self.playerKnowledge[x + i][y + j] = SAFE
-                                        q.append((x+i, y+j))
-                                        if self.logging:
-                                            print('\t\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
-                            safesFound = True
+                            # if no neighbors are hidden, then we can't deduce any more new info about them
+                            if numHiddenNbrs == 0:
+                                pass
+                            # case when all hidden nbrs must be mines: mark as such
+                            elif (clue - numMineNbrs) == numHiddenNbrs:
+                                if self.logging:
+                                    print('\tRe-processing KB found that: All neighbors of ({}, {}) must be mines.\n'.format(x, y))
+                                for i, j in dirs:
+                                    if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                        if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                            if self.uncertaintyType == 'none':
+                                                assert self.game.board[x + i][y + j] == MINE
+                                            self.playerKnowledge[x + i][y + j] = MINE
+                                            self.numFlaggedMines += 1
+                                            if self.logging:
+                                                print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
+                            # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
+                            elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
+                                if self.logging:
+                                    print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
+                                for i, j in dirs:
+                                    if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                        if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                            if self.uncertaintyType == 'none':
+                                                assert self.game.board[x + i][y + j] != MINE
+                                            self.playerKnowledge[x + i][y + j] = SAFE
+                                            q.append((x+i, y+j))
+                                            if self.logging:
+                                                print('\t\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
+                                safesFound = True
 
 
         # don't need to recrunch for the first enqueue
@@ -233,9 +246,36 @@ class agent:
         cell = self.int_to_cell(self.order[self.current_in_order])
         self.current_in_order += 1
         return cell
+
     # utility function to return the number of hidden cells remaining
     def numHiddenCells(self):
         return (self.playerKnowledge == HIDDEN).sum()
+
+   # utility function to return clue (or estimate for uncertain cases)
+    def getClue(self, x, y, p=0.02):
+        if self.uncertaintyType == "none":
+            return self.game.board[x][y]
+        elif self.uncertaintyType == "randomReveal":
+            if random.random() < p:
+                return self.game.board[x][y]
+            else:
+                return -1
+        else:
+            numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
+            if self.uncertaintyType == 'optimistic':
+                if numMineNbrs < self.game.board[x][y]:
+                    return random.randint(numMineNbrs, self.game.board[x][y])
+                else:
+                    return self.game.board[x][y]
+            elif self.uncertaintyType == 'cautious':
+                if self.game.board[x][y] < numMineNbrs + numHiddenNbrs:
+                    return random.randint(self.game.board[x][y], numMineNbrs + numHiddenNbrs)
+                else:
+                    return self.game.board[x][y]
+            else:
+                return -1
+
+
 
     def printPlayerKnowledge(self):
         # Color Legend:
@@ -274,7 +314,7 @@ class agent:
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
 def baselineGameDriver(dim, density, logFileName):
-    # sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
+    sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
 
     num_mines = int(density*(dim**2))
 
@@ -293,3 +333,33 @@ def baselineGameDriver(dim, density, logFileName):
           .format(baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100))
 
     baselineAgent.savePlayerKnowledge('{}_solved_board'.format(logFileName))
+
+# utility function to run baseline with various uncertainty drivers
+def baselineUncertaintyDriver(dim, density):
+    num_mines = int(density * (dim ** 2))
+    game = MineSweeper(dim, num_mines)
+
+    order = [i for i in range(dim ** 2)]
+    random.shuffle(order)
+
+    solveTimes = []
+    solveRates = []
+
+    uncertainties = ['none', 'randomReveal', 'optimistic', 'cautious']
+
+    for u in uncertainties:
+        baselineAgent = agent(deepcopy(game), order)
+        baselineAgent.uncertaintyType = u
+        #baselineAgent.enableLogging()
+        baselineAgent.solve()
+
+        solveTimes.append(baselineAgent.totalSolveTime)
+        solveRates.append(baselineAgent.mineFlagRate)
+
+    for u, v, w in zip(uncertainties, solveTimes, solveRates):
+        print('\n\nUncertainty type {} solved dim {} board w/ density {}\nSolve time: {}\nMine flag rate: {}\n' \
+              .format(u, dim, density, v, w))
+
+baselineUncertaintyDriver(50, 0.4)
+
+
