@@ -302,7 +302,7 @@ class agent:
 
     def savePlayerKnowledge(self, filename):
         imgsize = int(self.game.dim / 10)
-        fontsize = 75 / (self.game.dim)
+        fontsize = 55 / (self.game.dim)
         dpi = 1000
 
         plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
@@ -364,6 +364,8 @@ def baselineUncertaintyDriver(dim, density):
         print('\n\nUncertainty type {} solved dim {} board w/ density {}\nSolve time: {}\nMine flag rate: {}\n' \
               .format(u, dim, density, v, w))
 
-baselineUncertaintyDriver(50, 0.4)
+#baselineUncertaintyDriver(50, 0.4)
+
+baselineGameDriver(15, 0.3, 'baselineTrialRun')
 
 

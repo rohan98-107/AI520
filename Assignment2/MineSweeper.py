@@ -80,7 +80,7 @@ class MineSweeper:
 
     def saveBoard(self, filename):
         imgsize = int(self.dim / 10)
-        fontsize = 75 / (self.dim)
+        fontsize = 55 / (self.dim)
         dpi = 1000
 
         plt.figure(figsize=(imgsize, imgsize), dpi=dpi)
