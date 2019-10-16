@@ -234,7 +234,7 @@ def linearAlgebraGameDriver(dim, density, logFileName):
 # compares baseline and lin alg system of equations using same boards and outputs trial by trial time and mine
 # detection percent as well as average over all boards
 def baselineVsLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
-    print("baseline vs brute with lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
+    print("baseline vs lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
     num_mines = int(density*(dim**2))
     baseline_cumulative_time = 0
     baseline_cumulative_rate = 0
