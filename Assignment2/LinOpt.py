@@ -77,6 +77,8 @@ def simplexCautious(matrix):
     # simplex as usual
     tableau = simplex(tableau)
 
+    # TODO: if there's a solution, then cut out the slackvars columns in case extra cols screw up the lin alg sol'n
+
     return tableau
 
 # optimistic matrix: has inequalities [row] >= clue-numMineNbrs
@@ -107,6 +109,8 @@ def simplexOptimistic(matrix):
     tableau[-1] = obj_row
     # simplex as usual
     tableau = simplex(tableau)
+
+    # TODO: if there's a solution, then cut out the slackvars columns in case extra cols screw up the lin alg sol'n
 
     return tableau
 
