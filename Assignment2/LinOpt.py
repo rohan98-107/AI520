@@ -116,7 +116,7 @@ def simplexOptimistic(matrix):
 
 # inherit from brute force agent (and lin alg agent)
 # override enqueueBestPossibleCells to use lin opt instead of simple gaussian elim
-# question: what to do when no optimal sol'n is found?
+# when no optimal soln found then fall to normal strategy (bruteforce)
 class lin_opt_agent(brute_force_agent):
     def __init__(self, game, useMineCount, order, uncertaintyType):
         brute_force_agent.__init__(self, game, useMineCount, order)
