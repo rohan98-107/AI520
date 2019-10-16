@@ -6,7 +6,7 @@ import time
 from Agent import *
 from LinAlg import *
 
-class brute_force_no_lin_alg_agent(agen):
+class brute_force_no_lin_alg_agent(agent):
     def __init__(self, game, useMineCount, order):
         agent.__init__(self,game,order)
         self.useMineCount = useMineCount
@@ -96,7 +96,7 @@ class brute_force_no_lin_alg_agent(agen):
                 continue
             start_search_time = time.time()
             configs.append(self.get_configs(s, consistency_cells))
-            if time.time() - start_search_time > 10:
+            if self.logging and time.time() - start_search_time > 10:
                 print("len(s)={}, took {} seconds to compute".format(len(s), round(time.time() - start_search_time,2)))
         # print([len(s) for s in config_cells])
         for i in to_remove[::-1]:
@@ -201,15 +201,14 @@ def baselineVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCou
         baselineAgent = agent(game, order)
         brute_agent.solve()
         baselineAgent.solve()
-        if i % 20 == 19:
-            print('Trial {}:\n\tBaseline finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
-              .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
         baseline_cumulative_time+=baselineAgent.totalSolveTime
         baseline_cumulative_rate+=baselineAgent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
-          .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, brute_cumulative_time/trials, brute_cumulative_rate/trials))
+        if i % 50 == 49:
+            print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
+                  .format((i+1), baseline_cumulative_time/(i+1), baseline_cumulative_rate/(i+1), brute_cumulative_time/(i+1), brute_cumulative_rate/(i+1)))
+
 
 def linalgVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
     print("lin alg vs brute no lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
@@ -226,12 +225,10 @@ def linalgVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount
         la_agent = lin_alg_agent(game, useMineCount, order)
         brute_agent.solve()
         la_agent.solve()
-        if i % 20 == 19:
-            print('Trial {}:\n\tLin alg finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
-              .format(i+1, la_agent.totalSolveTime, la_agent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
         la_cumulative_time+=la_agent.totalSolveTime
         la_cumulative_rate+=la_agent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
-          .format(i+1, la_cumulative_time/trials, la_cumulative_rate/trials, brute_cumulative_time/trials, brute_cumulative_rate/trials))
+        if i % 50 == 49:
+            print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
+                  .format((i+1), la_cumulative_time/(i+1), la_cumulative_rate/(i+1), brute_cumulative_time/(i+1), brute_cumulative_rate/(i+1)))

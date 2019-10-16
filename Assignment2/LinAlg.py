@@ -233,7 +233,8 @@ def linearAlgebraGameDriver(dim, density, logFileName):
 
 # compares baseline and lin alg system of equations using same boards and outputs trial by trial time and mine
 # detection percent as well as average over all boards
-def baselineVsLinAlgComparisonGameDriver(dim, density, trials):
+def baselineVsLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
+    print("baseline vs brute with lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
     num_mines = int(density*(dim**2))
     baseline_cumulative_time = 0
     baseline_cumulative_rate = 0
@@ -243,15 +244,14 @@ def baselineVsLinAlgComparisonGameDriver(dim, density, trials):
         game = MineSweeper(dim, num_mines)
         order = [i for i in range(dim**2)]
         random.shuffle(order)
-        la_agent = lin_alg_agent(game, True, order)
+        la_agent = lin_alg_agent(game, useMineCount, order)
         baselineAgent = agent(game, order)
         la_agent.solve()
         baselineAgent.solve()
-        print('Trial {}:\n\tBaseline finished in {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
-              .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, la_agent.totalSolveTime, la_agent.mineFlagRate*100))
         baseline_cumulative_time+=baselineAgent.totalSolveTime
         baseline_cumulative_rate+=baselineAgent.mineFlagRate*100
         lin_alg_cumulative_time+=la_agent.totalSolveTime
         lin_alg_cumulative_rate+=la_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
-          .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, lin_alg_cumulative_time/trials, lin_alg_cumulative_rate/trials))
+        if i % 50 == 49:
+            print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detecting {}% of mines\n\tLin alg finished in {} seconds detecting {}% of mines'\
+              .format(i+1, baseline_cumulative_time/(i+1), baseline_cumulative_rate/(i+1), lin_alg_cumulative_time/(i+1), lin_alg_cumulative_rate/(i+1)))
