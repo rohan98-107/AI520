@@ -205,7 +205,7 @@ def baselineVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCou
         baseline_cumulative_rate+=baselineAgent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-        if i % 50 == 49:
+        if i % 10 == 9:
             print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
                   .format((i+1), baseline_cumulative_time/(i+1), baseline_cumulative_rate/(i+1), brute_cumulative_time/(i+1), brute_cumulative_rate/(i+1)))
 
@@ -229,6 +229,6 @@ def linalgVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount
         la_cumulative_rate+=la_agent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-        if i % 50 == 49:
+        if i % 10 == 9:
             print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
                   .format((i+1), la_cumulative_time/(i+1), la_cumulative_rate/(i+1), brute_cumulative_time/(i+1), brute_cumulative_rate/(i+1)))
