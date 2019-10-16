@@ -97,10 +97,18 @@ class lin_alg_agent(agent):
                     for nx, ny in hidden_nbrs:
                         matrix[i][dim * nx + ny] = 1
                     matrix[i][dim * dim] = clue - mineNeighbors
+                    if self.logging:
+                        print("generated following row using ({},{}): ".format(x,y))
+                        print(matrix[i])
+                        print()
+
                 if self.useMineCount:
                     for x,y in hidden_cells:
                         matrix[len(information_cells), dim * x + y] = 1
                     matrix[len(information_cells),dim*dim] = self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines
+                    print("generated following row using total mine count: ")
+                    print(matrix[len(information_cells)])
+                    print()
                 #row reduce our matrix to solve the system
                 if self.logging:
                     print("information matrix:")
@@ -159,7 +167,7 @@ class lin_alg_agent(agent):
                                 # if self.game.board[x][y] == MINE:
                                 assert self.game.board[x][y] != MINE
                                 if self.logging:
-                                    print("deduced {},{} to be safe via lin alg".format(x,y))
+                                    print("deduced ({},{}) to be safe via lin alg".format(x,y))
                                 self.playerKnowledge[x][y] = SAFE
                                 q.append((x,y)) #add the safe cell to the queue to visit next
                                 safesFound = True
@@ -178,13 +186,17 @@ class lin_alg_agent(agent):
                                         print()
                                     continue
                                 if self.logging:
-                                    print("deduced {},{} to be a mine via lin alg".format(x,y))
+                                    print("deduced ({},{}) to be a mine via lin alg".format(x,y))
                                 assert self.game.board[x][y] == MINE
                                 self.playerKnowledge[x][y] = MINE
                                 flags.append((x,y))
                                 self.numFlaggedMines += 1
                     if self.logging:
                         print()
+            else:
+                if self.logging:
+                    print("no information for lin alg")
+                    print()
 
 
 
