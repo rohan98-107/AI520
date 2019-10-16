@@ -1,0 +1,469 @@
+
+
+***** GAME STARTING *****
+
+4 by 4 board with 4 mines
+
+Solving with LINEAR ALGEBRA strategy
+
+
+
+Cell (3, 2) safely revealed with clue: 1.
+	# safe neighbors: 0
+	# mine neighbors: 0
+	# hidden neighbors: 5
+	# total neighbors: 5
+
+
+Revealing cell (3, 2) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[-1 -1 -1 -1]
+ [-1 -1 -1 -1]
+ [-1 -1 -1 -1]
+ [-1 -1  0 -1]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 1.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 1. 4.]]
+
+rref'd matrix:
+[[1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 3.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 1.]]
+
+using row: 
+[1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 3.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 1.]
+
+	Re-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.
+
+----------------------------------------
+
+Cell (2, 2) safely revealed with clue: 2.
+	# safe neighbors: 1
+	# mine neighbors: 0
+	# hidden neighbors: 7
+	# total neighbors: 8
+
+
+Revealing cell (2, 2) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[-1 -1 -1 -1]
+ [-1 -1 -1 -1]
+ [-1 -1  0 -1]
+ [-1 -1  0 -1]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 0. 1. 0. 1. 0. 1. 2.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 1. 1. 1. 0. 1. 4.]]
+
+rref'd matrix:
+[[1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 2.]
+ [0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]]
+
+using row: 
+[1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 2.]
+
+using row: 
+[0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+
+	Re-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.
+
+----------------------------------------
+
+BOOM! Mine detonated at (1, 2).
+
+
+Revealing cell (1, 2) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[-1 -1 -1 -1]
+ [-1 -1 -8 -1]
+ [-1 -1  0 -1]
+ [-1 -1  0 -1]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [1. 1. 1. 1. 1. 1. 0. 1. 1. 1. 0. 1. 1. 1. 0. 1. 3.]]
+
+rref'd matrix:
+[[1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 2.]
+ [0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]]
+
+using row: 
+[1. 1. 1. 1. 1. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 2.]
+
+using row: 
+[0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+deduced 1,1 to be safe via lin alg
+deduced 1,3 to be safe via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+
+----------------------------------------
+
+Cell (1, 1) safely revealed with clue: 2.
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 6
+	# total neighbors: 8
+
+
+----------------------------------------
+
+Cell (1, 3) safely revealed with clue: 2.
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell (1, 3) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[-1 -1 -1 -1]
+ [-1  0 -8  0]
+ [-1 -1  0 -1]
+ [-1 -1  0 -1]]
+
+information matrix:
+[[1. 1. 1. 0. 1. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [1. 1. 1. 1. 1. 0. 0. 0. 1. 1. 0. 1. 1. 1. 0. 1. 3.]]
+
+rref'd matrix:
+[[ 1.  1.  0.  0.  1.  0.  0.  0.  1.  0.  0. -1.  1.  0.  0.  0.  1.]
+ [ 0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1. -1.  0. -1. -1.]
+ [ 0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  1.  1.  1.  0.  1.  2.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  1.  0.  1.  0.  1.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
+
+using row: 
+[ 1.  1.  0.  0.  1.  0.  0.  0.  1.  0.  0. -1.  1.  0.  0.  0.  1.]
+
+using row: 
+[ 0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1. -1.  0. -1. -1.]
+
+using row: 
+[0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1. 2.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+	Re-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.
+
+----------------------------------------
+
+Cell (0, 1) safely revealed with clue: 1.
+	# safe neighbors: 1
+	# mine neighbors: 1
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+All neighbors of (0, 1) must be safe.
+
+	Neighbor (0, 2) flagged as safe and enqueued for next visitation.
+
+	Neighbor (0, 0) flagged as safe and enqueued for next visitation.
+
+	Neighbor (1, 0) flagged as safe and enqueued for next visitation.
+
+----------------------------------------
+
+Cell (0, 2) safely revealed with clue: 2.
+	# safe neighbors: 3
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+All neighbors of (0, 2) must be mines.
+
+	Neighbor (0, 3) flagged as a mine.
+
+----------------------------------------
+
+Cell (0, 0) safely revealed with clue: 0.
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 3
+
+
+All neighbors of (0, 0) are already revealed; nothing to infer.
+
+----------------------------------------
+
+Cell (1, 0) safely revealed with clue: 1.
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 2
+	# total neighbors: 5
+
+
+Revealing cell (1, 0) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[ 0  0  0 -6]
+ [ 0  0 -8  0]
+ [-1 -1  0 -1]
+ [-1 -1  0 -1]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 0. 1. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1. 1. 1. 0. 1. 2.]]
+
+rref'd matrix:
+[[ 0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.  0. -1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  1.  0.  1.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  1.  0.  1.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
+
+using row: 
+[ 0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.  0. -1.  0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 1. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0.]
+deduced 2,3 to be safe via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+----------------------------------------
+
+Cell (2, 3) safely revealed with clue: 1.
+	# safe neighbors: 3
+	# mine neighbors: 1
+	# hidden neighbors: 1
+	# total neighbors: 5
+
+
+All neighbors of (2, 3) must be safe.
+
+	Neighbor (3, 3) flagged as safe and enqueued for next visitation.
+
+----------------------------------------
+
+Cell (3, 3) safely revealed with clue: 0.
+	# safe neighbors: 3
+	# mine neighbors: 0
+	# hidden neighbors: 0
+	# total neighbors: 3
+
+
+All neighbors of (3, 3) are already revealed; nothing to infer.
+
+Revealing cell (3, 3) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[ 0  0  0 -6]
+ [ 0  0 -8  0]
+ [-1 -1  0  0]
+ [-1 -1  0  0]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 1. 0. 0. 2.]]
+
+rref'd matrix:
+[[ 0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  1.  0.  0.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  1.  0.  0.  1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]
+
+using row: 
+[ 0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.  0.  0.  0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1. 0. 0. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+	Re-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.
+
+----------------------------------------
+
+Cell (3, 1) safely revealed with clue: 2.
+	# safe neighbors: 2
+	# mine neighbors: 0
+	# hidden neighbors: 3
+	# total neighbors: 5
+
+
+Revealing cell (3, 1) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce & enqueue new safe cell(s) from all of current knowledge,
+
+or add random if none available.
+
+game:
+[0, 1, 2, -6]
+[1, 2, -6, 2]
+[2, -6, 2, 1]
+[-6, 2, 1, 0]
+
+knowledge:
+[[ 0  0  0 -6]
+ [ 0  0 -8  0]
+ [-1 -1  0  0]
+ [-1  0  0  0]]
+
+information matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 2.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 2.]]
+
+rref'd matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.]
+deduced 2,0 to be safe via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 1.]
+deduced 2,1 to be a mine via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1.]
+deduced 3,0 to be a mine via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+----------------------------------------
+
+Cell (2, 0) safely revealed with clue: 2.
+	# safe neighbors: 3
+	# mine neighbors: 2
+	# hidden neighbors: 0
+	# total neighbors: 5
+
+
+All neighbors of (2, 0) are already revealed; nothing to infer.
+
+----------------------------------------
+
+
+***** GAME OVER *****
+
+Game ended in 0.020799875259399414 seconds
+
+Safely detected (without detonating) 75.0% of mines

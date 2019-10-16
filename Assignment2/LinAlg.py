@@ -55,6 +55,14 @@ class lin_alg_agent(agent):
         safesFound = False;
         dim = self.game.dim
         if recrunch:
+            if self.logging:
+                print("game:")
+                for row in self.game.board:
+                    print(row)
+                print()
+                print("knowledge:")
+                print(self.playerKnowledge)
+                print()
             information_cells = []
             hidden_cells = []
             for x in range(dim):
@@ -94,11 +102,22 @@ class lin_alg_agent(agent):
                         matrix[len(information_cells), dim * x + y] = 1
                     matrix[len(information_cells),dim*dim] = self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines
                 #row reduce our matrix to solve the system
+                if self.logging:
+                    print("information matrix:")
+                    print(matrix)
+                    print()
                 rref(matrix)
+                if self.logging:
+                    print("rref'd matrix:")
+                    print(matrix)
+                    print()
                 #keeping track of flags here is purely for debugging purposes
                 flags = []
                 for row in matrix:
                     #
+                    if self.logging:
+                        print("using row: ")
+                        print(row)
                     positives = []
                     negatives = []
                     #scale the row for code reuseability
@@ -118,6 +137,8 @@ class lin_alg_agent(agent):
 
                     #if the row has no information move on
                     if len(positives) == len(negatives) == 0:
+                        if self.logging:
+                            print()
                         continue
 
                     #if the row sums to 0, we can potentially find definitively safe cells
@@ -127,6 +148,8 @@ class lin_alg_agent(agent):
                         # which can happen since we have positive and negative coeffecients
                         # so we don't know anything definitive (multiple combinations satisfy the equation)
                         if len(positives) >0 and len(negatives) > 0:
+                            if self.logging:
+                                print()
                             continue
                         else:
                             # however if only one list is populated then everything
@@ -135,6 +158,8 @@ class lin_alg_agent(agent):
                             for x,y,_ in positives + negatives:
                                 # if self.game.board[x][y] == MINE:
                                 assert self.game.board[x][y] != MINE
+                                if self.logging:
+                                    print("deduced {},{} to be safe via lin alg".format(x,y))
                                 self.playerKnowledge[x][y] = SAFE
                                 q.append((x,y)) #add the safe cell to the queue to visit next
                                 safesFound = True
@@ -149,18 +174,24 @@ class lin_alg_agent(agent):
                         if sum([coeffecient for x,y,coeffecient in positives]) == row[-1]:
                             for x,y,_ in positives:
                                 if self.playerKnowledge[x,y] == MINE:
+                                    if self.logging:
+                                        print()
                                     continue
+                                if self.logging:
+                                    print("deduced {},{} to be a mine via lin alg".format(x,y))
                                 assert self.game.board[x][y] == MINE
                                 self.playerKnowledge[x][y] = MINE
                                 flags.append((x,y))
                                 self.numFlaggedMines += 1
+                    if self.logging:
+                        print()
 
 
 
         # if lin alg didn't give us anything then pick a random cell
         if (recrunch is False) or (safesFound is False):
             if recrunch is True and self.logging:
-                print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
+                print('\tRe-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.\n')
             tuple = self.probability_method()
             if tuple:
                 q.append(tuple)
@@ -168,24 +199,25 @@ class lin_alg_agent(agent):
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
 def linearAlgebraGameDriver(dim, density, logFileName):
-    #sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
+    sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
 
     num_mines = int(density*(dim**2))
 
     print('\n\n***** GAME STARTING *****\n\n{} by {} board with {} mines\n\nSolving with LINEAR ALGEBRA strategy\n\n'\
           .format(dim, dim, num_mines))
-    order = random.shuffle([i for i in range(dim**2)])
+    order = [i for i in range(dim**2)]
+    random.shuffle(order)
     game = MineSweeper(dim, num_mines)
-    game.saveBoard('{}_init_board'.format(logFileName))
+    # game.saveBoard('{}_init_board'.format(logFileName))
 
-    agent = lin_alg_agent(game, order)
-    # agent.enableLogging()
+    agent = lin_alg_agent(game, True, order)
+    agent.enableLogging()
     agent.solve()
 
     print('\n\n***** GAME OVER *****\n\nGame ended in {} seconds\n\nSafely detected (without detonating) {}% of mines'\
           .format(agent.totalSolveTime, agent.mineFlagRate*100))
 
-    agent.savePlayerKnowledge('{}_solved_board'.format(logFileName))
+    # agent.savePlayerKnowledge('{}_solved_board'.format(logFileName))
 
 # compares baseline and lin alg system of equations using same boards and outputs trial by trial time and mine
 # detection percent as well as average over all boards
