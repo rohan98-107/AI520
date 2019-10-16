@@ -6,9 +6,10 @@ import time
 from Agent import *
 from LinAlg import *
 
-class brute_force_agent(lin_alg_agent):
+class brute_force_no_lin_alg_agent(agen):
     def __init__(self, game, useMineCount, order):
-        lin_alg_agent.__init__(self,game,useMineCount,order)
+        agent.__init__(self,game,order)
+        self.useMineCount = useMineCount
 
     def confirm_full_consistency(self, board, cells):
         dim = self.game.dim
@@ -185,8 +186,8 @@ class brute_force_agent(lin_alg_agent):
             configs = next_set
         return out
 
-def baselineVsBruteWithLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
-    print("baseline vs brute with lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
+def baselineVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
+    print("baseline vs brute no lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
     num_mines = int(density*(dim**2))
     baseline_cumulative_time = 0
     baseline_cumulative_rate = 0
@@ -196,22 +197,22 @@ def baselineVsBruteWithLinAlgComparisonGameDriver(dim, density, trials, useMineC
         game = MineSweeper(dim, num_mines)
         order = [i for i in range(dim**2)]
         random.shuffle(order)
-        brute_agent = brute_force_agent(game, useMineCount, order)
+        brute_agent = brute_force_no_lin_alg_agent(game, useMineCount, order)
         baselineAgent = agent(game, order)
         brute_agent.solve()
         baselineAgent.solve()
         if i % 20 == 19:
-            print('Trial {}:\n\tBaseline finished in {} seconds detcting {}% of mines\n\tBrute + lin alg finished in {} seconds detcting {}% of mines'\
-                .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
+            print('Trial {}:\n\tBaseline finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
+              .format(i+1, baselineAgent.totalSolveTime, baselineAgent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
         baseline_cumulative_time+=baselineAgent.totalSolveTime
         baseline_cumulative_rate+=baselineAgent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute + lin alg finished in {} seconds detcting {}% of mines'\
+    print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
           .format(i+1, baseline_cumulative_time/trials, baseline_cumulative_rate/trials, brute_cumulative_time/trials, brute_cumulative_rate/trials))
 
-def linalgVsBruteWithLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
-    print("lin alg vs brute with lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
+def linalgVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
+    print("lin alg vs brute no lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
     num_mines = int(density*(dim**2))
     la_cumulative_time = 0
     la_cumulative_rate = 0
@@ -221,16 +222,16 @@ def linalgVsBruteWithLinAlgComparisonGameDriver(dim, density, trials, useMineCou
         game = MineSweeper(dim, num_mines)
         order = [i for i in range(dim**2)]
         random.shuffle(order)
-        brute_agent = brute_force_agent(game, useMineCount, order)
+        brute_agent = brute_force_no_lin_alg_agent(game, useMineCount, order)
         la_agent = lin_alg_agent(game, useMineCount, order)
         brute_agent.solve()
         la_agent.solve()
         if i % 20 == 19:
-            print('Trial {}:\n\tLin alg finished in {} seconds detcting {}% of mines\n\tBrute + lin alg finished in {} seconds detcting {}% of mines'\
+            print('Trial {}:\n\tLin alg finished in {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
               .format(i+1, la_agent.totalSolveTime, la_agent.mineFlagRate*100, brute_agent.totalSolveTime, brute_agent.mineFlagRate*100))
         la_cumulative_time+=la_agent.totalSolveTime
         la_cumulative_rate+=la_agent.mineFlagRate*100
         brute_cumulative_time+=brute_agent.totalSolveTime
         brute_cumulative_rate+=brute_agent.mineFlagRate*100
-    print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute + lin alg finished in {} seconds detcting {}% of mines'\
+    print('\n\n\n\n\nFinished {} trials:\n\tLin alg average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
           .format(i+1, la_cumulative_time/trials, la_cumulative_rate/trials, brute_cumulative_time/trials, brute_cumulative_rate/trials))
