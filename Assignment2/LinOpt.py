@@ -133,8 +133,7 @@ def simplexOptimistic(matrix):
     # Phase II: update and simplex
     # delete artificial vars' columns
     tableau = np.column_stack((tableau[:, :(matrix.shape[1]-1 + matrix.shape[0])], tableau[:, -1]))
-    # update objective function: all +1s except for slacking vars
-    # now we want to min sum(x_i's) <=> max sum(-1 * x_i's)
+    # update objective function: all -1s except for slacking vars
     obj_row = np.concatenate(([-1]*(matrix.shape[1] - 1), [0]*(matrix.shape[0] + 1)))
     tableau[-1] = obj_row
     # row reduce to get basic vars std col vectors
@@ -237,13 +236,13 @@ class lin_opt_agent(brute_force_agent):
                     rref(matrix)
 
                 if matrix is None:
-                    if self.logging:
-                        print("Linear optimization for {} uncertainty FAILED. Proceeding with regular Lin Alg.".format(self.uncertaintyType))
+                    #if self.logging:
+                    print("Linear optimization for {} uncertainty FAILED. Proceeding with regular Lin Alg.".format(self.uncertaintyType))
                     matrix = backup
                     rref(matrix)
                 else:
-                    if self.logging:
-                        print("Linear optimization for {} uncertainty SUCCEEDED.".format(self.uncertainty))
+                    #if self.logging:
+                    print("Linear optimization for {} uncertainty SUCCEEDED.".format(self.uncertainty))
 
                 if self.logging:
                     print("solved matrix:")
@@ -343,7 +342,7 @@ class lin_opt_agent(brute_force_agent):
 # utility function to run game, save initial & solved boards, and print play-by-play to log txt file
 # game metrics: mine safe detection rate and solve time calculated here; outputted to log
 def linOptGameDriver(dim, density, logFileName, uncertaintyType):
-    #sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
+    sys.stdout = open('{}_log.txt'.format(logFileName), 'w')
 
     num_mines = int(density*(dim**2))
 
@@ -355,7 +354,7 @@ def linOptGameDriver(dim, density, logFileName, uncertaintyType):
     #game.saveBoard('{}_init_board'.format(logFileName))
 
     agent = lin_opt_agent(game, True, order, uncertaintyType)
-    #agent.enableLogging()
+    agent.enableLogging()
     agent.solve()
 
     print('\n\n***** GAME OVER *****\n\nGame ended in {} seconds\n\nSafely detected (without detonating) {}% of mines'\
@@ -378,6 +377,6 @@ print(simplexOptimistic(t))
 
 
 
-linOptGameDriver(10, 0.2, 'test', 'optimistic')
+linOptGameDriver(10, 0.2, 'cautious', 'cautious')
 
 
