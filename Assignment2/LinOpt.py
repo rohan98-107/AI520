@@ -85,7 +85,6 @@ def simplex(tableau):
         i+=1
 
         # hardcode stop if get stuck in degeneracy / bland's rule cycling issues
-        # because i don't want to code it
         if i > 20000:
             return None
     return tableau
