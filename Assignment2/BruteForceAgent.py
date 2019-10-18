@@ -187,8 +187,8 @@ class brute_force_agent(lin_alg_agent):
             return best_cell
         else:
             if self.logging:
-                print("found best cell ({},{}) that was in {}% of it's component's configurations, but probabilty for other cells outside fringe is at most {}, so using random"\
-                .format(best_cell[0],best_cell[1],round(best_probability,2),round(other_cell_max_probability,2)))
+                print("found best cell ({},{}) that was in {}% of it's component's configurations, but probability for other {} cells outside fringe is at most {}, so using random"\
+                .format(best_cell[0],best_cell[1],round(best_probability,2),other_cells,round(other_cell_max_probability,2)))
                 print()
             to_exclude = []
             for l in config_cells:

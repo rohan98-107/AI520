@@ -236,13 +236,13 @@ class agent:
         if self.current_in_order == dim ** 2:
             return None
         cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
-        if cell not in to_exclude:
+        if cell_to_consider not in to_exclude:
             self.current_in_order += 1
-            return cell
+            return cell_to_consider
         for i in range(self.current_in_order + 1, dim**2):
             cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
-            if cell not in to_exclude:
-                return cell
+            if cell_to_consider not in to_exclude:
+                return cell_to_consider
         cell = self.int_to_cell(self.order[self.current_in_order])
         self.current_in_order += 1
         return cell

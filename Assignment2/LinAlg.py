@@ -56,6 +56,50 @@ class lin_alg_agent(agent):
         dim = self.game.dim
         if recrunch:
             if self.logging:
+                print("recrunching baseline")
+                print()
+            for x in range(self.game.dim):
+                for y in range(self.game.dim):
+                    # if it's not safe, then there's no need to check all its neighbors (nothing to deduce if mine/hidden)
+                    if self.playerKnowledge[x][y] != SAFE:
+                        pass
+                    # otherwise do inference using neighbors
+                    else:
+                        clue = self.getClue(x, y)
+                        if clue != -1:
+                            numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
+
+                            # if no neighbors are hidden, then we can't deduce any more new info about them
+                            if numHiddenNbrs == 0:
+                                pass
+                            # case when all hidden nbrs must be mines: mark as such
+                            elif (clue - numMineNbrs) == numHiddenNbrs:
+                                if self.logging:
+                                    print('\tRe-processing KB found that: All neighbors of ({}, {}) must be mines.\n'.format(x, y))
+                                for i, j in dirs:
+                                    if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                        if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                            if self.uncertaintyType == 'none':
+                                                assert self.game.board[x + i][y + j] == MINE
+                                            self.playerKnowledge[x + i][y + j] = MINE
+                                            self.numFlaggedMines += 1
+                                            if self.logging:
+                                                print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
+                            # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
+                            elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
+                                if self.logging:
+                                    print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
+                                for i, j in dirs:
+                                    if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
+                                        if self.playerKnowledge[x + i][y + j] == HIDDEN:
+                                            if self.uncertaintyType == 'none':
+                                                assert self.game.board[x + i][y + j] != MINE
+                                            self.playerKnowledge[x + i][y + j] = SAFE
+                                            q.append((x+i, y+j))
+                                            if self.logging:
+                                                print('\t\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
+                                safesFound = True
+            if self.logging:
                 print("game:")
                 for row in self.game.board:
                     print(row)
@@ -129,8 +173,10 @@ class lin_alg_agent(agent):
                     positives = []
                     negatives = []
                     #scale the row for code reuseability
+                    negated = False
                     if row[-1] < 0 :
                         row *= -1
+                        negated = True
                     #for each variable
                     for i in range(dim*dim):
                         #first get the cell it corresponds to
@@ -191,6 +237,17 @@ class lin_alg_agent(agent):
                                 self.playerKnowledge[x][y] = MINE
                                 flags.append((x,y))
                                 self.numFlaggedMines += 1
+                            for x,y,_ in negatives:
+                                if self.playerKnowledge[x,y] == SAFE:
+                                    if self.logging:
+                                        print()
+                                    continue
+                                if self.logging:
+                                    print("deduced ({},{}) to be safe via lin alg".format(x,y))
+                                assert self.game.board[x][y] != MINE
+                                self.playerKnowledge[x][y] = SAFE
+                                q.append((x,y))
+                                safesFound = True
                     if self.logging:
                         print()
             else:
