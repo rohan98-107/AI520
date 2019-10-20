@@ -150,9 +150,10 @@ class lin_alg_agent(agent):
                     for x,y in hidden_cells:
                         matrix[len(information_cells), dim * x + y] = 1
                     matrix[len(information_cells),dim*dim] = self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines
-                    print("generated following row using total mine count: ")
-                    print(matrix[len(information_cells)])
-                    print()
+                    if self.logging:
+                        print("generated following row using total mine count: ")
+                        print(matrix[len(information_cells)])
+                        print()
                 #row reduce our matrix to solve the system
                 if self.logging:
                     print("information matrix:")
