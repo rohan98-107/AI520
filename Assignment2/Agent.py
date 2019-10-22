@@ -30,6 +30,7 @@ class agent:
         self.order = order
         self.current_in_order = 0
 
+        # set uncertainty type for optimistic/cautious/randomly revealed clues
         self.uncertaintyType = 'none'
 
     def enableLogging(self):
@@ -266,8 +267,11 @@ class agent:
    # utility function to return clue (or estimate for uncertain cases)
     def getClue(self, x, y, p=0.02):
         if self.uncertaintyType == "none":
+            # do nothing
             return self.game.board[x][y]
         elif self.uncertaintyType == "randomReveal":
+            # only reveal clue with probability p (hardcoded to 0.02 here)
+            # else return nothing
             if random.random() < p:
                 return self.game.board[x][y]
             else:
@@ -275,6 +279,7 @@ class agent:
         else:
             numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
             if self.uncertaintyType == 'optimistic':
+                # return something potentially smaller than real clue
                 if numMineNbrs < self.game.board[x][y]:
                     return random.randint(numMineNbrs, self.game.board[x][y])
                 elif numMineNbrs == self.game.board[x][y]:
@@ -282,6 +287,7 @@ class agent:
                 else:
                     return -1
             elif self.uncertaintyType == 'cautious':
+                # return something potentially larger than real clue
                 if self.game.board[x][y] < numMineNbrs + numHiddenNbrs:
                     return random.randint(self.game.board[x][y], numMineNbrs + numHiddenNbrs)
                 elif self.game.board[x][y] == numMineNbrs + numHiddenNbrs:
