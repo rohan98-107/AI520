@@ -6,6 +6,12 @@ import time
 from Agent import *
 from LinAlg import *
 
+# This entire file is just a copy of BruteForceAgent.py, we just have this class
+# be a child class of agent instead of lin_alg_agent so we only use the baseline
+# + brute force probabilities and don't inheritthe linear algebra
+# not the cleanest way to do this but makes it simple for running comparisons using
+# both this and BruteForceAgent.py at the same time
+
 class brute_force_no_lin_alg_agent(agent):
     def __init__(self, game, useMineCount, order):
         agent.__init__(self,game,order)
@@ -143,14 +149,15 @@ class brute_force_no_lin_alg_agent(agent):
             print()
 
         min_mine_count = sum([ 0 if len(s) == 0 else min([len(config) for config in s]) for s in configs])
-        for s in configs:
-            min_for_set =  0 if len(s) == 0 else min([len(config) for config in s])
-            to_remove = []
-            for i,config in enumerate(s):
-                if len(config) + min_mine_count - min_for_set > self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines:
-                    to_remove.append(i)
-            for i in to_remove[::-1]:
-                del s[i]
+        if self.useMineCount:
+            for s in configs:
+                min_for_set =  0 if len(s) == 0 else min([len(config) for config in s])
+                to_remove = []
+                for i,config in enumerate(s):
+                    if len(config) + min_mine_count - min_for_set > self.game.num_mines-self.numFlaggedMines-self.numDetonatedMines:
+                        to_remove.append(i)
+                for i in to_remove[::-1]:
+                    del s[i]
 
         # print("found configs:")
         probabilities = dict()
@@ -179,14 +186,8 @@ class brute_force_no_lin_alg_agent(agent):
         max_mines_in_hidden_cells_not_in_config_Cells = mines_left - min_mine_count
         other_cell_max_probability = 1 if other_cells == 0 else max_mines_in_hidden_cells_not_in_config_Cells / other_cells
 
-        if best_probability <= other_cell_max_probability:
-            if self.logging:
-                print("found best cell ({},{}) that was in {}% of it's component's configurations"\
-                    .format(best_cell[0],best_cell[1],round(best_probability,2)))
-                print()
-            assert best_cell is not None
-            return best_cell
-        else:
+        if self.useMineCount and best_probability > other_cell_max_probability:
+
             if self.logging:
                 print("found best cell ({},{}) that was in {}% of it's component's configurations, but probability for other {} cells outside fringe is at most {}, so using random"\
                 .format(best_cell[0],best_cell[1],round(best_probability,2),other_cells,round(other_cell_max_probability,2)))
@@ -195,6 +196,13 @@ class brute_force_no_lin_alg_agent(agent):
             for l in config_cells:
                 to_exclude.extend(l)
             return self.get_next_random(set(to_exclude))
+        else:
+            if self.logging:
+                print("found best cell ({},{}) that was in {}% of it's component's configurations"\
+                    .format(best_cell[0],best_cell[1],round(best_probability,2)))
+                print()
+            assert best_cell is not None
+            return best_cell
 
     def get_configs(self, configCells, consistency_cells):
         configs = [(deepcopy(self.playerKnowledge), i, [])  for i in range(len(configCells))]
@@ -250,7 +258,6 @@ def baselineVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCou
         if i % 10 == 9:
             print('\n\n\n\n\nFinished {} trials:\n\tBaseline average was {} seconds detcting {}% of mines\n\tBrute finished in {} seconds detcting {}% of mines'\
                   .format((i+1), baseline_cumulative_time/(i+1), baseline_cumulative_rate/(i+1), brute_cumulative_time/(i+1), brute_cumulative_rate/(i+1)))
-
 
 def linalgVsBruteNoLinAlgComparisonGameDriver(dim, density, trials, useMineCount = False):
     print("lin alg vs brute no lin alg, dim {}, density {}, trials {}, useMineCount={}".format(dim,density,trials,useMineCount))
