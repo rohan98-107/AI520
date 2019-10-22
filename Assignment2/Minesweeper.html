@@ -13144,7 +13144,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Baseline-Algorithm">Baseline Algorithm<a class="anchor-link" href="#Baseline-Algorithm">&#182;</a></h1><p>We began the assignment by implementing the basic solver agent algorithm that relies solely on local inference and iterative deduction.</p>
+<h1 id="Baseline-Algorithm">Baseline Algorithm<a class="anchor-link" href="#Baseline-Algorithm">&#182;</a></h1><p>We begin the assignment by implementing the basic solver agent algorithm that relies solely on local inference and iterative deduction.</p>
 
 </div>
 </div>
@@ -13152,7 +13152,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>Throughout this assignment we maintained a very object-oriented approach. The baseline case includes two main components. The Agent class and the MineSweeper class. The Agent represents the "player" of the game while the MineSweeper class represents the game as it transitions through its different states. Below are the class details for the two.</p>
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>Throughout this assignment, we maintain a very object-oriented approach. The baseline case includes two main component:  the Agent class and the MineSweeper class. The Agent represents the "player" of the game while the MineSweeper class represents the game as it transitions through its different states. Below are the class details for the two.</p>
 <h3 id="Agent-class">Agent class<a class="anchor-link" href="#Agent-class">&#182;</a></h3>
 </div>
 </div>
@@ -13167,8 +13167,7 @@ div#notebook {
         <span class="c1"># copy game into agent object</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">game</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">game</span><span class="p">)</span>
         <span class="c1"># track player knowledge per cell: initially all hidden</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">HIDDEN</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span> \
-                                         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">HIDDEN</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span><span class="p">)])</span>
 
         <span class="c1"># keep track of these throughout game to yield final mineFlagRate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span> <span class="o">=</span> <span class="mi">0</span>
@@ -13179,9 +13178,11 @@ div#notebook {
         <span class="bp">self</span><span class="o">.</span><span class="n">totalSolveTime</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logging</span> <span class="o">=</span> <span class="kc">False</span>
 
+        <span class="c1"># used (later) to control for variance in random selection when comparing agents</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_in_order</span> <span class="o">=</span> <span class="mi">0</span>
 
+        <span class="c1"># used (later) to toggle uncertainty type for clues</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uncertaintyType</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
 </pre></div>
 
@@ -13195,19 +13196,19 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As we can see, the agent's members include:</p>
 <ol>
-<li><strong>game (Type: Minesweeper):</strong> A MineSweeper object, which specifies the current instance of the game that agent is playing on</li>
-<li><strong>playerKnowledge(Type: Numpy Array 2d):</strong> An integer matrix that keeps track of what cells have been queried, their <em>value</em> (vicinity to a mine) and/or their "mine status"</li>
+<li><strong><code>game</code> (Type: Minesweeper):</strong> A MineSweeper object, which specifies the current instance of the game that agent is playing on</li>
+<li><strong><code>playerKnowledge</code> (Type: Numpy Array 2d):</strong> An integer matrix that keeps track of what cells have been queried, their <em>value</em> (vicinity to a mine) and/or their "mine status"</li>
 </ol>
 <p>And the rest are simple metrics used to track the agent's progress:</p>
 <ol>
-<li><strong>numFlaggedMines (Type: Integer):</strong> Number of flagged mines </li>
-<li><strong>numDetonatedMines (Type: Integer):</strong> Number of detonated mines</li>
-<li><strong>mineFlagRate (Type: Integer):</strong> Ratio between safely flagged mines and total mines present</li>
-<li><strong>totalSolveTime (Type: Integer):</strong> Time taken to solve</li>
-<li><strong>logging (Type: Boolean):</strong> Toggle the logger output to .txt file</li>
-<li><strong>order (Type: List):</strong> A fixed (but random) order of cell coordinates that we use to minimize variance of repeated trials </li>
-<li><strong>current_in_order (Type: Integer)</strong>: index of current 'random' cell coordinate in <code>order</code>, used for iteration through <code>order</code></li>
-<li><strong>uncertaintyType (Type: String):</strong> Uncertainty toggle for the bonus: when the clue is randomly revealed, optimistic, or cautious. Defaults to 'none' i.e. a revealed clue is accurate.</li>
+<li><strong><code>numFlaggedMines</code> (Type: Integer):</strong> Number of flagged mines </li>
+<li><strong><code>numDetonatedMines</code> (Type: Integer):</strong> Number of detonated mines</li>
+<li><strong><code>mineFlagRate</code> (Type: Integer):</strong> Ratio between safely flagged mines and total mines present</li>
+<li><strong><code>totalSolveTime</code> (Type: Integer):</strong> Time taken to solve</li>
+<li><strong><code>logging</code> (Type: Boolean):</strong> Toggle the logger output to .txt file</li>
+<li><strong><code>order</code> (Type: List):</strong> A fixed (but random) order of cell coordinates that we use to minimize variance of repeated trials </li>
+<li><strong><code>current_in_order</code> (Type: Integer)</strong>: index of current 'random' cell coordinate in <code>order</code>, used for iteration through <code>order</code></li>
+<li><strong><code>uncertaintyType</code> (Type: String):</strong> Uncertainty toggle for the bonus: when the clue is randomly revealed, optimistic, or cautious. Defaults to 'none' i.e. a revealed clue is accurate</li>
 </ol>
 <p>See <code>Agent.py</code> for more implementation details.</p>
 <h3 id="MineSweeper-class">MineSweeper class<a class="anchor-link" href="#MineSweeper-class">&#182;</a></h3>
@@ -13271,7 +13272,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The minesweeper class is even more straightforward and enables the following:</p>
+<p>The Minesweeper class is even more straightforward. It:</p>
 <ol>
 <li>Specifies coordinates to easily iterate through local cells</li>
 <li>Specifies a key for the board (mine, hidden, safe...etc.) </li>
@@ -13280,10 +13281,10 @@ div#notebook {
 </ol>
 <p>Its members are:</p>
 <ol>
-<li><strong>dim(Type: Integer):</strong> Dimension </li>
-<li><strong>num_mines (Type: Integer):</strong> Number of mines </li>
-<li><strong>board (Type: 2d list):</strong> Board </li>
-<li><strong>success (Type: Boolean):</strong> Whether or not the board was solved</li>
+<li><strong><code>dim</code> (Type: Integer):</strong> Dimension </li>
+<li><strong><code>num_mines</code> (Type: Integer):</strong> Number of mines </li>
+<li><strong><code>board</code> (Type: 2d list):</strong> Board </li>
+<li><strong><code>success</code> (Type: Boolean):</strong> Whether or not the board was solved</li>
 </ol>
 <p>See <code>Minesweeper.py</code> for more implementation details.</p>
 
@@ -13293,7 +13294,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Baseline-solver">Baseline solver<a class="anchor-link" href="#Baseline-solver">&#182;</a></h3><p>As is the baseline or "naive" approach to minesweeper, our solver algorithm begins with a random first move (i.e. revealing a cell). It then tries to deduce, based solely on the 8 cells adjacent to it, whether or not any of the 9 cells in question are definitely safe or definitely a mine. Clearly, the chosen cell does not need to be inferred, but the 8 cells adjacent can generally not be inferred on the first move <em>unless</em> the clue is 0, as there is not enough information yet. Mathematically, we can denote this as: $P(X_{i,j} = 0 | C) = (1-d)^9$ where $C$ is the board configuration and $d$ is the mine density (Note: we are assuming the first cell queried is <em>not</em> a corner or edge cell, but our implementation handles all cases).</p>
+<h3 id="Baseline-solver">Baseline solver<a class="anchor-link" href="#Baseline-solver">&#182;</a></h3><p>As it is the baseline or "naive" approach to Minesweeper, our solver algorithm begins with a random first move (i.e. revealing a cell). It then tries to deduce, based solely on the $8$ cells adjacent to it, whether or not any of the $9$ cells (total) in question are definitely safe or definitely a mine.</p>
+<p>Clearly, the chosen cell does not need to be inferred, but the $8$ cells adjacent can generally not be inferred on the first move <em>unless</em> the clue is $0$, as there is not enough information yet. Mathematically, we can denote this as: $P(X_{i,j} = 0 | C) = (1-d)^9$ where $C$ is the board configuration and $d$ is the mine density (Note: we are assuming the first cell queried is <em>not</em> a corner or edge cell, but our implementation handles all cases).</p>
+<p>This inference relies only on the local data of the adjacent cells; the following rules are followed:</p>
+<ol>
+<li>If the clue minus the number of revealed mines is equal to the number of hidden neighbors, then every hidden neighbor is a mine.</li>
+<li>If the number of safe neighbors minus the number of revealed safe neighbors is the number of hidden neighbors, then every hidden neighbor is safe.</li>
+</ol>
+<p>These rules are deterministic, i.e. they <strong>decisively</strong> find mine or safe cells. All cases in between the above two rules are not deterministic, and the baseline falls through to random choice of the remaining hidden cells (after re-crunching the knowledge base: see below section).</p>
 <p>See <code>solve(...)</code> method in <code>Agent.py</code> for more implementation details.</p>
 <p>For a trial run, see attached <code>/data/log.txt</code> for full breakdown of moves made by baseline agent. The following snippet illustrates the above methodology:</p>
 <hr>
@@ -13390,8 +13398,8 @@ All neighbors of (11, 7) must be safe.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When enough of the board has been filled, the metrics of each cell start to be the main source of knowledge for the agent. At every cell $(x,y)$, the agent keeps track of $(x,y)$'s total neighbors, its safe neighbors, mine neighbors and hidden neighbors, which can be used for marking more cells as safe/unsafe. This is <strong>local inference.</strong> For example, if a cell has 8 total neighbors, 7 safe neighbors, 1 hidden neighbor and a clue of 1, the agent can determine with 100% certainty that the final neighbor is a mine. Once the agent can no longer make any reliable inferences, it returns to the last safe, visited cell which is stored in a queue. If the queue is empty, the agent returns to random selection.</p>
 <h4 id="Recrunching-the-KB-via-local-inference-prior-to-random-selection">Recrunching the KB via local inference prior to random selection<a class="anchor-link" href="#Recrunching-the-KB-via-local-inference-prior-to-random-selection">&#182;</a></h4><p>Note that in cases where the algorithm falls to random selection, it first reprocesses its entire knowledge base by repeating how it parses clues (as above) to conduct local inference. That is, it iterates over all currently safe, uncovered cells and re-calculates number of safe neighbors, mine neighbors, hidden neighbors, etc. and possibly infers mine/safety. That way, it deduces as much knowledge as possible prior, possibly enqueueing safe cells to visit next or marking cells as mines.</p>
-<p>The motivation behind this is to minimize the number of mines which are accidentally detonated by random selection when, in fact, the current knowledge base contains that information. We don't need to uncover new cells to retrieve that information; our KB just needs to be "re-crunched" in terms of local inference to retrieve this insight. Then we filter out some of those mines that could have been randomly selected and improve our baseline without doing anything beyond simple local inference.</p>
-<p>Below is a snippet from <code>/data/log.txt</code> illustrating this more concretely; see the 'Reprocessing-KB found that: ...' lines below.</p>
+<p>The motivation behind this is to minimize the number of mines which are accidentally detonated by random selection when, in fact, the current knowledge base contains that information. We do not need to uncover new cells to retrieve that information; our KB just needs to be "re-crunched" in terms of local inference to retrieve this insight. Then we filter out some of those mines that could have been randomly selected and improve our baseline without doing anything beyond simple local inference.</p>
+<p>Below is a snippet from <code>/data/log.txt</code> illustrating this more concretely; see the <code>Reprocessing-KB found that: ...</code> lines below.</p>
 <hr>
 
 <pre><code>BASELINE SOLVER LOG (intermediate moves) 
@@ -13490,8 +13498,8 @@ Safely detected (without detonating) 89.55223880597015% of mines
             </figure>
         </td>        
    </tr>
-</table><p>For the initial board, the blue -6 cells correspond to mines, and the other numbers are clues (color coded based on intensity of clue).</p>
-<p>For the final solved player knowledge board, the green 0 cells are safely uncovered cells, orange -6 cells are safely detected mines, and red -8 cells are detonated mines.</p>
+</table><p>For the initial board, the blue $-6$ cells correspond to mines, and the other numbers are clues (color coded based on intensity of clue).</p>
+<p>For the final solved player knowledge board, the green $0$ cells are safely uncovered cells, orange $-6$ cells are safely detected mines, and red $-8$ cells are detonated mines.</p>
 
 </div>
 </div>
@@ -13507,7 +13515,7 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Performance-&amp;-Results">Performance &amp; Results<a class="anchor-link" href="#Performance-&amp;-Results">&#182;</a></h2><p>The following tables show how the baseline algorithm performs under different parametrized conditions.</p>
+<h2 id="Performance-&amp;-Results">Performance &amp; Results<a class="anchor-link" href="#Performance-&amp;-Results">&#182;</a></h2><p>The following tables show how the baseline algorithm performs under different parametrized conditions ($dim$, densities).</p>
 
 </div>
 </div>
@@ -13786,7 +13794,7 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Improved-Strategy-(v1):-Linear-Algebra-Approach">Improved Strategy (v1): Linear Algebra Approach<a class="anchor-link" href="#Improved-Strategy-(v1):-Linear-Algebra-Approach">&#182;</a></h1><p>We decided on an approach that relies not solely on local inference but evaluates all the clues given to evaluate the whole board at every iteration. We will refer to this as the <strong>Linear Algebra Approach.</strong></p>
+<h1 id="Improved-Strategy-(v1):-Linear-Algebra-Approach">Improved Strategy (v1): Linear Algebra Approach<a class="anchor-link" href="#Improved-Strategy-(v1):-Linear-Algebra-Approach">&#182;</a></h1><p>To improve upon the baseline approach, we devise a strategy that relies not solely on local inference but also on an evaluation of all the clues given to evaluate the whole board at every iteration. We will refer to this as the <strong>Linear Algebra Approach,</strong> as it relies on core principles of linear algebra.</p>
 
 </div>
 </div>
@@ -13831,19 +13839,19 @@ Safely detected (without detonating) 89.55223880597015% of mines
     <tr>
         <td>
             <figure>
-                <img src='./imgs/ss1.png' alt='missing' />
+                <img src='./imgs/ss1.png' alt='missing' width=150px  />
                 <figcaption>Example block of game board with variable labels</figcaption>
             </figure>
         </td>
         <td>
             <figure>
-                <img src='./imgs/ss2.png' alt='missing' />
+                <img src='./imgs/ss2.png' alt='missing' width=300px />
                 <figcaption>Corresponding System of Equations</figcaption>
             </figure>
         </td> 
         <td>
             <figure>
-                <img src='./imgs/ss4.png' alt='missing' />
+                <img src='./imgs/ss4.png' alt='missing' width=300px />
                 <figcaption>Corresponding Matrix</figcaption>
             </figure>
         </td>  
@@ -13856,8 +13864,10 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The advantage of this approach is that it makes full use of every clue by relating it to every other known clue on the board. In other words, the Linear Algebra Agent uses all of the mine proximity clues in its knowledge base to the fullest. In previous iterations of our implementation, the agent solely relied on the system of linear equations. In its final form, the agent uses not only every single clue that is available on the board, but the number of hidden mines, the number of total mines, the number of safe mines and the rest of the local data that the baseline approach was using to make the best possible decision.</p>
-<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><p>Here is how we implemented it:</p>
+<p>The advantage of this approach is that it makes full use of every clue by relating it to every other known clue on the board. In other words, the Linear Algebra Agent uses all of the mine proximity clues in its knowledge base to the fullest extent.</p>
+<p>In early iterations of our implementation, the agent solely relied on the system of linear equations.</p>
+<p>In its final form, the agent uses not only every single clue that is available on the board, but also the number of hidden mines, the number of total mines, the number of safe mines and the rest of the local data that the baseline approach was using to make the best possible decision. Usage of the number of total mines is described in the sections below.</p>
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><p>Here is how we implemented the Linear Algebra approach.</p>
 
 </div>
 </div>
@@ -13971,8 +13981,8 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note that this code 'takes place' in between baseline and random selection (if needed).</p>
-<p>One criticism of the purely Linear Algebra approach is how it handles random guessing when there are no available solutions at any given move. This will be improved upon in the latest iterations and will be highlighted further in this assignment report.</p>
+<p>Due to the inheritance structure of our agent classes, the Linear Algebra approach will attempt to deterministically find safe/mine cells via the baseline method, then execute the above code to use more than local inference, and then, in cases where no safe/mine cells can be found and enqueued, it falls to random choice.</p>
+<p>One criticism of the purely Linear Algebra approach is how it handles random guessing when there are no available solutions at any given move. Essentially, when the system of linear equations cannot find a solution, it falls through to random choice, as in the baseline. This will be improved upon in the latest iterations and will be highlighted further in this assignment report.</p>
 
 </div>
 </div>
@@ -13980,7 +13990,7 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Decisions">Decisions<a class="anchor-link" href="#Decisions">&#182;</a></h3><p>Decision making is fairly straightforward, once the matrix is row reduced, we can mark cells that correspond to reduced rows with a 0 in the final column vector as being safe and similarly reduced rows with value 1 in the final column vector as mine. Unreduced or 0 row vectors are disregarded.</p>
+<h3 id="Decisions">Decisions<a class="anchor-link" href="#Decisions">&#182;</a></h3><p>Decision-making is fairly straightforward: once the matrix is row reduced, we can mark cells that correspond to reduced rows with a $0$ in the final column vector as being safe and similarly reduced rows with value $1$ in the final column vector as being a mine. Unreduced or $0$ row vectors are disregarded.</p>
 <p>The Linear Algebra Agent's decision-making process is logged out in a snippet below (see <code>/data/lin_alg_log.txt</code>):</p>
 <hr>
 
@@ -14288,7 +14298,7 @@ Safely detected (without detonating) 75.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The above data is representative of 50-100 trials (depending on dim/density) which were averaged together. We can see that using the linear algebra approach consistently yields an improvement from the baseline case.</p>
+<p>The above data is representative of 50-100 trials (depending on dim/density) which are averaged together. We can see that using the linear algebra approach consistently yields an improvement from the baseline case.</p>
 <p>We can also see that the game gets 'hard' when the density surpasses approximately $d = 0.20$, at which point mine flag rate drops drastically.</p>
 
 </div>
@@ -14304,7 +14314,7 @@ Safely detected (without detonating) 75.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose the agent is told in advance how many total mines exist on the board. Then, recalling the system of equations used by the linear algebra approach, it follows that we would be able to add one additional equation to our system which conveys the total mine count (on the RHS of the equation). This would give us more mine information at each step in the algorithm. Consider the situation where 199 of 200 mines have been found already, and one pass of linear algebra finds the 200th mine. Then, subsequent passes of linear algebra will have an equation which essentially says all possible mines have been found, and the algorithm may use this to mark mines as safe, cutting down runtime and opportunities to fall through to random/brute force probabilistic selection.</p>
+<p>Suppose the agent is told in advance how many total mines exist on the board. Then, recalling the system of equations used by the linear algebra approach, it follows that we would be able to add one additional equation to our system which conveys the total mine count (on the RHS of the equation). This would give us more mine information at each step in the algorithm. Consider the situation where 199 of 200 mines have been found already, and one pass of linear algebra finds the 200th mine. Then, subsequent passes of linear algebra will have an equation which essentially says all possible mines have been found, and the algorithm may use this to mark mines as safe, cutting down runtime and opportunities to fall through to random selection.</p>
 <h3 id="Mine-count-implementation">Mine count implementation<a class="anchor-link" href="#Mine-count-implementation">&#182;</a></h3><p>Implementation-wise, all agents are equipped with a <code>useMineCount</code> boolean field which makes usage of mine counts toggleable. Setting it to <code>True</code> essentially adds the following equation at the end of the system of equations:</p>
 $$x_1 + x_2 + \dots + x_{dim^2-1} = N_m - N_f - N_d$$<p>where each $x_i$ is $dim * x + y$ (as before) for a given hidden cell $(x,y)$ and $N_m, N_f, N_d$ correspond to the numbers of total mines, flagged mines, and detonated mines, respectively. This makes the RHS above the number of remaining hidden mines.</p>
 
@@ -14330,7 +14340,7 @@ $$x_1 + x_2 + \dots + x_{dim^2-1} = N_m - N_f - N_d$$<p>where each $x_i$ is $dim
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The additional equation is appended to the system prior to being sent to reduced row-echelon form and solved. The addition of this one row simply gives the algorithm another row upon which to use inference, e.g. for an iteration of vanilla linear algebra on a 4x4 game with 4 mines we are able to achieve a 100% solve rate:</p>
+<p>The additional equation is appended to the system prior to being sent to reduced row-echelon form and solved. The addition of this one row simply gives the algorithm another row upon which to use inference, e.g. for an iteration of vanilla linear algebra on a $4\times4$ game with $4$ mines we are able to achieve a 100% solve rate:</p>
 
 </div>
 </div>
@@ -14509,7 +14519,7 @@ Safely detected (without detonating) 100.0% of mines
             </figure>
         </td>        
    </tr>
-</table><p>Notice that in the final state, there is one block still HIDDEN, however the agent terminated its gameplay because the number of mines is in its knowledge base. Had the number of mines not been specified, the agent would have continued until all the remaining hidden cells were revealed, adding slightly more computations (in this low-dimensional case). In higher dimensions, these extra computations could be sizeable though.</p>
+</table><p>Notice that in the final state, there is one block still HIDDEN (light green, $-1$ value), however the agent terminated its gameplay because the number of mines is in its knowledge base. Had the number of mines not been specified, the agent would have continued until all the remaining hidden cells were revealed, adding slightly more computations (in this low-dimensional case). In higher dimensions, these extra computations could be sizeable though.</p>
 <p>Our intuition is that knowing the mine count definitely helps the driver, but we seek a further improvement to our strategy to better exploit this fact.</p>
 
 </div>
@@ -14518,8 +14528,8 @@ Safely detected (without detonating) 100.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">Improved Algorithm (v2): Linear Algebra + Brute Force Probability Approach<a class="anchor-link" href="#Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">&#182;</a></h1><p>Our second iteration is a modified version of the <strong>Linear Algebra approach</strong> that makes improvements to guessing. Any algorithm to solve Minesweeper will have to eventually make a random guess. The improvements outlined in this version of our approach attempts to address this problem and instead make an <em>educated guess</em> using a combination of brute force and probabilistic inference. We call this the <strong>combined Linear Algebra + Brute force approach,</strong> and we use a new agent called the <strong>Brute Force Agent.</strong></p>
-<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>The Brute Force Agent inherits all of the Linear Algebra Agent's (and thus, the Generic Agent's) members/functions. The object-oriented schema remains unchanged throughout this assignment.</p>
+<h1 id="Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">Improved Algorithm (v2): Linear Algebra + Brute Force Probability Approach<a class="anchor-link" href="#Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">&#182;</a></h1><p>Our second iteration is a modified version of the <strong>Linear Algebra approach</strong> that makes improvements to guessing. Any algorithm to solve Minesweeper will have to eventually make a random guess. The improvements outlined in this version of our approach attempts to address this problem and instead make an <em>educated guess</em> using a combination of brute force and probabilistic inference. We call this the combined <strong>Linear Algebra + Brute Force approach,</strong> and we use a new agent called the <strong>Brute Force Agent.</strong></p>
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>The Brute Force Agent inherits all of the Linear Algebra Agent's (and thus, the baseline Agent's) members/functions. The object-oriented schema remains unchanged throughout this assignment.</p>
 
 </div>
 </div>
@@ -14542,7 +14552,7 @@ Safely detected (without detonating) 100.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The main advantage of adding brute force functionality is that upon failure of the Linear Algebra Agent's main method (i.e. solving the system of equations via matrix algebra), it no longer has to randomly guess what the next move will be. Instead, we iterate through all possible configurations (of relevant cells) and keep track of how many times a mine appeared in each cell. We then simply choose the cell with the least probability of having a mine.</p>
+<p>The main advantage of adding brute force functionality is that upon failure of the Linear Algebra Agent's main method (i.e. solving the system of equations via matrix algebra), it no longer has to randomly guess what the next move will be. Instead, we iterate through all possible configurations of relevant cells and keep track of how many times a mine appeared in each cell. We then simply choose the cell with the least probability of having a mine.</p>
 <p>The methods that perform these computations are listed below.</p>
 <h3 id="Configuration-Generation-Function">Configuration Generation Function<a class="anchor-link" href="#Configuration-Generation-Function">&#182;</a></h3><p>This function finds all possible configurations of mines that are valid in terms of consistency with the existing player knowledge base.</p>
 
@@ -14616,9 +14626,9 @@ Safely detected (without detonating) 100.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Probability-Generating-Function">Probability Generating Function<a class="anchor-link" href="#Probability-Generating-Function">&#182;</a></h3><p>This function acts on what we call <strong>components:</strong> A component is a set of hidden cells that are nighboring cells we have clues on, and can thus generate a probability it is a mine. Two such hidden cells are in the same component if they both neighbor the same safe cell, and this is transitive. Basically, a component is a set of cells that are potentially mines, and one being a mine affects whther the other cells in the component are mines.</p>
+<h3 id="Probability-Generating-Function">Probability Generating Function<a class="anchor-link" href="#Probability-Generating-Function">&#182;</a></h3><p>This function acts on what we call <strong>components:</strong> A component is a set of hidden cells that are neighboring cells we have clues on, and can thus generate a probability it is a mine. Two such hidden cells are in the same component if they both neighbor the same safe cell, and this is transitive. Basically, a component is a set of cells that are potentially mines, and one cell in the component being a mine affects whether the other cells in the component are mines.</p>
 <p>Then, the above configuration generation function generates valid configurations of these components.</p>
-<p>On these components, this function maps each cell in a component to the percentage of configurations of the component it appears in. This is the probability of that cell being a mine.</p>
+<p>On these components, this function maps each cell in a component to the percentage of configurations of the component it appears in. We take this as the <strong>probability of that cell being a mine.</strong></p>
 
 </div>
 </div>
@@ -14770,7 +14780,9 @@ Safely detected (without detonating) 100.0% of mines
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>See <code>BruteForceAgent.py</code> for more implementation details.</p>
 <p>As mentioned earlier, the Brute Force agent takes advantage of the added knowledge of <strong>total mine count.</strong> What makes this algorithm effective is that it uses the total mine count to compare the cell with lowest probability of being a mine in any component to that of the other cells not in any component. Without total mine count, this comparison (and the added knowledge) cannot be used.</p>
-<h2 id="Further-Improved-Decision-Making">Further Improved Decision-Making<a class="anchor-link" href="#Further-Improved-Decision-Making">&#182;</a></h2><p>Below is a single iteration of the new algorithm which incorporates both the linear algebra method and, when there are no matrix solutions, the brute force method to compute the safest next move via probabilities. The below iteration illustrates the linear algebra agent being insufficient to determine the next move, and thus prompts the brute force agent to determine it.</p>
+<p>A concrete example of this would be if our first random guess to start the game gives a clue of $1$. If the density is $0.2$, then we want to choose a cell surrounding the initial guess, as $\frac{1}{8} &lt; 0.2$ (assuming the initial guess has $8$ neighbors). But if density is $0.1$, then we want to look outside the initial guess, as $\frac{1}{8} &gt; 0.1$.</p>
+<p>Knowing the mine count also helps the brute force agent rule out possible configurations for a component. For example, if we have $2$ components with possible mine counts $7-9$ and $1-2$ with $10$ total mines, we can rule out the configurations with $7$ mines for component $1$, since $7 + (1 or 2) &lt; 10$. Similarly if we have $8-12$ and $6-10$ for the possible mine counts, and $16$ total mines, we can truncate to $8-10$ and $6-8$. These removals are done after computing all configurations for each component, and thus do not speed up computations. However, they ensure that the agent is using the most possibly accurate probabilities.</p>
+<h2 id="Further-Improved-Decision-Making">Further Improved Decision-Making<a class="anchor-link" href="#Further-Improved-Decision-Making">&#182;</a></h2><p>Below is a single iteration of the new algorithm which incorporates both the linear algebra method and, when there are no matrix solutions, the brute force method, to compute the safest next move via probabilities. The below iteration illustrates the linear algebra agent being insufficient to determine the next move, and thus prompts the brute force agent to determine it.</p>
 <p>The full decision log for our v2 algorithm can be found in <code>/data/lin_alg_with_brute_log.txt</code>.</p>
 <p>...</p>
 <hr>
@@ -14973,8 +14985,9 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This hybrid algorithm is quite powerful largely because it relies solely on computational methods and utilizes the full extent of the knowledge base at every iteration. In the above excerpt, which depicts a single iteration by the Linear Algebra/Brute Force Agent, the cell $(8,8)$ was revealed but did not provide enough information to the knowledge base for the linear algebra method to yield useful results. The Brute Force Agent then calculated all the possible mine configurations for the remaining cells and was able to find that cell $(9,9)$ had the least probability of being a mine, which it then chose to visit next. Had there been two minimum probabilities, the agents would have had no choice but to pick a random cell.</p>
-<p>That last case is where we may be able to find room for improvement. Perhaps a 3rd backup method in case both linear algebra and brute force fail would increase the "intelligence" of our agents, but may face a trade-of in terms of efficiency and sustainability of the knowledge base (space complexity).</p>
+<p>This hybrid algorithm is quite powerful largely because it relies solely on computational methods and utilizes the full extent of the knowledge base at every iteration. In the above excerpt, which depicts a single iteration by the Linear Algebra/Brute Force Agent, the cell  (8,8)  was revealed but did not provide enough information to the knowledge base for the linear algebra method to yield useful results. The Brute Force Agent then calculated all the possible mine configurations for the remaining cells and was able to find that cell  (9,9)  had the least probability of being a mine, which it then chose to visit next. Had there been two or more minimum probabilities, the agents would have had no choice but to arbitrarily (randomly) pick one of the corresponding cells.</p>
+<p>To improve the hybrid approach even further, we turn to the main weakness of the algorithm, which is the inefficiency of the brute force approach. The algorithm performance is discussed in detail in the following sections; however, the brute force approach as a whole could, in theory, be superceded by a more optimized algorithm. This might be one that does not require computing every possible mine configuration as a means of generating the probabilities of choosing a safe cell. In other words, the brute force approach is the least optimal "Plan-B" to the linear algebra approach, hence its name. Because of theoretical results relating to NP-Completeness, any algorithm for solving Minesweeper will require evaluating all configurations in a certain window. Using algorithms like linear algebra or Bayesian Expectation simply reduce the amount of computations that the brute force agent has to perform.</p>
+<p>In summary, the only way to improve this hybrid approach is to add more algorithms on top of linear algebra + brute force, which would further diminish time efficiency.</p>
 <h3 id="Performance">Performance<a class="anchor-link" href="#Performance">&#182;</a></h3><p>Below is a comparison table of the Brute Force (linear algebra + brute force probabilities) approach with the baseline approach, vanilla linear algebra approach, and even vanilla brute force approach (with no linear algebra used) in terms of mine detection rate (once again, DETECTED/total) as a percentage and performance time in seconds.</p>
 
 </div>
@@ -15205,10 +15218,10 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Note that here our lin alg + brute strategy is using <strong>total mine count.</strong></p>
+<p>Each data point is obtained via 100-200 trials. Note again that our linear algebra + brute strategy is using <strong>total mine count.</strong></p>
 <p>Since the vanilla linear algebra approach already uniformly outperformed baseline, it is no surprise that the linear algebra + brute force approach does as well. Again, we have uniformly outperformed strategy v1 (linear algebra) with strategy v2 (linear algebra + brute force) in terms of mine flag rates.</p>
-<p>Interestingly, one can see how for higher $dim$ (30-40), vanilla brute and vanilla linear algebra seem to get entangled in terms of mine flag rates for low mine densities (0.10-0.30). This is likely because we coded brute force to short circuit once its component size exceeds 20 (for runtime reasons), after which point it reverts to baseline. Without this cap, we would expect vanilla brute force to outperform vanilla linear algebra  nearly always.</p>
-<p>And ultimately, brute force eventually tends to decisively beat linear algebra for higher mine densities, as seen above. This is because there are lots of possible ways to configure mines, but brute will find the cells that are least likely. On the other hand, vanilla linear algebra (system of equations) does not optimize for that.</p>
+<p>Interestingly, one can see how for higher $dim$ (30-40), vanilla brute and vanilla linear algebra seem to get entangled in terms of mine flag rates for low mine densities (0.10-0.30). This is likely because we coded brute force to short circuit once its component size exceeds 20 for runtime reasons, after which point it reverts to baseline. Without this cap, we would expect vanilla brute force to outperform vanilla linear algebra nearly always.</p>
+<p>And ultimately, brute force tends to decisively beat linear algebra for higher mine densities, as seen above. This is because there are lots of possible ways to configure mines, but the brute force agent will find the cells that are least likely. On the other hand, vanilla linear algebra (system of equations) can not do that, as it purely finds deterministic inferences.</p>
 
 </div>
 </div>
@@ -15224,17 +15237,17 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Runtime data collected was quite variable because multiple processes were running concurrently. However, we found was that runtimes tended towards the following pattern:</p>
-<p><strong>Vanilla brute force $\geq$ brute force + lin alg $\geq$ vanilla lin alg $\geq$ baseline</strong></p>
-<p><strong>Implementation-specific constraints:</strong></p>
-<p>In general, it makes sense that vanilla brute force has higher runtimes, because although it will still locate cells that are definitively safe, it currently only picks one spot, i.e. the one with the least probability of being a mine. We could decrease its runtime by enqueuing all cells with zero mine probability (if they exist), otherwise we would pick just one with least probability; our implementation (<code>probabilityMethod(...)</code>) currently only returns one coordinate.</p>
-<p>The combined brute force + linear algebra strategy has lower runtimes than vanilla brute because it executes the linear algebra inference step first. This allows for a lot of simple deductions to take place, growing the KB. Consequently, the agent ends up calling brute force fewer times, and also has a smaller space of configurations to calculate, on average, when trying to find probabilities.</p>
-<p><strong>Problem-specific constraints:</strong></p>
+<center><b>Vanilla brute force $\geq$ brute force + lin alg $\geq$ vanilla lin alg $\geq$ baseline</b></center><p><strong>Implementation-specific constraints</strong></p>
+<p>In general, it makes sense that vanilla brute force has higher runtimes, because although it will still locate cells that are definitively safe, it currently only picks one spot, i.e. the one with the least probability of being a mine. We could decrease its runtime by enqueuing all cells with zero mine probability (if they exist) so that we avoid redoing the expensive brute force operation to find out something is safe, especially if we already knew it was safe. We do not currently do this as our implementation (<code>probabilityMethod(...)</code>) currently only returns one coordinate.</p>
+<p>The combined brute force + linear algebra strategy has lower runtimes than vanilla brute force because it executes the linear algebra inference step first. This allows for a lot of simple deductions to take place, growing the KB. Consequently, the agent ends up calling brute force fewer times, and it also has a smaller space of configurations to calculate, on average, when trying to find probabilities.</p>
+<p><strong>Problem-specific constraints</strong></p>
 <p>Across various $dim$ and densities, we observed:</p>
 <ol>
 <li>At low $dim$ and mine densities, linear algebra was close to baseline in terms of runtime, and the other two options had extremely high runtimes. </li>
 <li>At higher $dim$ and mine densities, linear algebra, vanilla brute, and combined linear algebra + brute had extraordinarily high runtimes.</li>
 </ol>
-<p>This is simply because higher $dim$ and mine densities are 'harder' games to solve.</p>
+<p>In fact, we noticed several $dim$, density threshold "walls" beyond which runtimes became excessively long. For example, for density $d = 0.3$, $dim = 30$ was one such "wall." For $d = 0.5$, $dim = 20$ was a "wall." In those cases, runtimes blew up even though they performed better, in terms of mine flag rate, than vanilla linear algebra.</p>
+<p>This is simply because higher $dim$ and mine densities are 'harder' games to solve. Higher density means less fast inferences by baseline, and more time spent in expensive linear algebra and brute steps. Linear algebra closes in on brute for higher dim simply because we cap the component size we are willing to compute brute force probabilties for at 20. If we had a fast enough computer and did not cap brute, then at high dim we would still see brute force take significantly longer than linear algebra.</p>
 
 </div>
 </div>
@@ -15394,7 +15407,7 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><table>
+<table>
     <tr>
         <td>
             <figure>
@@ -15414,15 +15427,15 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
                 <figcaption>Dim 30</figcaption>
             </figure>
         </td> 
-   </tr></p>
-
+   </tr>
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From above, we can see that the usage of the mine count marginally improves the mine flag rates (when using brute force + linear algebra), but this improvement is small, with somewhere between a 0 and 2 percent improvement. On the other hand, we can conclude that mine flag rates when the mine count is utilized are better or equal to mine flag rates when the mine count is not utilized.</p>
+<p>From above, we can see that the usage of the mine count marginally improves the mine flag rates (when using brute force + linear algebra), but this improvement is small, with somewhere between a $0$ and $2$ percent improvement. On the other hand, we can conclude that mine flag rates when the mine count is utilized are better or equal to mine flag rates when the mine count is not utilized.</p>
 <p>This reiterates the fact that if the brute force agent does not have the total mine count, then it cannot make the comparison between cells with the lowest mine probability and cells not in any component, i.e. not bordering any safe cell. This added information gives the agent a performance boost.</p>
 <p>As mentioned earlier, the Brute Force agent takes advantage of the added knowledge of <strong>total mine count.</strong> What makes this algorithm effective is that it uses the total mine count to compare the cell with lowest probability of being a mine in any component to that of the other cells not in any configuration.</p>
 <p>Moreover, we can also see the following trends:</p>
@@ -15430,7 +15443,7 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <li>The added benefit of using the mine count decreases over higher $dim$; note the smaller gap for $dim = 30$ vs that of $dim = 10$.</li>
 <li>The added benefit of using the mine count decreases over higher mine densities, and this effect is especially pronounced for higher $dim$.</li>
 </ul>
-<p>This is due to the increasing complexity of Minesweeper games for higher $dim$ and mine densities. The more complex the game, the harder time the brute force + linear algebra agent has when solving it, regardless of whether or not it knows the total mine count.</p>
+<p>This is due to the increasing complexity of Minesweeper games for higher $dim$ and mine densities. The more complex the game, the harder time the brute force + linear algebra agent has when solving it, regardless of whether or not it knows the total mine count. More specifically, mine count helps linear algebra primarily near the end of the game, as early on the row added using mine count has too many variables. For high $dim$, end game is a much smaller portion of the overall board, so the effect is less pronounced. For brute force, a possible explanation of why mine count helps less at high $dim$ is that at high $dim$, component sizes get large and we end up not even bothering to compute anything, so we can't use the mine count anyways.</p>
 
 </div>
 </div>
@@ -15438,7 +15451,8 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Dealing-with-Uncertainty">Dealing with Uncertainty<a class="anchor-link" href="#Dealing-with-Uncertainty">&#182;</a></h1><p>This section dealt with a variation of the MineSweeper game in which the clue itself is not assumed to be correct. That is, we deal with uncertainty on the accuracy of the clue itself. Accordingly, instead of merely revealing the actual clue via <code>clue = self.game.board[x][y]</code>, we now use the <code>getClue(...)</code> function found in <code>Agent.py</code> which returns an uncertain clue. Note that toggling between these types of uncertain clues, as well as having no uncertainty (as before), is done via the <code>self.uncertaintyType</code> attribute in the <code>Agent</code> class.</p>
+<h1 id="Dealing-with-Uncertainty">Dealing with Uncertainty<a class="anchor-link" href="#Dealing-with-Uncertainty">&#182;</a></h1><p>This section deals with a variation of the MineSweeper game in which the clue itself is not assumed to be correct. That is, we deal with uncertainty on the accuracy of the clue itself. Accordingly, instead of merely revealing the actual clue via <code>clue = self.game.board[x][y]</code>, we now use the <code>getClue(...)</code> function found in <code>Agent.py</code> which returns an uncertain clue.</p>
+<p>Recall that toggling between these types of uncertain clues, as well as having no uncertainty (as before), is done via the <code>self.uncertaintyType</code> attribute in the <code>Agent</code> class.</p>
 <h2 id="Accurate-information,-random-reveal">Accurate information, random reveal<a class="anchor-link" href="#Accurate-information,-random-reveal">&#182;</a></h2><p>In this case, the revealed clue is accurate, but it is only revealed with some random probability $p$. This complicates the game because the knowledge base is not updated as frequently as before, leading to less opportunities for inference to deterministically detect mines or safe cells.</p>
 <h3 id="Uncertainty-implementation">Uncertainty implementation<a class="anchor-link" href="#Uncertainty-implementation">&#182;</a></h3><p>For the random reveal type of uncertainty, the <code>getClue</code> function needs to be passed $p$, the probability that any given clue will be revealed. Then, the code to reveal the clue randomly is simple:</p>
 
@@ -15484,8 +15498,8 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Strategy-adaptation">Strategy adaptation<a class="anchor-link" href="#Strategy-adaptation">&#182;</a></h3><p>We first need to assume that we are provided with the information of the number of mines given in the grid. Without this information, it becomes incredibly difficult to estimate the probability. The problem with this situation is that we cannot trust any of our knowledge base, since our clues are all based on probabilities.</p>
-<p>What we could do is that we can using probabilistic inference here. But the problem remains since there is still no way of knowing if our knowledge base will consistency be correct. And if it is not correct, then the game will typically not last too long since mine detection will be quite off from the baseline approach where the clues are given to you with full certainty.</p>
-<p>When we approach this problem, we are given a board with clear cells that have attached clues with a certain probability, or mines. We first must calculate the probability of landing on a mine using the Bayes' Theorem: which would be taking the (total number of mines -1) multiplied by (total number of cells -1) divided by (total number of cells choose total number of mines). We are assuming the total number of mines is a constraint provided to us. Each cell now has an associated probabiltiy. This will be our base probability. We can store this as base_prob.</p>
+<p>What we could do is use probabilistic inference here. But the problem remains, since there is still no way of knowing if our knowledge base will consistently be correct. And if it is not correct, then the game will typically not last too long since mine detection will be quite off from the baseline approach where the clues are given to you with full certainty.</p>
+<p>When we approach this problem, we are given a board with clear cells that have attached clues with a certain probability, or mines. We first must calculate the probability of landing on a mine using Bayes' Theorem: which would be taking the (total number of mines -1) multiplied by (total number of cells -1) divided by (total number of cells choose total number of mines). We are assuming the total number of mines is a constraint provided to us. Each cell now has an associated probabiltiy. This will be our base probability. We can store this as <code>base_prob</code>.</p>
 <p>When we approach a cell that has a probabilistic, "true" clue, our implementation idea is to use the clue and its neighbors with an equal probability. Assuming that none of a cell's neighbors are uncovered, each probability would be 1/8. And the rest of the cells would have a probability of (total number of mines -1) divided by (total number of cells - 8). Now we can calculate the probabilies of each of the surrounding cells and the chance of there being a mine in the surrounding cells. But to make more accurate predicitions, we should choose to reveal neighbors, one by one, with the associated lowest probability. Once we have the probabilities of two neighbors, we have doubled our information and also doubled the accuracy by doing a rerun of all the probabilites surrounding the cell.</p>
 <p>This step can be repeated over and over again until the table is solved. There is no certainty that the table will be accurately solved each time since everything is a probability and not an accurate clue. The chance of explosions is still significantly higher to any approach we have discussed previously in regards to accurate clues. Since, each step of this process, our clues start off with weak probabilistic inference, the chance of explosion is greater in the beginning. But as the game progresses (if it does progress), the chance of survival also significantly increases.</p>
 
