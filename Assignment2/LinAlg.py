@@ -58,21 +58,20 @@ class lin_alg_agent(agent):
             if self.logging:
                 print("recrunching baseline")
                 print()
+
+            # this double for loop is just the same recrunch code as baseline agent, lin alg will figure this out as well
+            # but we can do it faster this way
             for x in range(self.game.dim):
                 for y in range(self.game.dim):
-                    # if it's not safe, then there's no need to check all its neighbors (nothing to deduce if mine/hidden)
                     if self.playerKnowledge[x][y] != SAFE:
                         pass
-                    # otherwise do inference using neighbors
                     else:
                         clue = self.getClue(x, y)
                         if clue != -1:
                             numSafeNbrs, numMineNbrs, numHiddenNbrs, numTotalNbrs = self.getCellNeighborData(x, y)
 
-                            # if no neighbors are hidden, then we can't deduce any more new info about them
                             if numHiddenNbrs == 0:
                                 pass
-                            # case when all hidden nbrs must be mines: mark as such
                             elif (clue - numMineNbrs) == numHiddenNbrs:
                                 if self.logging:
                                     print('\tRe-processing KB found that: All neighbors of ({}, {}) must be mines.\n'.format(x, y))
@@ -85,7 +84,6 @@ class lin_alg_agent(agent):
                                             self.numFlaggedMines += 1
                                             if self.logging:
                                                 print('\t\tNeighbor ({}, {}) flagged as a mine.\n'.format(x + i, y + j))
-                            # case when all hidden nbrs must be safe: mark as safe, add safe cell(s) to q
                             elif (numTotalNbrs - clue - numSafeNbrs) == numHiddenNbrs:
                                 if self.logging:
                                     print('\tRe-processing KB found that: All neighbors of ({}, {}) must be safe.\n'.format(x, y))
@@ -99,6 +97,7 @@ class lin_alg_agent(agent):
                                             if self.logging:
                                                 print('\t\tNeighbor ({}, {}) flagged as safe and enqueued for next visitation.\n'.format(x + i, y + j))
                                 safesFound = True
+            #moving on to linear algebra now
             if self.logging:
                 print("game:")
                 for row in self.game.board:
@@ -107,7 +106,11 @@ class lin_alg_agent(agent):
                 print("knowledge:")
                 print(self.playerKnowledge)
                 print()
+
+            # information cells are a list of cells that provide us information as we have a clue
+            # for them but haven't solved their full neigbors so we can write an equation
             information_cells = []
+            # list of all hidden cells, for use with creating an equation for mine count
             hidden_cells = []
             for x in range(dim):
                 for y in range(dim):
@@ -146,6 +149,8 @@ class lin_alg_agent(agent):
                         print(matrix[i])
                         print()
 
+                # if using mine count, create a row to represent the sum of the number of mines in all hidden cells
+                # is the number of remaing mines
                 if self.useMineCount:
                     for x,y in hidden_cells:
                         matrix[len(information_cells), dim * x + y] = 1
@@ -154,11 +159,11 @@ class lin_alg_agent(agent):
                         print("generated following row using total mine count: ")
                         print(matrix[len(information_cells)])
                         print()
-                #row reduce our matrix to solve the system
                 if self.logging:
                     print("information matrix:")
                     print(matrix)
                     print()
+                #row reduce our matrix to solve the system
                 rref(matrix)
                 if self.logging:
                     print("rref'd matrix:")
@@ -167,7 +172,6 @@ class lin_alg_agent(agent):
                 #keeping track of flags here is purely for debugging purposes
                 flags = []
                 for row in matrix:
-                    #
                     if self.logging:
                         print("using row: ")
                         print(row)
@@ -199,8 +203,8 @@ class lin_alg_agent(agent):
                     #if the row sums to 0, we can potentially find definitively safe cells
                     if row[-1] == 0:
                         # if we have both positive and negative coeffecients, the variables could all be 0
-                        # or there could be some mines, the sum of the coeffecients of the mines is 0
-                        # which can happen since we have positive and negative coeffecients
+                        # or there could be some mines as long the sum of the coeffecients of the mines is 0.
+                        # Which can happen since we have positive and negative coeffecients and
                         # so we don't know anything definitive (multiple combinations satisfy the equation)
                         if len(positives) >0 and len(negatives) > 0:
                             if self.logging:
@@ -209,7 +213,7 @@ class lin_alg_agent(agent):
                         else:
                             # however if only one list is populated then everything
                             # in the list must have value 0 for equation to hold (so everything is safe)
-                            # we can do positives + negatives since exactly one has values
+                            # we can do positives + negatives for code reuseability since exactly one has values
                             for x,y,_ in positives + negatives:
                                 # if self.game.board[x][y] == MINE:
                                 assert self.game.board[x][y] != MINE
@@ -225,7 +229,8 @@ class lin_alg_agent(agent):
                         # (the other side of the equation), then all the variables with
                         # positive coeffecients must be 1, and so we flag them. The sum can never be less since
                         # each variable is at most 1, and if it is greater, then multiple combinations
-                        # of the variables in the positive and negative lists can be mines
+                        # of the variables in the positive and negative lists can be mines.
+                        # Also if the sum matches, then all the variables with negative coeffecients must be safe too.
                         if sum([coeffecient for x,y,coeffecient in positives]) == row[-1]:
                             for x,y,_ in positives:
                                 if self.playerKnowledge[x,y] == MINE:
@@ -262,6 +267,7 @@ class lin_alg_agent(agent):
         if (recrunch is False) or (safesFound is False):
             if recrunch is True and self.logging:
                 print('\tRe-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.\n')
+            #probability_method is same as baseline for lin alg (pure random)
             tuple = self.probability_method()
             if tuple:
                 q.append(tuple)

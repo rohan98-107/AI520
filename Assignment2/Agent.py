@@ -25,6 +25,8 @@ class agent:
         self.totalSolveTime = 0
         self.logging = False
 
+        #we pass in the same order for randomly selecting a cell to remove the variance associated
+        #store the order and where we currently are
         self.order = order
         self.current_in_order = 0
 
@@ -78,8 +80,6 @@ class agent:
                         for i, j in dirs:
                             if 0 <= x + i < self.game.dim and 0 <= y + j < self.game.dim:
                                 if self.playerKnowledge[x + i][y + j] == HIDDEN:
-                                    #if self.logging:
-                                    #    print(self.playerKnowledge)
                                     if self.uncertaintyType == 'none':
                                         assert self.game.board[x + i][y + j] == MINE
                                     self.playerKnowledge[x + i][y + j] = MINE
@@ -214,11 +214,13 @@ class agent:
         if (recrunch is False) or (safesFound is False):
             if recrunch is True and self.logging:
                 print('\tRe-processing did not find new safe cells; proceeding to randomly select hidden cell.\n')
+            #if we found nothing safe, get a new cell using probability_method
             tuple = self.probability_method()
             if tuple:
                 q.append(tuple)
 
     def probability_method(self):
+        #in baseline agent when returning a cell based on probability, we just return the nect random
         tuple = self.get_next_random(set())
         return tuple
 
@@ -226,23 +228,33 @@ class agent:
         dim = self.game.dim
         return (x//dim, x % dim)
 
+    #return's next random cell in our order, excluding those in to_exclude
     def get_next_random(self, to_exclude):
         dim = self.game.dim
+        # loop through incrementing current_in_order from current value until we skip past
+        # all already revealed cells
         while self.current_in_order < dim ** 2:
             cell = self.int_to_cell(self.order[self.current_in_order])
             if self.playerKnowledge[cell[0]][cell[1]] == HIDDEN:
                 break
             self.current_in_order += 1
+        #if we reached the end nothing to return
         if self.current_in_order == dim ** 2:
             return None
+        #consider the next cell in the order, order is a list of ints [1,..,dim^2] so we need to convert it to a cell
         cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
+        #return the cell if we can
         if cell_to_consider not in to_exclude:
             self.current_in_order += 1
             return cell_to_consider
+        # if the next cell was in to_exclude keep looping until we find a hidden cell not in our exclusion list
+        # don't increment self.current_in_order here because we skipped over the that cell for now
         for i in range(self.current_in_order + 1, dim**2):
             cell_to_consider = self.int_to_cell(self.order[self.current_in_order])
-            if cell_to_consider not in to_exclude:
+            if cell_to_consider not in to_exclude and self.playerKnowledge[cell_to_consider[0]][cell_to_consider[1]] == HIDDEN:
                 return cell_to_consider
+        # if all of the later cells after self.current_in_order were also in exclusion list (or there were no other cells),
+        # then go back to default and use self.current_in_order cell
         cell = self.int_to_cell(self.order[self.current_in_order])
         self.current_in_order += 1
         return cell
