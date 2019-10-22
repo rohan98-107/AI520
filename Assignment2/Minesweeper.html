@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-<style=margin:50px>
 <head><meta charset="utf-8" />
 
 <title>Minesweeper</title>
@@ -9131,15 +9129,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box
+/* This file is a compatability layer.  It allows the usage of flexible box 
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this
+`Modern browsers` comments below).  Browsers that are known to implement this 
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+
+    Internet Explorer 11+ 
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -12521,7 +12519,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for
+  /* This injects handle bars (a short, wide = symbol) for 
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -13020,7 +13018,7 @@ ul.typeahead-list  > li > a.pull-right {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
-
+    
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -13087,14 +13085,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  }
-  div.output_wrapper {
+  } 
+  div.output_wrapper { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
-  div.output {
+  div.output { 
     display: block;
-    page-break-inside: avoid;
+    page-break-inside: avoid; 
   }
 }
 </style>
@@ -13300,7 +13298,7 @@ div#notebook {
 <p>For a trial run, see attached <code>/data/log.txt</code> for full breakdown of moves made by baseline agent. The following snippet illustrates the above methodology:</p>
 <hr>
 
-<pre><code>BASELINE SOLVER LOG (initial moves)
+<pre><code>BASELINE SOLVER LOG (initial moves) 
 
 Cell (8, 2) safely revealed with clue: 3.
     # safe neighbors: 0
@@ -13396,7 +13394,7 @@ All neighbors of (11, 7) must be safe.
 <p>Below is a snippet from <code>/data/log.txt</code> illustrating this more concretely; see the 'Reprocessing-KB found that: ...' lines below.</p>
 <hr>
 
-<pre><code>BASELINE SOLVER LOG (intermediate moves)
+<pre><code>BASELINE SOLVER LOG (intermediate moves) 
 
 ...
 
@@ -13477,9 +13475,22 @@ Safely detected (without detonating) 89.55223880597015% of mines
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The above log was from the following initial &amp; final game boards:</p>
-<p><img src="imgs/baselineTrialRun_init_board.png" alt="Initial Board (Unhidden)"></p>
-<p><img src="imgs/baselineTrialRun_solved_board.png" alt="Solved Board"></p>
-<p>For the initial board, the blue -6 cells correspond to mines, and the other numbers are clues (color coded based on intensity of clue).</p>
+<table>
+    <tr>
+        <td>
+            <figure>
+                <img src='./imgs/baselineTrialRun_init_board.png' alt='missing' />
+                <figcaption>Initial Board (Unhidden)</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/baselineTrialRun_solved_board.png' alt='missing' />
+                <figcaption>Solved Board</figcaption>
+            </figure>
+        </td>        
+   </tr>
+</table><p>For the initial board, the blue -6 cells correspond to mines, and the other numbers are clues (color coded based on intensity of clue).</p>
 <p>For the final solved player knowledge board, the green 0 cells are safely uncovered cells, orange -6 cells are safely detected mines, and red -8 cells are detonated mines.</p>
 
 </div>
@@ -13513,7 +13524,7 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 <span class="n">baselineFlagRates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/baseline_solo_performance_flagRates.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">baselineFlagRates</span>
 </pre></div>
@@ -13816,10 +13827,28 @@ Safely detected (without detonating) 89.55223880597015% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="imgs/ss1.png" alt="Example block of game board with variable labels">
-<img src="imgs/ss2.png" alt="Corresponding System of Equations">
-<img src="imgs/ss4.png" alt="Corresponding Matrix"></p>
-<p>Images courtesy of <a href="https://massaioli.wordpress.com/2013/01/12/solving-minesweeper-with-matricies/comment-page-1/">https://massaioli.wordpress.com/2013/01/12/solving-minesweeper-with-matricies/comment-page-1/</a>.</p>
+<table>
+    <tr>
+        <td>
+            <figure>
+                <img src='./imgs/ss1.png' alt='missing' />
+                <figcaption>Example block of game board with variable labels</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/ss2.png' alt='missing' />
+                <figcaption>Corresponding System of Equations</figcaption>
+            </figure>
+        </td> 
+        <td>
+            <figure>
+                <img src='./imgs/ss4.png' alt='missing' />
+                <figcaption>Corresponding Matrix</figcaption>
+            </figure>
+        </td>  
+   </tr>
+</table><p>Images courtesy of <a href="https://massaioli.wordpress.com/2013/01/12/solving-minesweeper-with-matricies/comment-page-1/">https://massaioli.wordpress.com/2013/01/12/solving-minesweeper-with-matricies/comment-page-1/</a>.</p>
 
 </div>
 </div>
@@ -13860,7 +13889,7 @@ Safely detected (without detonating) 89.55223880597015% of mines
         <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="n">clue</span> <span class="o">-</span> <span class="n">mineNeighbors</span>
 
     <span class="n">rref</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-
+    
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
         <span class="n">positives</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">negatives</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13989,19 +14018,19 @@ knowledge:
  [-1 -1  0 -1]
  [ 0 -1 -1 -1]]
 
-generated following row using (0,1):
+generated following row using (0,1): 
 [0. 0. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2.]
 
-generated following row using (1,1):
+generated following row using (1,1): 
 [0. 0. 1. 0. 1. 0. 1. 0. 1. 1. 0. 0. 0. 0. 0. 0. 3.]
 
-generated following row using (1,3):
+generated following row using (1,3): 
 [0. 0. 1. 1. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.]
 
-generated following row using (2,2):
+generated following row using (2,2): 
 [0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 0. 1. 0. 1. 1. 1. 1.]
 
-generated following row using (3,0):
+generated following row using (3,0): 
 [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 1. 0. 0. 1.]
 
 information matrix:
@@ -14018,22 +14047,22 @@ rref'd matrix:
  [ 0.  0.  0.  0.  0.  0.  0.  0.  1.  1.  0.  0.  0.  0.  0.  0.  1.]
  [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.]]
 
-using row:
+using row: 
 [ 0.  0.  1.  0.  1.  0.  0.  0.  0. -1.  0. -1.  0.  0. -1. -1.  1.]
 
-using row:
+using row: 
 [ 0.  0.  0.  1. -1.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0. -1.]
 deduced (1,0) to be a mine via lin alg
 deduced (0,3) to be safe via lin alg
 deduced (2,3) to be safe via lin alg
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 1. 0. 0. 1. 0. 1. 0. 0. 1. 1. 1.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 1.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0.]
 deduced (3,1) to be safe via lin alg
 
@@ -14223,11 +14252,36 @@ Safely detected (without detonating) 75.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="imgs/base_linalg_dim10.png" alt="Baseline vs Lin Alg, dim 10">
-<img src="imgs/base_linalg_dim20.png" alt="Baseline vs Lin Alg, dim 20">
-<img src="imgs/base_linalg_dim30.png" alt="Baseline vs Lin Alg, dim 30">
-<img src="imgs/base_linalg_dim40.png" alt="Baseline vs Lin Alg, dim 40"></p>
-
+<table>
+    <tr>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalg_dim10.png' alt='missing' />
+                <figcaption>Dim 10</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalg_dim20.png' alt='missing' />
+                <figcaption>Dim 20</figcaption>
+            </figure>
+        </td>        
+   </tr>
+   <tr>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalg_dim30.png' alt='missing' />
+                <figcaption>Dim 30</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalg_dim40.png' alt='missing' />
+                <figcaption>Dim 40</figcaption>
+            </figure>
+        </td>        
+   </tr>
+</table>
 </div>
 </div>
 </div>
@@ -14243,7 +14297,228 @@ Safely detected (without detonating) 75.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">Improved Algorithm (v2): Linear Algebra + Brute Force Probability Approach<a class="anchor-link" href="#Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">&#182;</a></h1><p>This is a modified version of the <strong>Linear Algebra approach</strong> that makes improvements to guessing. Any algorithm to solve Minesweeper will have to eventually make a random guess. The improvements outlined in this version of our approach attempts to address this problem and instead make an <em>educated guess</em> using a combination of brute force and probabilistic inference. We call this the <strong>combined Linear Algebra + Brute force approach,</strong> and we use a new agent called the <strong>Brute Force Agent.</strong></p>
+<h2 id="Improvements">Improvements<a class="anchor-link" href="#Improvements">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose the agent is told in advance how many total mines exist on the board. Then, recalling the system of equations used by the linear algebra approach, it follows that we would be able to add one additional equation to our system which conveys the total mine count (on the RHS of the equation). This would give us more mine information at each step in the algorithm. Consider the situation where 199 of 200 mines have been found already, and one pass of linear algebra finds the 200th mine. Then, subsequent passes of linear algebra will have an equation which essentially says all possible mines have been found, and the algorithm may use this to mark mines as safe, cutting down runtime and opportunities to fall through to random/brute force probabilistic selection.</p>
+<h3 id="Mine-count-implementation">Mine count implementation<a class="anchor-link" href="#Mine-count-implementation">&#182;</a></h3><p>Implementation-wise, all agents are equipped with a <code>useMineCount</code> boolean field which makes usage of mine counts toggleable. Setting it to <code>True</code> essentially adds the following equation at the end of the system of equations:</p>
+$$x_1 + x_2 + \dots + x_{dim^2-1} = N_m - N_f - N_d$$<p>where each $x_i$ is $dim * x + y$ (as before) for a given hidden cell $(x,y)$ and $N_m, N_f, N_d$ correspond to the numbers of total mines, flagged mines, and detonated mines, respectively. This makes the RHS above the number of remaining hidden mines.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">hidden_cells</span><span class="p">:</span>
+        <span class="n">matrix</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">information_cells</span><span class="p">),</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">matrix</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">information_cells</span><span class="p">),</span><span class="n">dim</span><span class="o">*</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The additional equation is appended to the system prior to being sent to reduced row-echelon form and solved. The addition of this one row simply gives the algorithm another row upon which to use inference, e.g. for an iteration of vanilla linear algebra on a 4x4 game with 4 mines we are able to achieve a 100% solve rate:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+<pre><code>...
+
+Cell (2, 2) safely revealed with clue: 3.
+    # safe neighbors: 4
+    # mine neighbors: 1
+    # hidden neighbors: 3
+    # total neighbors: 8
+
+Revealing cell (2, 2) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce &amp; enqueue new safe cell(s) from all of current knowledge,
+or add random if none available.
+
+game:
+[0, 0, 0, 0]
+[1, 1, 1, 1]
+[-6, 2, 3, -6]
+[2, -6, 3, -6]
+
+knowledge:
+[[ 0  0  0  0]
+ [ 0  0  0  0]
+ [-6  0  0 -6] 
+ [-1 -1 -1 -1]]
+
+generated following row using (2,1): 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1.]
+
+generated following row using (2,2): 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 2.]
+
+generated following row using total mine count: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 2.]
+
+information matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 2.] 
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 2.]]
+
+rref'd matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]]
+
+using row:
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+deduced (3,0) to be safe via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]
+
+deduced (3,3) to be a mine via lin alg
+
+----------------------------------------
+
+Cell (3, 0) safely revealed with clue: 2.
+    # safe neighbors: 1
+    # mine neighbors: 1
+    # hidden neighbors: 1
+    # total neighbors: 3
+
+
+All neighbors of (3, 0) must be mines.
+
+    Neighbor (3, 1) flagged as a mine.
+
+Revealing cell (3, 0) led to no conclusive next move (either DETONATED or all neighbors MINES).
+
+Will attempt to re-deduce &amp; enqueue new safe cell(s) from all of current knowledge,
+or add random if none available.
+
+game:
+[0, 0, 0, 0]
+[1, 1, 1, 1]
+[-6, 2, 3, -6]
+[2, -6, 3, -6]
+
+knowledge:
+[[ 0  0  0  0]
+ [ 0  0  0  0]
+ [-6  0  0 -6]
+ [ 0 -6 -1 -6]]
+
+
+generated following row using (2,1): 
+
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+
+generated following row using (2,2): 
+
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+
+generated following row using total mine count: 
+
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+
+information matrix:
+
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]]
+
+
+rref'd matrix:
+[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
+deduced (3,2) to be safe via lin alg
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+using row: 
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
+
+----------------------------------------
+
+Cell (3, 2) safely revealed with clue: 3.
+    # safe neighbors: 2
+    # mine neighbors: 3
+    # hidden neighbors: 0
+    # total neighbors: 5
+
+
+All neighbors of (3, 2) are already revealed; nothing to infer.
+
+----------------------------------------
+...
+
+----------------------------------------
+
+
+***** GAME OVER *****
+
+Game ended in 0.010601043701171875 seconds
+
+Safely detected (without detonating) 100.0% of mines
+
+</code></pre>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the full log, see <code>/data/lin_alg_log_mineCt.txt</code>. The game board &amp; final result that yielded the above log is displayed here:</p>
+<table>
+    <tr>
+        <td width=50%>
+            <figure>
+                <img src='./imgs/linalgboard.png' alt='missing'/>
+                <figcaption>Initial Board (Unhidden)</figcaption>
+            </figure>
+        </td>
+        <td width=50%>
+            <figure>
+                <img src='./imgs/linalgknowledge.png' alt='missing'/>
+                <figcaption>Solved Agent Knowledge via Linear Algebra</figcaption>
+            </figure>
+        </td>        
+   </tr>
+</table><p>Notice that in the final state, there is one block still HIDDEN, however the agent terminated its gameplay because the number of mines is in its knowledge base. Had the number of mines not been specified, the agent would have continued until all the remaining hidden cells were revealed, adding slightly more computations (in this low-dimensional case). In higher dimensions, these extra computations could be sizeable though.</p>
+<p>Our intuition is that knowing the mine count definitely helps the driver, but we seek a further improvement to our strategy to better exploit this fact.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">Improved Algorithm (v2): Linear Algebra + Brute Force Probability Approach<a class="anchor-link" href="#Improved-Algorithm-(v2):-Linear-Algebra-+-Brute-Force-Probability-Approach">&#182;</a></h1><p>Our second iteration is a modified version of the <strong>Linear Algebra approach</strong> that makes improvements to guessing. Any algorithm to solve Minesweeper will have to eventually make a random guess. The improvements outlined in this version of our approach attempts to address this problem and instead make an <em>educated guess</em> using a combination of brute force and probabilistic inference. We call this the <strong>combined Linear Algebra + Brute force approach,</strong> and we use a new agent called the <strong>Brute Force Agent.</strong></p>
 <h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>The Brute Force Agent inherits all of the Linear Algebra Agent's (and thus, the Generic Agent's) members/functions. The object-oriented schema remains unchanged throughout this assignment.</p>
 
 </div>
@@ -14268,7 +14543,8 @@ Safely detected (without detonating) 75.0% of mines
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The main advantage of adding brute force functionality is that upon failure of the Linear Algebra Agent's main method (i.e. solving the system of equations via matrix algebra), it no longer has to randomly guess what the next move will be. Instead, we iterate through all possible configurations (of relevant cells) and keep track of how many times a mine appeared in each cell. We then simply choose the cell with the least probability of having a mine.</p>
-<p>The methods that perform these computations are the configuration generation function:</p>
+<p>The methods that perform these computations are listed below.</p>
+<h3 id="Configuration-Generation-Function">Configuration Generation Function<a class="anchor-link" href="#Configuration-Generation-Function">&#182;</a></h3><p>This function finds all possible configurations of mines that are valid in terms of consistency with the existing player knowledge base.</p>
 
 </div>
 </div>
@@ -14278,41 +14554,58 @@ Safely detected (without detonating) 75.0% of mines
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configCells</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">):</span>
-        <span class="n">configs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">),</span> <span class="n">i</span><span class="p">,</span> <span class="p">[])</span> \
-                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">))]</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">while</span> <span class="n">configs</span><span class="p">:</span>
-            <span class="n">next_set</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">board</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">currentConfig</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
-                <span class="n">current_board</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
-                <span class="n">current_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">currentConfig</span><span class="p">)</span>
-                <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># potential mine configuration finder</span>
+<span class="k">def</span> <span class="nf">get_configs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configCells</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">):</span>
+    <span class="c1"># configs is our current list of potential configs, we have a tuple with three elements</span>
+    <span class="c1"># 1. a copy othe KB that will be modified to add mines</span>
+    <span class="c1"># 2. an index of the next cell in the component to set as a mine, this never decreases to force</span>
+    <span class="c1">#    an order on how we visit configurations, and removes looping. If index &gt;= len(component) then we terminate</span>
+    <span class="c1"># 3. a list of cells set to mines in the component to be returned if the config is valid</span>
+    <span class="n">configs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">),</span> <span class="n">i</span><span class="p">,</span> <span class="p">[])</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">))]</span>
+    <span class="c1"># list of all valid configs</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">configs</span><span class="p">:</span>
+        <span class="c1"># essentially doing a bfs over configurations, instead of a queue we take all the nodes at a given depth</span>
+        <span class="c1"># and then add all their children to next_set, and then use that for next iteration</span>
+        <span class="n">next_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">board</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">currentConfig</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
+            <span class="n">current_board</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">board</span><span class="p">)</span>
+            <span class="n">current_config</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">currentConfig</span><span class="p">)</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span>
 
-                <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_config</span><span class="p">)</span>\
-                                                 <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span>\
-                                                 <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">confirm_full_consistency</span><span class="p">(</span><span class="n">current_board</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">):</span>
-                        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_config</span><span class="p">)</span>
-                    <span class="k">continue</span>
-                <span class="n">cell</span> <span class="o">=</span> <span class="n">configCells</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-                <span class="n">current_config</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">current_board</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">MINE</span>
-                <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">for</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
-                    <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
-                    <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
-                    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="n">dim</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="n">dim</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="n">SAFE</span>\
-                                        <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">confirm_consistency</span><span class="p">(</span><span class="n">current_board</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
-                        <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-                        <span class="n">next_set</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">current_board</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">current_config</span><span class="p">))</span>
+            <span class="c1"># terminate if index is out of bounds, or if using mine count and there are too many mines</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_config</span><span class="p">)</span> <span class="o">==</span> \
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span><span class="p">):</span>
+                <span class="c1"># if the config is consitent, add it to our output list</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">confirm_full_consistency</span><span class="p">(</span><span class="n">current_board</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">):</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_config</span><span class="p">)</span>
+                <span class="k">continue</span>
 
-            <span class="n">configs</span> <span class="o">=</span> <span class="n">next_set</span>
-        <span class="k">return</span> <span class="n">out</span>
+            <span class="c1"># get the next cell we want to set as a mine and do so</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">configCells</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">current_config</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">current_board</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">MINE</span>
+
+            <span class="c1"># initialize the config as valid, but set valid false if any neighbor has been made inconsistent</span>
+            <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+                <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
+                <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nx</span> <span class="o">&lt;</span> <span class="n">dim</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">ny</span> <span class="o">&lt;</span> <span class="n">dim</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">==</span> <span class="n">SAFE</span> \
+                                    <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">confirm_consistency</span><span class="p">(</span><span class="n">current_board</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
+                    <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># if every neighbor was found to be valid then add each of the node (the config&#39;s) children to </span>
+            <span class="c1"># the next list</span>
+            <span class="c1"># it&#39;s children are adding any of the cells after index as a mine, or terminating </span>
+            <span class="c1">#(index = len(configCells))</span>
+            <span class="k">if</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">configCells</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">next_set</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">current_board</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">current_config</span><span class="p">))</span>
+
+        <span class="n">configs</span> <span class="o">=</span> <span class="n">next_set</span>
+    <span class="k">return</span> <span class="n">out</span>
 </pre></div>
 
     </div>
@@ -14323,7 +14616,9 @@ Safely detected (without detonating) 75.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>and the probability calculating function:</p>
+<h3 id="Probability-Generating-Function">Probability Generating Function<a class="anchor-link" href="#Probability-Generating-Function">&#182;</a></h3><p>This function acts on what we call <strong>components:</strong> A component is a set of hidden cells that are nighboring cells we have clues on, and can thus generate a probability it is a mine. Two such hidden cells are in the same component if they both neighbor the same safe cell, and this is transitive. Basically, a component is a set of cells that are potentially mines, and one being a mine affects whther the other cells in the component are mines.</p>
+<p>Then, the above configuration generation function generates valid configurations of these components.</p>
+<p>On these components, this function maps each cell in a component to the percentage of configurations of the component it appears in. This is the probability of that cell being a mine.</p>
 
 </div>
 </div>
@@ -14333,95 +14628,136 @@ Safely detected (without detonating) 75.0% of mines
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">probability_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span>
-        <span class="n">consistency_cells</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">config_cells</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="n">SAFE</span><span class="p">:</span>
-                    <span class="n">numSafeNbrs</span><span class="p">,</span> <span class="n">numMineNbrs</span><span class="p">,</span> <span class="n">numHiddenNbrs</span><span class="p">,</span> <span class="n">numTotalNbrs</span> <span class="o">=</span> \
-                                                    <span class="bp">self</span><span class="o">.</span><span class="n">getCellNeighborData</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">numHiddenNbrs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">consistency_cells</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
-                        <span class="n">children</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hidden_neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
-                        <span class="n">intersects</span> <span class="o">=</span> <span class="p">[]</span>
-                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_cells</span><span class="p">):</span>
-                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                                <span class="n">intersects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersects</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">intersects</span><span class="p">:</span>
-                                <span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">intersects</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                                <span class="k">del</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                        <span class="n">config_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># overriding probability_method to use brute force probabilities</span>
+<span class="c1"># broad strokes implementation:</span>
+<span class="c1"># First create a list of components;</span>
+<span class="c1"># This list of components of hidden cells is config_cells below</span>
+<span class="c1"># We also store the associated safe cells for each component in consistency_cells</span>
+<span class="c1"># cap is the maximum size for a component that we are willing to compute probabilities for, as larger components take exponentially longer to compute</span>
+<span class="k">def</span> <span class="nf">probability_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cap</span> <span class="o">=</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">dim</span>
+    <span class="c1"># list of safe cells separated by corresponding component, we will need to use confirm_full_consistency using the set of safe cells</span>
+    <span class="c1"># to verufy a confuration of mines&#39; consistency</span>
+    <span class="n">consistency_cells</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="c1"># list of hidden cells separated by corresponding component, called config_cells as</span>
+    <span class="c1"># each component will be used to generate potential configurations of mines</span>
+    <span class="n">config_cells</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+            <span class="c1"># if the cell has a clue</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">playerKnowledge</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="n">SAFE</span><span class="p">:</span>
+                <span class="n">numSafeNbrs</span><span class="p">,</span> <span class="n">numMineNbrs</span><span class="p">,</span> <span class="n">numHiddenNbrs</span><span class="p">,</span> <span class="n">numTotalNbrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCellNeighborData</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="c1"># make sure there are hidden neighbors to try making mines</span>
+                <span class="k">if</span> <span class="n">numHiddenNbrs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># this cell we be needed for the consistency_cells component for all its children (neighbors)</span>
+                    <span class="n">children_consistency</span> <span class="o">=</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)}</span>
+                    <span class="n">children</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_hidden_neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+                    <span class="n">intersects</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="c1"># find all other components that have use any of the same hidden cells</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_cells</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">intersects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="c1"># if any such components were found, then we add those components to the one we are currently creating,</span>
+                    <span class="c1"># as they should actually be the same component. Then delete the old version separated versions those</span>
+                    <span class="c1"># components.</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intersects</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">intersects</span><span class="p">:</span>
+                            <span class="n">children</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                            <span class="n">children_consistency</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">consistency_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">intersects</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="k">del</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="k">del</span> <span class="n">consistency_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="c1"># Then we add our current component to our lists.</span>
+                    <span class="n">config_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+                    <span class="n">consistency_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">children_consistency</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consistency_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
+    <span class="c1"># if we found no components then we just use pure random as we cannot compute probabilities</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">consistency_cells</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
+    <span class="c1"># just turn the config_cells into a list for simplicity</span>
+    <span class="n">config_cells</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">dim</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">]</span>
+    <span class="c1"># configs is potential configurations for a given component</span>
+    <span class="n">configs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># we will remove some components for being too large to compute</span>
+    <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">config_cells</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">dim</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>\
-                        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_cells</span><span class="p">):</span>
+        <span class="c1"># if a component is too large, note that we should remove it</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cap</span><span class="p">:</span>
+            <span class="n">to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="c1"># otherwise get the list of possible mine configurations for the config, passing the corresponding</span>
+        <span class="c1"># safe cell list (consistency_cells[i]) so we can ensure the configurations are possible</span>
+        <span class="n">start_search_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">current_configs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_configs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_configs</span><span class="p">)</span>
 
-        <span class="n">configs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">config_cells</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
-                <span class="n">to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                <span class="k">continue</span>
-            <span class="n">start_search_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="n">configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_configs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">consistency_cells</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="k">del</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
+    <span class="c1"># remove the components that are too large</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">del</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">consistency_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        <span class="n">min_mine_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span> <span class="mi">0</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> \
-                                                          <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">())</span>
+
+    <span class="c1"># minimum number of mines present among all configs</span>
+    <span class="n">min_mine_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span> <span class="mi">0</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">])</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
             <span class="n">min_for_set</span> <span class="o">=</span>  <span class="mi">0</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">min</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
             <span class="n">to_remove</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="o">+</span> <span class="n">min_mine_count</span> <span class="o">-</span> <span class="n">min_for_set</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span>\
-                                                <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span><span class="p">:</span>
+                <span class="c1"># for each config for the component, if the number of mines in the config + the minimum number</span>
+                <span class="c1"># of mines in other configs (min_mine_count - min_for_set) exceeds the number of mines in the game,</span>
+                <span class="c1"># then remove the config as it is impossible</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="o">+</span> <span class="n">min_mine_count</span> <span class="o">-</span> <span class="n">min_for_set</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span><span class="p">:</span>
                     <span class="n">to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">to_remove</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="k">del</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        <span class="n">probabilities</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">configs</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
-                <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
-                        <span class="n">counts</span><span class="p">[</span><span class="n">coordinates</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">for</span> <span class="n">k</span> <span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                    <span class="n">probabilities</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="n">probabilities</span><span class="p">[</span><span class="n">cell</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="n">best_cell</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">best_probability</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">probability</span> <span class="o">&lt;=</span> <span class="n">best_probability</span><span class="p">:</span>
-                <span class="n">best_cell</span> <span class="o">=</span> <span class="n">cell</span>
-                <span class="n">best_probability</span> <span class="o">=</span> <span class="n">probability</span>
-
-        <span class="n">other_cells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numHiddenCells</span><span class="p">()</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_cells</span><span class="p">)</span>
-        <span class="n">mines_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span>
-        <span class="n">max_mines_in_hidden_cells_not_in_config_Cells</span> <span class="o">=</span> <span class="n">mines_left</span> <span class="o">-</span> <span class="n">min_mine_count</span>
-        <span class="n">other_cell_max_probability</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">other_cells</span> <span class="o">==</span> <span class="mi">0</span>
-                        <span class="k">else</span> <span class="n">max_mines_in_hidden_cells_not_in_config_Cells</span> <span class="o">/</span> <span class="n">other_cells</span>
-
-        <span class="k">if</span> <span class="n">best_probability</span> <span class="o">&lt;</span> <span class="n">other_cell_max_probability</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">best_cell</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-            <span class="k">return</span> <span class="n">best_cell</span>
+    <span class="c1"># map each cell in a component to the percentage of configs of the component it appears in</span>
+    <span class="c1"># this is it&#39;s probability of being a mine</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">configs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
+            <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+                    <span class="n">counts</span><span class="p">[</span><span class="n">coordinates</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">probabilities</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">to_exclude</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">:</span>
-                <span class="n">to_exclude</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">to_exclude</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">probabilities</span><span class="p">[</span><span class="n">cell</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># get cell with lowest probability</span>
+    <span class="n">best_cell</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best_probability</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">cell</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">probability</span> <span class="o">&lt;=</span> <span class="n">best_probability</span><span class="p">:</span>
+            <span class="n">best_cell</span> <span class="o">=</span> <span class="n">cell</span>
+            <span class="n">best_probability</span> <span class="o">=</span> <span class="n">probability</span>
+
+    <span class="c1"># the probability that a cell not in any component is a mine is uniform among all such cells</span>
+    <span class="c1"># it is at most the maximum numnber of mines not in any component divided by the number of such cells</span>
+    <span class="n">other_cells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numHiddenCells</span><span class="p">()</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">component</span><span class="p">)</span> <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">])</span>
+    <span class="n">mines_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span>
+    <span class="n">max_mines_in_hidden_cells_not_in_config_Cells</span> <span class="o">=</span> <span class="n">mines_left</span> <span class="o">-</span> <span class="n">min_mine_count</span>
+    <span class="n">other_cell_max_probability</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">other_cells</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">max_mines_in_hidden_cells_not_in_config_Cells</span> <span class="o">/</span> <span class="n">other_cells</span>
+
+    <span class="c1"># we can only compute and useother cell probabilities if using mine count</span>
+    <span class="c1"># when we can use it, them if other cells have a lower probability, then instead</span>
+    <span class="c1"># just return the next random excluding all hidden cells in any component</span>
+    <span class="c1"># otherwise just return the best cell found above</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span> <span class="ow">and</span> <span class="n">best_probability</span> <span class="o">&gt;</span> <span class="n">other_cell_max_probability</span><span class="p">:</span>
+        <span class="n">to_exclude</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">config_cells</span><span class="p">:</span>
+            <span class="n">to_exclude</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_random</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">to_exclude</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">best_cell</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">best_cell</span>
 </pre></div>
 
     </div>
@@ -14433,6 +14769,7 @@ Safely detected (without detonating) 75.0% of mines
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>See <code>BruteForceAgent.py</code> for more implementation details.</p>
+<p>As mentioned earlier, the Brute Force agent takes advantage of the added knowledge of <strong>total mine count.</strong> What makes this algorithm effective is that it uses the total mine count to compare the cell with lowest probability of being a mine in any component to that of the other cells not in any component. Without total mine count, this comparison (and the added knowledge) cannot be used.</p>
 <h2 id="Further-Improved-Decision-Making">Further Improved Decision-Making<a class="anchor-link" href="#Further-Improved-Decision-Making">&#182;</a></h2><p>Below is a single iteration of the new algorithm which incorporates both the linear algebra method and, when there are no matrix solutions, the brute force method to compute the safest next move via probabilities. The below iteration illustrates the linear algebra agent being insufficient to determine the next move, and thus prompts the brute force agent to determine it.</p>
 <p>The full decision log for our v2 algorithm can be found in <code>/data/lin_alg_with_brute_log.txt</code>.</p>
 <p>...</p>
@@ -14475,41 +14812,41 @@ knowledge:
  [ 0 -6  0  0  0  0 -1 -1  0 -1]
  [ 0  0  0  0  0 -6 -1 -1 -1 -1]]
 
-generated following row using (0,6):
+generated following row using (0,6): 
 [0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-generated following row using (1,6):
+generated following row using (1,6): 
 [0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-generated following row using (1,8):
+generated following row using (1,8): 
 [0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2.]
 
-generated following row using (2,6):
+generated following row using (2,6): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-generated following row using (2,7):
+generated following row using (2,7): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-generated following row using (2,8):
+generated following row using (2,8): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0.
  0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.
  0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
  0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
  0. 0. 0. 0. 2.]
 
-generated following row using (3,6):
+generated following row using (3,6): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-generated following row using (3,8):
+generated following row using (3,8): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2.]
 
-generated following row using (7,6):
+generated following row using (7,6): 
     [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2.]
 
-generated following row using (8,5):
+generated following row using (8,5): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1.]
 
-generated following row using (8,8):
+generated following row using (8,8): 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1.]
 
 information matrix:
@@ -14530,37 +14867,37 @@ rref'd matrix:
  [0. 0. 0. ... 0. 0. 0.]
  [0. 0. 0. ... 0. 0. 0.]]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-using row:
+using row: 
 [ 0.  0.  0.  0.  0.  0.  0.  0.  1.  1.  0.  0.  0.  0.  0.  0.  0.  0. 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. 0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
 
-using row:
+using row: 
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
 
-using row:
+using row: 
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.  1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.  0. 0. 0. 0. 1.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
 
-using row:
+using row: 
 [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0.  1.  0.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1. -1.  0.  0.  0.  0.  0.  0.  0.  0.  0. -1.  0.  0.  0.  0.  0.  0. -1. -1. -1. -1.  0.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 1.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
 
-using row:
+using row: 
 [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
 
     Re-processing via lin alg not find new safe cells; proceeding to randomly select hidden cell.
@@ -14832,17 +15169,43 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="imgs/base_linalgBrute_dim10.png" alt="Baseline vs All, dim 10">
-<img src="imgs/base_linalgBrute_dim20.png" alt="Baseline vs All, dim 20">
-<img src="imgs/base_linalgBrute_dim30.png" alt="Baseline vs All, dim 30">
-<img src="imgs/base_linalgBrute_dim40.png" alt="Baseline vs All, dim 40"></p>
-
+<table>
+    <tr>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalgBrute_dim10.png' alt='missing' />
+                <figcaption>Dim 10</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalgBrute_dim20.png' alt='missing' />
+                <figcaption>Dim 20</figcaption>
+            </figure>
+        </td>        
+   </tr>
+   <tr>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalgBrute_dim30.png' alt='missing' />
+                <figcaption>Dim 30</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/base_linalgBrute_dim40.png' alt='missing' />
+                <figcaption>Dim 40</figcaption>
+            </figure>
+        </td>        
+   </tr>
+</table>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that here our lin alg + brute strategy is using <strong>total mine count.</strong></p>
 <p>Since the vanilla linear algebra approach already uniformly outperformed baseline, it is no surprise that the linear algebra + brute force approach does as well. Again, we have uniformly outperformed strategy v1 (linear algebra) with strategy v2 (linear algebra + brute force) in terms of mine flag rates.</p>
 <p>Interestingly, one can see how for higher $dim$ (30-40), vanilla brute and vanilla linear algebra seem to get entangled in terms of mine flag rates for low mine densities (0.10-0.30). This is likely because we coded brute force to short circuit once its component size exceeds 20 (for runtime reasons), after which point it reverts to baseline. Without this cap, we would expect vanilla brute force to outperform vanilla linear algebra  nearly always.</p>
 <p>And ultimately, brute force eventually tends to decisively beat linear algebra for higher mine densities, as seen above. This is because there are lots of possible ways to configure mines, but brute will find the cells that are least likely. On the other hand, vanilla linear algebra (system of equations) does not optimize for that.</p>
@@ -14879,221 +15242,15 @@ found best cell (9,9) that was in 0.1% of it's component's configurations
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Improvements">Improvements<a class="anchor-link" href="#Improvements">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose the agent is told in advance how many total mines exist on the board. Then, recalling the system of equations used by the linear algebra approach, it follows that we would be able to add one additional equation to our system which conveys the total mine count (on the RHS of the equation). This would give us more mine information at each step in the algorithm. Consider the situation where 199 of 200 mines have been found already, and one pass of linear algebra finds the 200th mine. Then, subsequent passes of linear algebra will have an equation which essentially says all possible mines have been found, and the algorithm may use this to mark mines as safe, cutting down runtime and opportunities to fall through to random/brute force probabilistic selection.</p>
-<h3 id="Mine-count-implementation">Mine count implementation<a class="anchor-link" href="#Mine-count-implementation">&#182;</a></h3><p>Implementation-wise, all agents are equipped with a <code>useMineCount</code> boolean field which makes usage of mine counts toggleable. Setting it to <code>True</code> essentially adds the following equation at the end of the system of equations:</p>
-$$x_1 + x_2 + \dots + x_{dim^2-1} = N_m - N_f - N_d$$<p>where each $x_i$ is $dim * x + y$ (as before) for a given hidden cell $(x,y)$ and $N_m, N_f, N_d$ correspond to the numbers of total mines, flagged mines, and detonated mines, respectively. This makes the RHS above the number of remaining hidden mines.</p>
+<h2 id="Performance-of-brute-force-+-linear-algebra-without-mine-count">Performance of brute force + linear algebra without mine count<a class="anchor-link" href="#Performance-of-brute-force-+-linear-algebra-without-mine-count">&#182;</a></h2><p>Earlier, we stated that brute force exploits the knowledge of the total mine count, and this contributes towards its efficacy. Now, we compare the brute force + linear algebra driver both with and without the mine count in use for a variety of $dim$ and mine densities.</p>
+<p>Note that each data point below is the result of 100-200 controlled trials (for the same game).</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useMineCount</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">hidden_cells</span><span class="p">:</span>
-        <span class="n">matrix</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">information_cells</span><span class="p">),</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">matrix</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">information_cells</span><span class="p">),</span><span class="n">dim</span><span class="o">*</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game</span><span class="o">.</span><span class="n">num_mines</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">numFlaggedMines</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">numDetonatedMines</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The additional equation is appended to the system prior to being sent to reduced row-echelon form and solved. The addition of this one row simply gives the algorithm another row upon which to use inference, e.g. for an iteration of vanilla linear algebra on a 4x4 game with 4 mines we are able to achieve a 100% solve rate:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<hr>
-
-<pre><code>...
-
-Cell (2, 2) safely revealed with clue: 3.
-    # safe neighbors: 4
-    # mine neighbors: 1
-    # hidden neighbors: 3
-    # total neighbors: 8
-
-Revealing cell (2, 2) led to no conclusive next move (either DETONATED or all neighbors MINES).
-
-Will attempt to re-deduce &amp; enqueue new safe cell(s) from all of current knowledge,
-or add random if none available.
-
-game:
-[0, 0, 0, 0]
-[1, 1, 1, 1]
-[-6, 2, 3, -6]
-[2, -6, 3, -6]
-
-knowledge:
-[[ 0  0  0  0]
- [ 0  0  0  0]
- [-6  0  0 -6]
- [-1 -1 -1 -1]]
-
-generated following row using (2,1):
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1.]
-
-generated following row using (2,2):
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 2.]
-
-generated following row using total mine count:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 2.]
-
-information matrix:
-[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 0. 1.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 2.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 2.]]
-
-rref'd matrix:
-[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]]
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
-deduced (3,0) to be safe via lin alg
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1.]
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1.]
-
-deduced (3,3) to be a mine via lin alg
-
-----------------------------------------
-
-Cell (3, 0) safely revealed with clue: 2.
-    # safe neighbors: 1
-    # mine neighbors: 1
-    # hidden neighbors: 1
-    # total neighbors: 3
-
-
-All neighbors of (3, 0) must be mines.
-
-    Neighbor (3, 1) flagged as a mine.
-
-Revealing cell (3, 0) led to no conclusive next move (either DETONATED or all neighbors MINES).
-
-Will attempt to re-deduce &amp; enqueue new safe cell(s) from all of current knowledge,
-or add random if none available.
-
-game:
-[0, 0, 0, 0]
-[1, 1, 1, 1]
-[-6, 2, 3, -6]
-[2, -6, 3, -6]
-
-knowledge:
-[[ 0  0  0  0]
- [ 0  0  0  0]
- [-6  0  0 -6]
- [ 0 -6 -1 -6]]
-
-
-generated following row using (2,1):
-
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
-
-generated following row using (2,2):
-
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
-
-generated following row using total mine count:
-
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
-
-information matrix:
-
-[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]]
-
-
-rref'd matrix:
-[[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]]
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
-deduced (3,2) to be safe via lin alg
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-
-using row:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]
-
-----------------------------------------
-
-Cell (3, 2) safely revealed with clue: 3.
-    # safe neighbors: 2
-    # mine neighbors: 3
-    # hidden neighbors: 0
-    # total neighbors: 5
-
-
-All neighbors of (3, 2) are already revealed; nothing to infer.
-
-----------------------------------------
-...
-
-----------------------------------------
-
-
-***** GAME OVER *****
-
-Game ended in 0.010601043701171875 seconds
-
-Safely detected (without detonating) 100.0% of mines
-
-</code></pre>
-<hr>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>For the full log, see <code>/data/lin_alg_log_mineCt.txt</code>. The game board &amp; final result that yielded the above log is displayed here:</p>
-<p><img src="imgs/linalgboard.png" alt="Game board (unhidden)">
-<img src="imgs/linalgknowledge.png" alt="Agent Solution at final state"></p>
-<p>Notice that in the final state, there is one block still HIDDEN, however the agent terminated its gameplay because the number of mines is in its knowledge base. Had the number of mines not been specified, the agent would have continued until all the remaining hidden cells were revealed, adding slightly more computations (in this low-dimensional case). In higher dimensions, these extra computations could be sizeable though.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Performance-using-mine-count">Performance using mine count<a class="anchor-link" href="#Performance-using-mine-count">&#182;</a></h3><p>We test the brute force + linear algebra driver with the mine count in use for a variety of $dim$ and mine densities.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">mineCtRates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/mineCtRates.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -15110,7 +15267,7 @@ Safely detected (without detonating) 100.0% of mines
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -15153,75 +15310,75 @@ Safely detected (without detonating) 100.0% of mines
   <tbody>
     <tr>
       <th>dim</th>
-      <td>10.0</td>
-      <td>10.000000</td>
-      <td>10.0</td>
       <td>10.00</td>
-      <td>10.000000</td>
-      <td>20.0000</td>
-      <td>20.000000</td>
-      <td>20.000</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>10.00</td>
+      <td>10.00</td>
       <td>20.00</td>
-      <td>20.000000</td>
-      <td>30.000000</td>
-      <td>30.000000</td>
-      <td>30.000000</td>
-      <td>30.000000</td>
-      <td>30.000000</td>
+      <td>20.00</td>
+      <td>20.00</td>
+      <td>20.00</td>
+      <td>20.00</td>
+      <td>30.00</td>
+      <td>30.00</td>
+      <td>30.00</td>
+      <td>30.00</td>
+      <td>30.0</td>
     </tr>
     <tr>
       <th>density</th>
-      <td>0.1</td>
-      <td>0.150000</td>
-      <td>0.2</td>
+      <td>0.10</td>
+      <td>0.15</td>
+      <td>0.20</td>
       <td>0.25</td>
-      <td>0.300000</td>
-      <td>0.1000</td>
-      <td>0.150000</td>
-      <td>0.200</td>
+      <td>0.30</td>
+      <td>0.10</td>
+      <td>0.15</td>
+      <td>0.20</td>
       <td>0.25</td>
-      <td>0.300000</td>
-      <td>0.100000</td>
-      <td>0.150000</td>
-      <td>0.200000</td>
-      <td>0.250000</td>
-      <td>0.300000</td>
+      <td>0.30</td>
+      <td>0.10</td>
+      <td>0.15</td>
+      <td>0.20</td>
+      <td>0.25</td>
+      <td>0.3</td>
     </tr>
     <tr>
       <th>baseRate</th>
-      <td>97.3</td>
-      <td>96.100000</td>
-      <td>94.0</td>
-      <td>91.12</td>
-      <td>86.333333</td>
-      <td>99.3875</td>
-      <td>98.966667</td>
-      <td>98.125</td>
-      <td>95.34</td>
-      <td>91.383333</td>
-      <td>99.738889</td>
-      <td>99.500000</td>
-      <td>98.922222</td>
-      <td>97.173333</td>
-      <td>93.214815</td>
+      <td>95.97</td>
+      <td>95.15</td>
+      <td>93.80</td>
+      <td>91.10</td>
+      <td>85.71</td>
+      <td>98.88</td>
+      <td>98.59</td>
+      <td>97.71</td>
+      <td>95.51</td>
+      <td>91.32</td>
+      <td>99.52</td>
+      <td>99.36</td>
+      <td>98.82</td>
+      <td>97.12</td>
+      <td>93.3</td>
     </tr>
     <tr>
       <th>mineCtRate</th>
-      <td>97.3</td>
-      <td>96.066667</td>
-      <td>94.3</td>
-      <td>91.36</td>
-      <td>87.133333</td>
-      <td>99.3875</td>
-      <td>98.975000</td>
-      <td>98.125</td>
-      <td>95.42</td>
-      <td>91.516667</td>
-      <td>99.738889</td>
-      <td>99.511111</td>
-      <td>98.966667</td>
-      <td>97.191111</td>
-      <td>93.244444</td>
+      <td>97.40</td>
+      <td>96.15</td>
+      <td>94.33</td>
+      <td>91.70</td>
+      <td>87.00</td>
+      <td>99.41</td>
+      <td>98.87</td>
+      <td>98.04</td>
+      <td>95.69</td>
+      <td>91.64</td>
+      <td>99.69</td>
+      <td>99.48</td>
+      <td>98.89</td>
+      <td>97.16</td>
+      <td>93.2</td>
     </tr>
   </tbody>
 </table>
@@ -15237,9 +15394,27 @@ Safely detected (without detonating) 100.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="imgs/mineCtRates10.png" alt="Mine Flag Rates with Mine Count, dim 10">
-<img src="imgs/mineCtRates20.png" alt="Mine Flag Rates with Mine Count, dim 20">
-<img src="imgs/mineCtRates30.png" alt="Mine Flag Rates with Mine Count, dim 30"></p>
+<p><table>
+    <tr>
+        <td>
+            <figure>
+                <img src='./imgs/mineCtRates10.png' alt='missing' />
+                <figcaption>Dim 10</figcaption>
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/mineCtRates20.png' alt='missing' />
+                <figcaption>Dim 20</figcaption>
+            </figure>
+        </td>  
+        <td>
+            <figure>
+                <img src='./imgs/mineCtRates30.png' alt='missing' />
+                <figcaption>Dim 30</figcaption>
+            </figure>
+        </td> 
+   </tr></p>
 
 </div>
 </div>
@@ -15247,7 +15422,15 @@ Safely detected (without detonating) 100.0% of mines
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From above, we can see that the usage of the mine count marginally improves the mine flag rates (when using brute force + linear algebra), but this improvement is small, with somewhere between a 0 and 1 percent improvement. On the other hand, we can conclude that mine flag rates when the mine count is utilized are better or equal to mine flag rates when the mine count is not utilized.</p>
+<p>From above, we can see that the usage of the mine count marginally improves the mine flag rates (when using brute force + linear algebra), but this improvement is small, with somewhere between a 0 and 2 percent improvement. On the other hand, we can conclude that mine flag rates when the mine count is utilized are better or equal to mine flag rates when the mine count is not utilized.</p>
+<p>This reiterates the fact that if the brute force agent does not have the total mine count, then it cannot make the comparison between cells with the lowest mine probability and cells not in any component, i.e. not bordering any safe cell. This added information gives the agent a performance boost.</p>
+<p>As mentioned earlier, the Brute Force agent takes advantage of the added knowledge of <strong>total mine count.</strong> What makes this algorithm effective is that it uses the total mine count to compare the cell with lowest probability of being a mine in any component to that of the other cells not in any configuration.</p>
+<p>Moreover, we can also see the following trends:</p>
+<ul>
+<li>The added benefit of using the mine count decreases over higher $dim$; note the smaller gap for $dim = 30$ vs that of $dim = 10$.</li>
+<li>The added benefit of using the mine count decreases over higher mine densities, and this effect is especially pronounced for higher $dim$.</li>
+</ul>
+<p>This is due to the increasing complexity of Minesweeper games for higher $dim$ and mine densities. The more complex the game, the harder time the brute force + linear algebra agent has when solving it, regardless of whether or not it knows the total mine count.</p>
 
 </div>
 </div>
@@ -15469,7 +15652,7 @@ or add random if none available.
 
 ...
 
-generated following row using total mine count:
+generated following row using total mine count: 
 [ 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1. 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1. 1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1. 20.]
 
 Linear optimization for optimistic uncertainty FAILED. Proceeding with regular Lin Alg.
@@ -15585,7 +15768,7 @@ or add random if none available.
 
 ...
 
-generated following row using total mine count:
+generated following row using total mine count: 
 
 [ 1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1. 1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  1.  0.  1.  1.  1.  1.  1.  1.  1. 17.]
 
@@ -15632,7 +15815,7 @@ Consider the case of optimistic clues. Intuitively, if each constraint is uses a
   </div>
 </body>
 
-
+ 
 
 
 </html>
