@@ -5,6 +5,10 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+# We should eventually organize this into an Agent class, Landscape class etc.
+# But for now I'm just going to dump everything here
+
 TARGET = 1
 EMPTY = 0
 
@@ -44,3 +48,13 @@ def printLandscape(ls):
                     yticklabels=False,
                     cmap='Greens')
     plt.show()
+
+def searchCell(tup):
+    if tup[0] == EMPTY:
+        return False
+    else:
+        p = 1 - tup[1]
+        if random.uniform(0, 1) < p:
+            return True
+        else:
+            return False
