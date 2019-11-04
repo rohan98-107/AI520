@@ -1,3 +1,5 @@
+import random
+
 PRESENT = 1
 ABSENT = 0
 

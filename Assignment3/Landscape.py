@@ -42,12 +42,12 @@ class landscape:
         self.landscape[self.target_x][self.target_y].target = PRESENT
 
         terrains = {FLAT, HILLY, FOREST, MAZE}
-        new_terrain = {(self.landscape[new_x][new_y])[1]}
+        new_terrain = {(self.landscape[self.target_x][self.target_y]).terrain}
         return random.choice(list(terrains.difference(new_terrain)))
 
     def printLandscape(self):
         size = len(self.landscape)
-        temp = [[self.flattenFNrate(j) for j in i] for i in self.landscape]
+        temp = [[j.terrain for j in i] for i in self.landscape]
         plt.figure(figsize=(size/10, size/10), dpi=500)
         sns.heatmap(temp, mask=(temp==-1), vmin=0, vmax=1, linewidth=0.01, linecolor='black',
                         annot=False, annot_kws={"size": 15/size},
@@ -55,7 +55,7 @@ class landscape:
                         xticklabels=False,
                         yticklabels=False,
                         cmap='Greens')
-        plt.title('Landscape: Target at ({}, {})'.format(self.target[0], self.target[1]), fontsize=size/15, ha='center')
+        plt.title('Landscape: Target at ({}, {})'.format(self.target_x, self.target_y), fontsize=size/15, ha='center')
         plt.show()
 
 test = landscape(50)
