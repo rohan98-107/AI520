@@ -9,12 +9,11 @@ MAZE = 0.9
 VISTED = True
 UNVISITED = False
 
-class cell:
+class landCell:
 
     def __init__(self):
         x = random.randint(1, 100)
         self.target = ABSENT
-        self.status = UNVISITED
         if x <= 20:
             self.terrain = FLAT
         elif 20 < x <= 50:
@@ -27,5 +26,20 @@ class cell:
     def getTerrain(self):
         return self.terrain
 
+
+class agentCell:
+
+    def __init__(self,landCell):
+
+        self.belief = 0
+        self.terrain = landCell.terrain
+        self.status = UNVISITED
+
+    def getBelief(self):
+        return self.belief
+
+    def getTerrain(self):
+        return self.terrain
+
     def getStatus(self):
-        return self.visited
+        return self.status

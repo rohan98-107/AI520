@@ -19,7 +19,7 @@ class landscape:
 
     def __init__(self, dim):
         self.dim = dim
-        self.landscape = [[Cell() for _ in range(self.dim)] for _ in range(self.dim)]
+        self.landscape = [[landCell() for _ in range(self.dim)] for _ in range(self.dim)]
 
         target_x = random.randint(0, dim - 1)
         target_y = random.randint(0, dim - 1)
@@ -39,7 +39,7 @@ class landscape:
 
         new_nbr = random.choice(nbrs)
         self.target_x = new_nbr[0]; self.target_y = new_nbr[1]
-        self.landscape[new_x][new_y] = (TARGET, self.flattenFNrate(self.landscape[new_x][new_y]))
+        self.landscape[self.target_x][self.target_y].target = PRESENT
 
         terrains = {FLAT, HILLY, FOREST, MAZE}
         new_terrain = {(self.landscape[new_x][new_y])[1]}
