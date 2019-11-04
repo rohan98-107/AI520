@@ -57,6 +57,3 @@ class landscape:
                         cmap='Greens')
         plt.title('Landscape: Target at ({}, {})'.format(self.target_x, self.target_y), fontsize=size/15, ha='center')
         plt.show()
-
-test = landscape(50)
-test.printLandscape()
