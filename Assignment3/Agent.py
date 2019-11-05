@@ -77,7 +77,7 @@ class agent:
             curr_belief = self.knowledge[x][y].getBelief()
             num = self.ls.landscape[x][y].getTerrain()*curr_belief
             denom = self.probNotFound()
-            remainder = curr_belief - (num/denom)
+            remainder = abs(curr_belief - (num/denom))
             self.knowledge[x][y].setBelief(num/denom)
             for i in range(self.ls.dim):
                 for j in range(self.ls.dim):
@@ -85,7 +85,7 @@ class agent:
                         continue
                     else:
                         temp = self.knowledge[i][j].getBelief()
-                        self.knowledge[i][j].setBelief(temp + (remainder/(self.ls.dim**2-1)))
+                        self.knowledge[i][j].setBelief(temp + (temp*remainder)/(1-remainder))
 
         return self.knowledge
 
