@@ -5,6 +5,8 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import seaborn as sns
+sns.set(font_scale=1)
+from copy import deepcopy
 
 from Landscape import *
 
@@ -12,9 +14,16 @@ class agent:
     # track total number of cell searches (and movements for movement-restricted agent)
     num_actions = 0
 
-    def __init__(self, landscape):
+    def __init__(self, landscape, rule):
         self.ls = landscape
         d = self.ls.dim
+
+        if rule == 1 or rule == 2:
+            self.rule = rule
+        else:
+            print("Invalid rule, set to 1 by default")
+            self.rule = 1
+
         self.knowledge = [[agentCell() for j in range(d)] for i in range(d)]
         for i in range(d):
             for j in range(d):
@@ -22,16 +31,29 @@ class agent:
 
     def printBelief(self):
         size = len(self.knowledge)
-        plt.figure(figsize=(size/10, size/10), dpi=500)
+        plt.figure(figsize=(size / 5, size / 5), dpi=500)
         belief = [[self.knowledge[i][j].getBelief() for j in range(size)] for i in range(size)]
         sns.heatmap(belief, vmin=0, vmax=1, linewidth=0.01, linecolor='black',
-                        annot=True, annot_kws={"size": 15/size},
-                        square=True, cbar=False,
-                        xticklabels=False,
-                        yticklabels=False,
-                        cmap='Blues')
-        plt.title('Agent Belief', fontsize=size / 15, ha='center')
+                    annot=True, annot_kws={"fontsize": 1},
+                    square=True, cbar=False,
+                    xticklabels=False,
+                    yticklabels=False,
+                    cmap='Blues')
+        plt.title('Agent Belief', fontsize=size / 20, ha='center')
         plt.show()
+
+    def saveBelief(self, filename):
+        size = len(self.knowledge)
+        plt.figure(figsize=(size / 5, size / 5), dpi=500)
+        belief = [[self.knowledge[i][j].getBelief() for j in range(size)] for i in range(size)]
+        sns.heatmap(belief, vmin=0, vmax=1, linewidth=0.01, linecolor='black',
+                    annot=True, annot_kws={"fontsize": size / 20}, fmt='0.2g',
+                    square=True, cbar=False,
+                    xticklabels=False,
+                    yticklabels=False,
+                    cmap='Blues')
+        plt.title('Agent Belief', fontsize=size / 5, ha='center')
+        plt.savefig('./imgs/belief_{}.png'.format(filename), dpi=500)
 
     def searchCell(self,cell): #search a landCell
         if not cell.isTarget():
@@ -89,9 +111,18 @@ class agent:
 
         return self.knowledge
 
-test_ls = landscape(5)
+# compare rule 1 and 2 for 1 iteration
+test_ls = landscape(50)
 test_ls.printLandscape()
-test_agent = agent(test_ls)
-test_agent.printBelief()
-test_agent.updateBelief(2,3)
-test_agent.printBelief()
+
+test_agent1 = agent(test_ls, 1)
+test_agent2 = agent(test_ls, 2)
+
+test_agent1.saveBelief('test1')
+test_agent1.updateBelief(2,3)
+test_agent1.saveBelief('test1_updated')
+
+test_agent2.saveBelief('test2')
+test_agent2.updateBelief(2,3)
+test_agent2.saveBelief('test2_updated')
+

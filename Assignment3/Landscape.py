@@ -49,11 +49,24 @@ class landscape:
         size = len(self.landscape)
         temp = [[j.terrain for j in i] for i in self.landscape]
         plt.figure(figsize=(size/10, size/10), dpi=500)
-        sns.heatmap(temp, mask=(temp==-1), vmin=0, vmax=1, linewidth=0.01, linecolor='black',
-                        annot=False, annot_kws={"size": 15/size},
+        sns.heatmap(temp, vmin=0, vmax=1, linewidth=0.01, linecolor='black',
+                        annot=False,
                         square=True, cbar=False,
                         xticklabels=False,
                         yticklabels=False,
                         cmap='Greens')
         plt.title('Landscape: Target at ({}, {})'.format(self.target_x, self.target_y), fontsize=size/15, ha='center')
         plt.show()
+
+    def saveLandscape(self, filename):
+        size = len(self.landscape)
+        temp = [[j.terrain for j in i] for i in self.landscape]
+        plt.figure(figsize=(size/10, size/10), dpi=500)
+        sns.heatmap(temp, vmin=0, vmax=1, linewidth=0.01, linecolor='black',
+                        annot=False,
+                        square=True, cbar=False,
+                        xticklabels=False,
+                        yticklabels=False,
+                        cmap='Greens')
+        plt.title('Landscape: Target at ({}, {})'.format(self.target_x, self.target_y), fontsize=size/15, ha='center')
+        plt.savefig('./imgs/landscape_{}.png'.format(filename), dpi=500)
