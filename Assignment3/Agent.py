@@ -111,18 +111,28 @@ class agent:
 
         return self.knowledge
 
+    def getMaxLikCell(self):
+        if self.rule == 1:
+            #get max i for P(Target in Cell i)
+            belief = np.array([[self.knowledge[i][j].getBelief() for j in range(self.ls.dim)] for i in range(self.ls.dim)])
+            return np.unravel_index(belief.argmax(),belief.shape)
+        else:
+            #get max i for P(Target FOUND in Cell i)
+            belief = [[self.knowledge[i][j].getBelief()*(1-self.ls.landscape[i][j].getTerrain()) for j in range(self.ls.dim)] for i in range(self.ls.dim)]
+            belief = np.array(belief)
+            return np.unravel_index(belief.argmax(),belief.shape)
+
+    def findTarget(self):
+        i = 0; j = 0
+        while not self.searchCell(self.ls.landscape[i][j]):
+            self.knowledge = self.updateBelief(i,j)
+            i,j = self.getMaxLikCell()
+
+        return (i,j)
+
 # compare rule 1 and 2 for 1 iteration
-test_ls = landscape(50)
-test_ls.printLandscape()
-
-test_agent1 = agent(test_ls, 1)
-test_agent2 = agent(test_ls, 2)
-
-test_agent1.saveBelief('test1')
-test_agent1.updateBelief(2,3)
-test_agent1.saveBelief('test1_updated')
-
-test_agent2.saveBelief('test2')
-test_agent2.updateBelief(2,3)
-test_agent2.saveBelief('test2_updated')
-
+test_landscape = landscape(20)
+test_landscape.printLandscape()
+test_agent = agent(test_landscape,2)
+target = test_agent.findTarget()
+print(target)
