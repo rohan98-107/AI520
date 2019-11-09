@@ -56,6 +56,7 @@ class agent:
         plt.savefig('./imgs/belief_{}.png'.format(filename), dpi=500)
 
     def searchCell(self,cell): #search a landCell
+        self.num_actions += 1
         if not cell.isTarget():
             return False
         else:
@@ -123,16 +124,9 @@ class agent:
             return np.unravel_index(belief.argmax(),belief.shape)
 
     def findTarget(self):
-        i = 0; j = 0
+        i = random.randint(0, self.ls.dim-1); j = random.randint(0, self.ls.dim-1)
         while not self.searchCell(self.ls.landscape[i][j]):
             self.knowledge = self.updateBelief(i,j)
             i,j = self.getMaxLikCell()
 
         return (i,j)
-
-# compare rule 1 and 2 for 1 iteration
-test_landscape = landscape(20)
-test_landscape.printLandscape()
-test_agent = agent(test_landscape,2)
-target = test_agent.findTarget()
-print(target)

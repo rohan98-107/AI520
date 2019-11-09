@@ -45,6 +45,18 @@ class landscape:
         new_terrain = {(self.landscape[self.target_x][self.target_y]).terrain}
         return random.choice(list(terrains.difference(new_terrain)))
 
+    # resets target to a random spot (not just a nbr) while keeping the same maze
+    def resetTarget(self):
+        x = self.target_x; y = self.target_y
+        self.landscape[x][y].target = ABSENT
+
+        new_targ_coords = list(set([(x,y) for x in range(self.dim) for y in range(self.dim)]).difference({(x,y)}))
+
+        new_target = random.choice(new_targ_coords)
+        self.target_x = new_target[0]
+        self.target_y = new_target[1]
+        self.landscape[self.target_x][self.target_y].target = PRESENT
+
     def printLandscape(self):
         size = len(self.landscape)
         temp = [[j.terrain for j in i] for i in self.landscape]
