@@ -108,7 +108,7 @@ class agent:
                     self.knowledge[i][j].setBelief(temp + (temp*remainder)/(1-remainder))
         return self.knowledge
 
-    def getMaxLikCell(self,i,j):
+    def getMaxLikCell(self,start_i,start_j):
         if self.rule == 1:
             #get max i for P(Target in Cell i)
             belief = np.array([[self.knowledge[i][j].getBelief() for j in range(self.ls.dim)] for i in range(self.ls.dim)])
@@ -123,7 +123,10 @@ class agent:
             belief = np.array(belief)
             return np.unravel_index(belief.argmax(),belief.shape)
         else:
-            pass
+            belief = [[math.pow(1 - self.knowledge[i][j].getBelief()*(1-self.ls.landscape[i][j].getTerrain()), 1/(1 + math.abs(start_i - i) + math.abs(start_j - j)) ) \
+                    for j in range(self.ls.dim)] for i in range(self.ls.dim)]
+            belief = np.array(belief)
+            return np.unravel_index(belief.argmin(),belief.shape)
 
     def findTarget(self):
         i = self.i; j = self.j
