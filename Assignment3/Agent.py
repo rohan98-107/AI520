@@ -19,6 +19,11 @@ class agent:
         self.ls = landscape
         d = self.ls.dim
 
+        # Rule 1 is highest probability of containing Target
+        # Rule 2 and 3 are highest probability of finding Target
+        # Rule 4 uses a heuristic to optimize for movement cost
+        # Rule 3 and 4 incur costs for movement
+
         if rule == 1 or rule == 2 or rule == 3 or rule == 4:
             self.rule = rule
         else:
@@ -29,7 +34,7 @@ class agent:
         for i in range(d):
             for j in range(d):
                 self.knowledge[i][j].setBelief(1/(d**2)) #prior belief is a uniform distribution amongst all d^2 cells
-                
+
         self.i = random.randint(0, self.ls.dim-1) if start_i == -1 else start_i
         self.j = random.randint(0, self.ls.dim-1) if start_j == -1 else start_j
 
@@ -60,16 +65,16 @@ class agent:
         plt.savefig('./imgs/belief_{}.png'.format(filename), dpi=500)
 
     def searchCell(self,cell): #search a landCell
-        if not cell.isTarget(): 
+        if not cell.isTarget():
             return False
         else:
-            p = 1 - cell.getTerrain() # we want the probability that the cell will be found 
-            if random.uniform(0, 1) < p: 
+            p = 1 - cell.getTerrain() # we want the probability that the cell will be found
+            if random.uniform(0, 1) < p:
                 return True
             else:
                 return False
 
-    def getVisited(self): # function that returns all visited cells 
+    def getVisited(self): # function that returns all visited cells
         n = self.ls.dim
         coords = []
         for x in range(n):
@@ -81,9 +86,9 @@ class agent:
     def probNotFound(self): # this function gives the denominator for the bayesian calculation
         n = self.ls.dim
         res = 0
-        coords = self.getVisited() 
+        coords = self.getVisited()
         res = (n**2 - len(coords))/(n**2) #all the unvisited cells will have equal probabilities...
-        #... of not being found, thus, we set res := unvisited/total 
+        #... of not being found, thus, we set res := unvisited/total
         for coord in coords:
             res += (self.ls.landscape[coord].getTerrain())*(self.knowledge[coord].getBelief()) #all the visited cells...
             #...need to be weighted by their current belief and the terrain type (prob of not being found)
@@ -99,7 +104,7 @@ class agent:
         #E: Target not found
         curr_belief = self.knowledge[x][y].getBelief()
         num = self.ls.landscape[x][y].getTerrain()*curr_belief #P(E|H)*P(H)
-        denom = self.probNotFound() # P(E) 
+        denom = self.probNotFound() # P(E)
         remainder = abs(curr_belief - (num/denom)) # some belief will be lost when we update a cell
         self.knowledge[x][y].setBelief(num/denom)
         # we now take that lost belief and distribute it amongst the other cells
@@ -109,7 +114,7 @@ class agent:
                 if i == x and j == y:
                     continue
                 else:
-                    # * that is done here 
+                    # * that is done here
                     temp = self.knowledge[i][j].getBelief()
                     self.knowledge[i][j].setBelief(temp + (temp*remainder)/(1-remainder))
         return self.knowledge
@@ -125,6 +130,7 @@ class agent:
             belief = np.array(belief)
             return np.unravel_index(belief.argmax(),belief.shape)
         else:
+            # get min i for (1 - P(Target FOUND in Cell i)) ^ (1/ (1 + Manhattan distance from start to cell i))
             belief = [[math.pow(1 - self.knowledge[i][j].getBelief()*(1-self.ls.landscape[i][j].getTerrain()), 1/(1 + math.abs(start_i - i) + math.abs(start_j - j)) ) \
                     for j in range(self.ls.dim)] for i in range(self.ls.dim)]
             belief = np.array(belief)
@@ -133,14 +139,14 @@ class agent:
     def findTarget(self):
         i = self.i; j = self.j
         self.num_actions += 1
-        while not self.searchCell(self.ls.landscape[i][j]): # while target not found 
-            self.knowledge = self.updateBelief(i,j) # keep updating knowledge base 
+        while not self.searchCell(self.ls.landscape[i][j]): # while target not found
+            self.knowledge = self.updateBelief(i,j) # keep updating knowledge base
             next_i,next_j = self.getMaxLikCell(i,j) # query the cell with the greatest likelihood
             self.num_actions += 1
             if self.rule == 3 or self.rule == 4:
                 self.num_actions += math.abs(i - next_i) + math.abs(j - next_j)
             i,j = next_i,next_j
-            
+
             #repeat
 
-        return (i,j) # return target coordinates 
+        return (i,j) # return target coordinates
