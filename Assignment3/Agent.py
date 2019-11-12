@@ -113,12 +113,8 @@ class agent:
             #get max i for P(Target in Cell i)
             belief = np.array([[self.knowledge[i][j].getBelief() for j in range(self.ls.dim)] for i in range(self.ls.dim)])
             return np.unravel_index(belief.argmax(),belief.shape)
-        elif self.rule == 2:
+        elif self.rule == 2 or self.rule == 3:
             #get max i for P(Target FOUND in Cell i)
-            belief = [[self.knowledge[i][j].getBelief()*(1-self.ls.landscape[i][j].getTerrain()) for j in range(self.ls.dim)] for i in range(self.ls.dim)]
-            belief = np.array(belief)
-            return np.unravel_index(belief.argmax(),belief.shape)
-        elif self.rule == 3:
             belief = [[self.knowledge[i][j].getBelief()*(1-self.ls.landscape[i][j].getTerrain()) for j in range(self.ls.dim)] for i in range(self.ls.dim)]
             belief = np.array(belief)
             return np.unravel_index(belief.argmax(),belief.shape)
