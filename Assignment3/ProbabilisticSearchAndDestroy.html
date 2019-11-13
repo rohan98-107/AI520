@@ -13255,7 +13255,7 @@ $$P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)$$<p>which is
 <p>For more implementation details, see <code>Cell.py</code>.</p>
 <p>For example, an initialized $dim = 50$ landscape may look like this:</p>
 <p><img src="./imgs/landscape_blankTest.png" alt="Blank Landscape"></p>
-<p>where the target is located at (40, 48).</p>
+<p>where the target is located at (40, 48), and the darker the shade of green a cell is, the higher the probability of a false negative.</p>
 
 </div>
 </div>
@@ -13279,8 +13279,8 @@ $$P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)$$<p>which is
 </li>
 <li><code>rule</code> (int): either 1 or 2, corresponding to the two probability rules described below</li>
 <li><code>num_actions</code> (int): the number of actions, whether queries or movements (in the later case of a movement-restricted agent), executed so far; initially 0</li>
-<li><code>i</code> (int): x-coordinate of first cell to query; if -1, then select one at random</li>
-<li><code>j</code> (int): y-coordinate of first cell to query; if -1, then select one at random</li>
+<li><code>i</code> (int): x-coordinate of first cell to query; if -1, then select one at random. This is used to control for variance among comparison trials later on.</li>
+<li><code>j</code> (int): y-coordinate of first cell to query; if -1, then select one at random. This is used to control for variance among comparison trials later on.</li>
 </ul>
 
 </div>
@@ -13466,7 +13466,7 @@ $$P(E) = \sum_{i \text{ visited}} P(\text{Target not found in Cell}_i | \text{Ta
 <p>Finally, once a queried cell is updated, we must update the rest of the knowledge base.</p>
 <p>Let $R_i = |{\text{new belief of Cell}_i} - {\text{old belief of Cell}_i}|$, or the difference between the new and old beliefs of the queried cell.</p>
 <p>Then for all remaining cells $j$, use the following update formula:</p>
-$$\text{Belief}^{t+1}_j = \text{Belief}^t_j + \frac{\text{Belief}^t_j * R_i}{1 - R_i}$$<p>This, in a sense, scales the previous belief by how much our query impacted the belief of the queried cell. One can see how failed queries will increase the beliefs of all other cells per iteration, although this increase may be marginal.</p>
+$$\text{Belief}^{t+1}_j = \text{Belief}^t_j + \frac{\text{Belief}^t_j * R_i}{1 - R_i}$$<p>This, in a sense, <strong>scales</strong> the previous belief by how much our query impacted the belief of the queried cell. One can see how failed queries will increase the beliefs of all other cells per iteration, even if this increase is marginal.</p>
 
 </div>
 </div>
@@ -13511,7 +13511,7 @@ $$\text{Belief}^{t+1}_j = \text{Belief}^t_j + \frac{\text{Belief}^t_j * R_i}{1 -
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This method returns a new belief for a specified cell and updates the beliefs about the rest of the map, as described earlier.</p>
+<p>This method returns a new belief for a specified cell and updates the beliefs of the cells in the rest of the map, as described earlier.</p>
 <p><strong>Note:</strong> We do not update the knowledge base when the target is found (case 1 above), as this is trivial: if the target is found, the program will terminate anyway.</p>
 <p>The above method relies on the function <code>probNotFound</code> which computes $P(H|E)$ exactly as described above.</p>
 
@@ -13564,7 +13564,7 @@ $$\text{Belief}^{t+1}_j = \text{Belief}^t_j + \frac{\text{Belief}^t_j * R_i}{1 -
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Rule-1:-Prioritize-the-probability-that-the-target-is-in-a-given-cell">Rule 1: Prioritize the probability that the target is in a given cell<a class="anchor-link" href="#Rule-1:-Prioritize-the-probability-that-the-target-is-in-a-given-cell">&#182;</a></h2><p>This is based on the same $P(H|E)$ computed above. Upon each failed query, we update the entire knowledge base of beliefs as described above, and then we visit the cell with the highest belief. Its implementation is described above via <code>updateBelief</code>.</p>
+<h2 id="Rule-1:-Prioritize-the-probability-that-the-target-is-in-a-given-cell">Rule 1: Prioritize the probability that the target is in a given cell<a class="anchor-link" href="#Rule-1:-Prioritize-the-probability-that-the-target-is-in-a-given-cell">&#182;</a></h2><p>This is based on the same belief, i.e. $P(H|E)$, computed above. Upon each failed query, we update the entire knowledge base of beliefs as described above, and then we visit the cell with the highest belief. Its implementation is described above via <code>updateBelief</code>.</p>
 
 </div>
 </div>
@@ -13581,7 +13581,7 @@ $$\text{Belief}^{t+1}_j = \text{Belief}^t_j + \frac{\text{Belief}^t_j * R_i}{1 -
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Probabilistic-intuition">Probabilistic intuition<a class="anchor-link" href="#Probabilistic-intuition">&#182;</a></h3><p>Observe that this probability is different from $\text{Belief}_i$. It must consider the impact of the terrain's interference with queries, i.e. potential false negatives. We want the following probability:</p>
 $$P(F) := P(\text{Target found in Cell}_i | \text{Observations}_t)$$<p>which is equal to:</p>
-$$(1 - P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)) * P(\text{Target is in Cell}_i)$$<p>Note that $P(\text{Target is in Cell}_i)$ is exactly $P(H)$ from before, and $P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)$ is determined by the terrain type of $\text{Cell}_i$, so we can easily compute $P(F)$.</p>
+$$(1 - P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)) * P(\text{Target is in Cell}_i)$$<p>Note that $P(\text{Target is in Cell}_i)$ is exactly $P(H)$ from before, and $P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)$ is determined by the terrain type of $\text{Cell}_i$. So, we can easily compute $P(F)$.</p>
 
 </div>
 </div>
@@ -13641,7 +13641,7 @@ $$(1 - P(\text{Target not found in Cell}_i | \text{Target is in Cell}_i)) * P(\t
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This method will find the cell with maximum probability for either rule:</p>
+<p>This method will find the argmax for the above probabilities, i.e. cell with maximum probability for either rule:</p>
 <ol>
 <li>Return the cell coordinates with the highest Rule 1 probability, i.e. belief. For arbitrary $\text{Cell}_j$, this is given by:</li>
 </ol>
@@ -13866,7 +13866,8 @@ $$\text{argmax}_j \quad P_\text{Rule2}(j)$$<p>In either case, ties between multi
 <p>The above trial-by-trial data on the number of searches required for the agents (using rules 1 or 2) to find the target can be visualized via the following scatter plot:</p>
 <p><img src="./imgs/fixed_map_comparison_ruleOneTwoScatter.png" alt="Rules 1-2 Comparison by Trials, Scatter"></p>
 <p>It appears that the agent using Rule 1 requires a higher number of searches to find the target. But this pattern is not immediately clear. To mediate this, we consider the quantity:</p>
-$$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searches}_{\text{Rule2}}$$<p><img src="./imgs/fixed_map_comparison_ruleOneTwoDiff.png" alt="Rules 1-2 Difference by Trials, Plot"></p>
+$$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searches}_{\text{Rule2}}$$<p>This observes the margin by which the rule 1 agent underpeforms the rule 2 agent, i.e. the number of additional queries the rule 1 agent took to find the target with respect to the rule 2 agent.</p>
+<p><img src="./imgs/fixed_map_comparison_ruleOneTwoDiff.png" alt="Rules 1-2 Difference by Trials, Plot"></p>
 <p><img src="./imgs/fixed_map_comparison_ruleOneTwoDiffBox.png" alt="Rules 1-2 Difference by Trials, Box"></p>
 <p>The above images show that the difference between the number of searches required following rules 1 and 2 has high spread. The following 1-variable statistics describe the distribution:</p>
 
@@ -13951,7 +13952,8 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>All in all, for a fixed map, it appears that <strong>the agent using Rule 2</strong> outperforms the agent using Rule 1 in terms of, on average, <strong>1648 fewer searches required to find the target.</strong> However, the large variance visualized above strongly motivates repeated trials over multiple randomly-generated maps in order to see if this pattern holds in general.</p>
+<p>All in all, for a fixed map, it appears that <strong>the agent using Rule 2</strong> outperforms the agent using Rule 1 in terms of, on average, <strong>1648 fewer searches required to find the target.</strong></p>
+<p>However, the large variance (std. dev of 9230) and the presence of some extreme outliers, visualized above, strongly motivate repeated trials over multiple randomly-generated maps in order to see if this pattern holds in general.</p>
 
 </div>
 </div>
@@ -13959,14 +13961,14 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Repeated-trials-over-multiple-landscapes">Repeated trials over multiple landscapes<a class="anchor-link" href="#Repeated-trials-over-multiple-landscapes">&#182;</a></h3><p>We conduct similar trials to compare both agents for $N = 50$ distinct and randomly generated maps. For each map and agent, we record the average number of actions taken to find the target over $n = 30$ trials. As above, we start both agents at the same initial queried cell (at random) and reset the target to a random new location in between each trial.</p>
+<h3 id="Repeated-trials-over-multiple-landscapes">Repeated trials over multiple landscapes<a class="anchor-link" href="#Repeated-trials-over-multiple-landscapes">&#182;</a></h3><p>We conduct similar trials to compare both agents for $N = 50$ distinct and randomly generated maps. For each map and agent, we record the average number of actions taken to find the target over $n = 30$ trials. As above, we start both agents at the same initial queried cell (at random) and reset the target to a random new location in between each trial. Also as above, we consider the distribution of the difference between the number of actions required for both agents.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">multi_ruleOneTwoComp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/multimap_comparison_ruleOneTwo.csv&#39;</span><span class="p">)[[</span><span class="s1">&#39;RuleOne&#39;</span><span class="p">,</span> <span class="s1">&#39;RuleTwo&#39;</span><span class="p">]]</span>
@@ -13983,7 +13985,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -14032,51 +14034,51 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
   <tbody>
     <tr>
       <th>RuleOne</th>
-      <td>6239.666667</td>
-      <td>8238.2</td>
-      <td>7995.200000</td>
-      <td>4642.600000</td>
-      <td>5201.333333</td>
-      <td>6096.200000</td>
-      <td>5929.8</td>
-      <td>3793.733333</td>
-      <td>6416.133333</td>
-      <td>4689.800000</td>
+      <td>3413.633333</td>
+      <td>6070.766667</td>
+      <td>4080.3</td>
+      <td>8716.700000</td>
+      <td>5552.833333</td>
+      <td>7149.533333</td>
+      <td>7182.766667</td>
+      <td>4946.033333</td>
+      <td>5595.800000</td>
+      <td>5111.566667</td>
       <td>...</td>
-      <td>4645.466667</td>
-      <td>5928.066667</td>
-      <td>6189.0</td>
-      <td>3903.866667</td>
-      <td>6836.933333</td>
-      <td>4990.000000</td>
-      <td>4923.266667</td>
-      <td>7069.466667</td>
-      <td>8294.866667</td>
-      <td>7375.866667</td>
+      <td>7485.166667</td>
+      <td>7212.466667</td>
+      <td>5438.466667</td>
+      <td>5507.933333</td>
+      <td>6367.566667</td>
+      <td>4476.733333</td>
+      <td>7140.600000</td>
+      <td>4156.700000</td>
+      <td>4111.133333</td>
+      <td>6959.833333</td>
     </tr>
     <tr>
       <th>RuleTwo</th>
-      <td>3687.333333</td>
-      <td>7271.0</td>
-      <td>6089.666667</td>
-      <td>4928.133333</td>
-      <td>8382.600000</td>
-      <td>6516.933333</td>
-      <td>5877.8</td>
-      <td>4493.466667</td>
-      <td>7009.933333</td>
-      <td>3859.933333</td>
+      <td>5825.033333</td>
+      <td>4620.866667</td>
+      <td>4918.0</td>
+      <td>5389.533333</td>
+      <td>6677.766667</td>
+      <td>5095.966667</td>
+      <td>4693.633333</td>
+      <td>4517.033333</td>
+      <td>3647.166667</td>
+      <td>3155.700000</td>
       <td>...</td>
-      <td>5404.133333</td>
-      <td>6142.333333</td>
-      <td>4896.2</td>
-      <td>6497.600000</td>
-      <td>7608.733333</td>
-      <td>5126.333333</td>
-      <td>5827.266667</td>
-      <td>7152.266667</td>
-      <td>9738.533333</td>
-      <td>7034.200000</td>
+      <td>5084.233333</td>
+      <td>3227.066667</td>
+      <td>2747.666667</td>
+      <td>5198.000000</td>
+      <td>5797.033333</td>
+      <td>4272.866667</td>
+      <td>3923.133333</td>
+      <td>5189.466667</td>
+      <td>5423.533333</td>
+      <td>4395.366667</td>
     </tr>
   </tbody>
 </table>
@@ -14096,14 +14098,14 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <p><img src="./imgs/multi_map_comparison_ruleOneTwoScatter.png" alt="Rules 1-2 Comparison by Trials, Multi, Scatter"></p>
 <p><img src="./imgs/multi_map_comparison_ruleOneTwoDiff.png" alt="Rules 1-2 Difference by Trials, Multi, Plot"></p>
 <p><img src="./imgs/multi_map_comparison_ruleOneTwoDiffBox.png" alt="Rules 1-2 Difference by Trials, Multi, Box"></p>
-<p>As before, the difference distribution shown above has quite a large spread. The distribution can be described by the following one-variable descriptive statistics:</p>
+<p>Now, the difference distribution shown above has a significantly smaller spread, even if it is still quite large. The distribution can be described by the following one-variable descriptive statistics:</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">multimap_1varstats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/multimap_1varstats.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -14120,7 +14122,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -14157,13 +14159,13 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
     <tr>
       <th>diff</th>
       <td>50.0</td>
-      <td>259.573333</td>
-      <td>1722.672219</td>
-      <td>-3181.266667</td>
-      <td>-787.8</td>
-      <td>26.233333</td>
-      <td>1290.0</td>
-      <td>4715.533333</td>
+      <td>1228.762667</td>
+      <td>1632.140658</td>
+      <td>-2411.4</td>
+      <td>205.683333</td>
+      <td>1329.933333</td>
+      <td>2389.433333</td>
+      <td>4608.933333</td>
     </tr>
   </tbody>
 </table>
@@ -14179,7 +14181,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It appears that over multiple maps, <strong>rule two</strong> still outperforms rule one by ways of, on average, <strong>260 fewer searches required to find the target.</strong></p>
+<p>It appears that over multiple maps, <strong>rule two</strong> still outperforms rule one by ways of, on average, <strong>1229 fewer searches required to find the target.</strong> And, by controlling for multiple maps, we have significantly reduced the standard deviation of the difference distribution from 9230 to 1632. The outliers are similarly less extreme.</p>
 
 </div>
 </div>
@@ -14187,14 +14189,14 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h3><p>This makes intuitive sense, because rule two prioritizes a more realistic goal: <em>finding</em> the target versus trying to ordain where the target is. In a sense, the two rules are related, but rule two takes more directly into account the possibility of false negatives in a query. Instead of prioritizing where the target is, but possibly still getting a false negative in response, the rule two-prioritizing agent focuses on the most revealing queries. This is more "intelligent" in the sense that the agent's queries are more effective in driving belief updates, and this yields a lower number of searches required to find the target.</p>
-<p>Of course, these data does not seem like a decisive statistical victory for rule two. Accounting for multiple maps has reduced the standard deviation in the difference distribution from 8418 to 1722, but we see that a few outliers still have a pronounced effect on the distributions described above. After running trials on multiple maps, we do see that at best rule two outperforms rule one by 4715 fewer searches, and at worst rule one outperforms rule two by 3181 fewer searches; one might say that in both extreme worst case scenarios, rule two still prevails.</p>
-<p>But even though we hold maps fixed over repeated trials, variations in the data are naturally likely a result of:</p>
+<h3 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h3><p>The superiority of rule 2 makes intuitive sense, because it prioritizes a more realistic goal: <em>finding</em> the target versus trying to ordain where the target is. In a sense, the two rules are related, but rule two takes more directly into account the possibility of false negatives in a query. Instead of prioritizing where the target is, but possibly still getting a false negative in response, the rule two-prioritizing agent focuses on the most revealing queries. This is more "intelligent" in the sense that the agent's queries are more effective in driving belief updates, and this yields a lower number of searches required to find the target.</p>
+<p>Of course, these data does not seem like a decisive statistical victory for rule two. Accounting for multiple maps has reduced the standard deviation in the difference distribution from 9230 to 1632, but we see that a few outliers still have a pronounced effect on the distributions described above. After running trials on multiple maps, we do see that at best rule two outperforms rule one by 4609 fewer searches, and at worst rule one outperforms rule two by 1632 fewer searches; one might say that in general, rule two still prevails.</p>
+<p>But even though we hold maps fixed over repeated trials, variance in the data is naturally a result of:</p>
 <ul>
-<li>Randomly selecting a first cell to query</li>
-<li>Probabalistic revealing of false negatives</li>
+<li>Randomly selecting a first cell to query: although we fix this for both agents per trial, it is still randomized at first.</li>
+<li>Probabalistic revealing of false negatives: there is nothing we can do to totally mediate this randomness.</li>
 </ul>
-<p>As expected from the problem statement, every trial for the same map will vary in terms of how the agent will solve, which sequence of cells to query, etc. because the environment is probabilistic.</p>
+<p>As expected from the problem statement, every trial for the same map will vary in terms of how the agent will solve it, which sequence of cells to query, etc. because the environment is probabilistic.</p>
 
 </div>
 </div>
@@ -14211,7 +14213,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, we consider an agent for which movement between one queried cell to the next <strong>matters.</strong></p>
 <p>That is, we consider movement of one cell in any direction to be an action that the agent takes, just like querying is considered as one action. For example, if an agent has just queried (0,0) and then wishes to query (5,5), it will need to navigate 5 cells down and 5 cells right, meaning 10 total cells traveled across. Then, the next query at (5,5)  counts as an action, making the total number of additional actions, assuming querying (0,0) has already been counted, is $10 + 1 = 11$.</p>
-<p>Note that we are using the <strong>Manhattan distance</strong> to consider travel costs, and not the Euclidean distance, because we assume the agent can only travel rectilinearlly, i.e. up, down, right, or left.</p>
+<p>Note that we are using the <strong>Manhattan distance</strong> to consider travel costs, and not the Euclidean distance, because we assume the agent can only travel rectilinearly, i.e. up, down, right, or left.</p>
 
 </div>
 </div>
@@ -14219,7 +14221,8 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule1}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Rule-3:-Run-with-Rule-2,-but-also-incur-action-costs-for-agent-travel">Rule 3: Run with Rule 2, but also incur action costs for agent travel<a class="anchor-link" href="#Rule-3:-Run-with-Rule-2,-but-also-incur-action-costs-for-agent-travel">&#182;</a></h2><p>As described above, we define a <strong>Rule 3</strong> agent to be exactly the same as a Rule 2 agent, not a Rule 1 agent, as we found Rule 2 to perform better. However, we additionally modify the incrementing of the number of actions required as follows:</p>
+<h2 id="Rule-3:-Run-with-Rule-2,-but-also-incur-action-costs-for-agent-travel">Rule 3: Run with Rule 2, but also incur action costs for agent travel<a class="anchor-link" href="#Rule-3:-Run-with-Rule-2,-but-also-incur-action-costs-for-agent-travel">&#182;</a></h2><p>As described above, we define a <strong>Rule 3</strong> agent to be exactly the same as a Rule 2 agent - not a Rule 1 agent, as we found Rule 2 to perform better.</p>
+<p>However, we additionally modify the incrementing of the number of actions required as follows:</p>
 <p>In addition to counting individual cell queries as one action each, also calculate the <strong>Manhattan distance</strong> between subsequently queried cells:</p>
 $$\text{dist}((x_1, y_1), (x_2, y_2)) = | x_1 - x_2 | + | y_1 - y_2 |$$<p>Then, multiply this quantity by one action per distance unit and add this to the total number of actions incremented at each time step.</p>
 <p>The implementation simply adds on a case (which also works for rule 4 below) for additional incrementation for the <code>findTarget</code> method in the <code>agent</code> described previously:</p>
@@ -14234,7 +14237,7 @@ $$\text{dist}((x_1, y_1), (x_2, y_2)) = | x_1 - x_2 | + | y_1 - y_2 |$$<p>Then, 
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">findTarget</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># ... previous code, which also increments by 1 for queries</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">rule</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_actions</span> <span class="o">+=</span> <span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">next_i</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">next_j</span><span class="p">)</span>
     <span class="c1"># ...</span>
 </pre></div>
@@ -14274,7 +14277,7 @@ $$\text{dist}((x_1, y_1), (x_2, y_2)) = | x_1 - x_2 | + | y_1 - y_2 |$$<p>Then, 
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Naively, running a rule 3 agent on maps will solve them just as a rule 2 agent would, except it would incur much higher values for the number of actions required to find the target. That is, rule 3 is an unintelligent approach to solving this distance-based problem.</p>
+<p>Naively, running a rule 3 agent on maps will solve them just as a rule 2 agent would, except it would incur much higher values for the number of actions required to find the target. That is, rule 3 is an <strong>unintelligent</strong> approach to solving this distance-based problem.</p>
 <p>To mediate the effects of this performance hit, we need to re-adapt our agent's priorities in order to account for necessary travel distance as well.</p>
 
 </div>
@@ -14283,13 +14286,15 @@ $$\text{dist}((x_1, y_1), (x_2, y_2)) = | x_1 - x_2 | + | y_1 - y_2 |$$<p>Then, 
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Rule-4:-Prioritize-cells-both-on-Rule-2-and-travel-costs">Rule 4: Prioritize cells both on Rule 2 and travel costs<a class="anchor-link" href="#Rule-4:-Prioritize-cells-both-on-Rule-2-and-travel-costs">&#182;</a></h2><h3 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h3><p>Instead of using the Rule 1 or Rule 2 probabilities to prioritize the next cell queried, we instead devise a new heuristic which depends only on the cell's Rule 2 probability (of finding the target) as well as the travel cost of reaching that cell from the current one.</p>
+<h2 id="Rule-4:-Prioritize-cells-on-utility,-i.e.-both-on-Rule-2-and-travel-costs">Rule 4: Prioritize cells on utility, i.e. both on Rule 2 and travel costs<a class="anchor-link" href="#Rule-4:-Prioritize-cells-on-utility,-i.e.-both-on-Rule-2-and-travel-costs">&#182;</a></h2><h3 id="Intuition">Intuition<a class="anchor-link" href="#Intuition">&#182;</a></h3><p>Instead of using the Rule 1 or Rule 2 probabilities to prioritize the next cell queried, we instead devise a new heuristic which depends only on the cell's Rule 2 probability (of finding the target) as well as the travel cost of reaching that cell from the current one.</p>
 <p>For simplicity of notation, let the previous Rule 2 probability for any cell $i$ to be denoted as $p_i$.</p>
 <p>If the most-recently queried cell is $\text{Cell}_i$, then let $m_{ij}$ be the total number of actions required to query any other $\text{Cell}_j$ where we <strong>do not require</strong> $j \neq i$. This is equal to Manhattan distance between $\text{Cell}_i$ and  $\text{Cell}_j$ plus 1 for the cost of querying $\text{Cell}_j$.</p>
-<p>Next, let $k_t$ be the number of actions at time $t$ to end game, i.e. the number of queries and/or movements left in the game prior to finding the target. Then, the probability of not finding the target prior to end game, if we query $\text{Cell}_j$ next after $\text{Cell}_i$, is given by:</p>
+<p>Next, let $k_t$ be the number of actions at time $t$ to end game, i.e. the number of queries and/or movements left in the game prior to finding the target.</p>
+<p>Then, the probability of not finding the target prior to end game, if we were somehow able to repeatedly execute the same action of moving from $\text{Cell}_i$ to $\text{Cell}_j$ and querying it repeatedly without belief updates, is given by:</p>
 $$P(\text{\{find target only at end game\}}) = (1-p_i)^{\frac{k_t}{m_{ij}}}$$<p>We intuitively want to minimize this probability at each time step such that we can find the target in fewer than $k$ steps, i.e. before end game. To accomplish this, at each time step and regardless of the value of $k_t$, we choose the next cell to query after $\text{Cell}_i$ as:</p>
 $$\text{argmin}_j \quad \{ h(i,j) = (1-p_i)^{\frac{1}{m_{ij}}} \}$$<p>That is, we choose the $\text{Cell}_j$ such that we minimize the heuristic $h(i,j)$, which relates the rule 2 probability and the distance between $\text{Cell}_i$, $\text{Cell}_j$ in an <strong>exponential relationship.</strong></p>
 <p>That way, very high distances from the current cell and very low rule 2 probabilities penalize the heuristic value by increasing it, and vice versa, which is exactly what we wish our rational rule 3 agent to do.</p>
+<p>Again, because the above probability and heuristic functions are predicated on the notion of repeatedly carrying out the same move until the target is found, the above heuristic captures the notion of a given cell's utility towards ultimately solving the problem. In stretching out the time horizon to end game while keeping the cell's current $p_i$ constant, we are assessing the cell's current time-step utility towards solving the game, independent of what cells are queried, or what belief updates take place, next. The intuition behind our utility approach is further described in a later section.</p>
 <p>Implementation-wise, this is nothing more than an alternative heuristic to rules 1 and 2 to prioritize cells to query at each time step, except we wish to <strong>minimize</strong> this heuristic, unlike the probabilities in rules 1 and 2, which we sought to maximize.</p>
 
 </div>
@@ -14325,7 +14330,7 @@ $$\text{argmin}_j \quad \{ h(i,j) = (1-p_i)^{\frac{1}{m_{ij}}} \}$$<p>That is, w
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Note:</strong> Again, we are finding the argmin of the heuristic and not the argmax of the likelihood (as for rules 1 and 2), as the method name suggests. This is for compatibility with the driver <code>findTarget</code> method.</p>
+<p><strong>Note:</strong> Again, we are finding the argmin of the heuristic and not the argmax of the likelihood (as for rules 1 and 2), contrary to what the method name suggests. This is for code compatibility with and reuse in the driver <code>findTarget</code> method.</p>
 <p><strong>Note 2:</strong> Recall that for rule 3, we added a case in <code>findTarget</code> for both rules 3 and 4 to additionally increment the number of agent actions by the Manhattan distance travelled. This holds here as well.</p>
 
 </div>
@@ -14475,7 +14480,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule3}} - \text{Number of searc
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">multimap_1varstats_ruleThreeFour</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./data/multimap_1varstats_ruleThreeFour.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -14492,7 +14497,7 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule3}} - \text{Number of searc
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -14552,7 +14557,8 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule3}} - \text{Number of searc
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Encouragingly, we see that <strong>Rule 4 strictly outperforms Rule 3</strong>, i.e. naively running with Rule 2, by a performance improvement of, on average, <strong>31,275 fewer actions taken.</strong> This includes costs of both queries and traveling.</p>
-<p>The distribution of the performance improvement does still hvae a large spread, with improvements ranging from 14,477 fewer to as many as 60,584 fewer actions taken to find the target. However, the standard deviation is significantly lower than the mean, and in any case, all trials showed improvement over the baseline rule 3 agent.</p>
+<p>The distribution of the performance improvement does still hvae a large spread, with improvements ranging from 14,477 fewer to as many as 60,584 fewer actions taken to find the target. However, the standard deviation is significantly lower than the mean, and in any case, all trials showed improvement over the baseline rule 3 agent. This fact alone sufficiently demonstrates the effectiveness of our approach.</p>
+<p>Of course, this approach could be improved further.</p>
 
 </div>
 </div>
@@ -14578,10 +14584,11 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule3}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This old joke shines a light at a major problem with a lot of different algorithmic strategies to solve this search and destroy problem. The biggest problem in solving this assignment was that you could never be perfectly sure of a “true false.” Everything was based off probabilities. To that point, there were certain terrains that had lower probabilities of having a false negative. In the order of lowest probabilities of false negatives to highest: flat, hilly, forested, maze of caves.  When we would present probabilities to our probabilistic inference model using Bayes’ Theorem, probabilities of a false negative for flat was a lot smaller then that of a maze of caves. The intuition with algorithms like these is trying to gauge targets at flat or hilly surfaces before forested or a maze of caves terrains since its probability of finding a false negative was a lot higher.</p>
+<p><em>A policeman sees a drunk man searching for something under a streetlight and asks what the drunk has lost. He says he lost his keys and they both look under the streetlight together. After a few minutes the policeman asks if he is sure he lost them here, and the drunk replies, no, and that he lost them in the park. The policeman asks why he is searching here, and the drunk replies, ”the light is better here."</em></p>
+<p>This old joke shines a light at a major problem with a lot of different algorithmic strategies to solve this search and destroy problem. The biggest problem in solving this assignment was that you could never be perfectly sure of a “false negative.” Everything was based off probabilities. To that point, there were certain terrains that had lower probabilities of having a false negative. In the order of lowest probabilities of false negatives to highest: flat, hilly, forested, maze of caves. When we would present probabilities to our probabilistic inference model using Bayes’ Theorem, probabilities of a false negative for flat was a lot smaller then that of a maze of caves. The intuition with algorithms like these is trying to gauge targets at flat or hilly surfaces before forested or a maze of caves terrains since its probability of finding a false negative was a lot higher.</p>
 <p>After collecting our own data on the Rule 1 vs Rule 2 comparison, we were able to justify the decision of the drunk man (jokingly). After running the implementations of each against one another, we were able to deduce on average, on multiple landscapes and on a fixed landscape, Rule 2 outperforms Rule 1 by at least a few hundred searches. In our own implementation, it seems that searching cells of terrains that have low false negative rates are better to search before searching terrains that may have high probabilities of containing the target, regardless of its terrain.</p>
 <p>There were cases where Rule 1 outperformed Rule 2 on certain terrains, but even at its worst case Rule 1 seemed to still not perform terribly worse than Rule 2. So even at its best and worst, Rule 2 seemed to be the winning algorithm in terms of success rates and efficiency.</p>
-<p>What also becomes known is that there will always be outliers with both rules that require either an extremely high amount of searches or an incredibly low amount of searches. Even though, the distribution on random maps over a fixed map seemed to lower the standard deviation significantly (i.e. 8418 searches vs 1722 searches), this is still a rather high standard deviation in itself. Variations for a search and destroy algorithm of this sort are always going to be rather large.</p>
+<p>What also becomes known is that there will always be outliers with both rules that require either an extremely high amount of searches or an incredibly low amount of searches. Even though, the distribution on random maps over a fixed map seemed to lower the standard deviation significantly (i.e. 9230 searches vs 1632), this is still a rather high standard deviation in itself. Variations for a search and destroy algorithm of this sort are always going to be rather large.</p>
 <p>The joke demonstrates how a drunk man (seemingly for this problem a low efficiency AI) seems to believe that it’s better to search somewhere where it’s easier to find a target (under the streetlight) rather than search areas where there is a higher rate of success (parking lot). But according to our findings from Rule 1 vs Rule 2 efficiency, it almost seems as if the drunk man has a point. Obviously, in the joke, the drunk man is wrong. But in truth for false negative target searching, it may in fact be better to search places where there is a higher probability of finding the target before searching places where this is a higher probability of containing a target.</p>
 
 </div>
@@ -14647,47 +14654,28 @@ $$\text{Diff} = \text{Number of searches}_{\text{Rule3}} - \text{Number of searc
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Strategy">Strategy<a class="anchor-link" href="#Strategy">&#182;</a></h2><p>With a moving target, our first problem that arrives is that we have no true knowledge base of where the target will move after each iteration. In our stationary target search, there is an eventual end where we will find the target since it must exist in one of the squares of the grid. So in the worst case scenario it will take dim x dim searches to find the target. In a moving target scenario, this is not the case. There is a possibility that the target will never be found.</p>
-<p>To deal with this problem, we are provided with the information of the tracker. The tracker tells us with 100% assurance what terrain the target will not be in. So there is a 1/3 likeliness it exists in either of the other three terrains. With this information we can knock out 1/4 of the cells (this isn’t always 1/4, it depends on the random allocation according to the given probabilities). After this, we are also provided with the information as to where the target moved next since it only moves to its neighbors.</p>
-<p>At the base step, we are provided with a matrix that has 1/(total cells) probability in each cell. After making our first random guess, we can update the table according to our original strategy of obtaining probabilities. Now, we have the probabilities of each of the given cells according to the probabilities we attained through our normal means using Bayes Theorem. But now, we will use the information we receive from the tracker to remove cells of the terrain that the tracker reported since we know for certain they do not contain the target. Now, we have a reduced cell matrix. We choose the cell with the highest probability of containing the cell.</p>
+<h2 id="Strategy">Strategy<a class="anchor-link" href="#Strategy">&#182;</a></h2><p>With a moving target, our first problem that arrives is that we have no true knowledge base of where the target will move after each iteration. In our stationary target search, there is an eventual end where we will find the target, since it must exist in one of the squares of the grid. So in the worst case scenario, it will take $dim \times dim$ searches to find the target. In a moving target scenario, this is not the case. There is a possibility that the target will never be found.</p>
+<p>To deal with this problem, we are provided with the information of the tracker. The tracker tells us with 100 percent assurance what terrain the target will not be in. So there is a $\frac{1}{3}$ likeliness it exists in either of the other three terrains. With this information we can knock out $\frac{1}{4}$ of the cells (this isn’t always $\frac{1}{4}$, it depends on the random allocation according to the given probabilities). After this, we are also provided with the information as to where the target moved next since it only moves to its neighbors.</p>
+<p>At the base step, we are provided with a matrix that has $\frac{1}{dim^2}$ probability in each cell. After making our first random guess, we can update the table according to our original strategy of obtaining probabilities. Now, we have the probabilities of each of the given cells according to the probabilities we attained through our normal means using Bayes Theorem. But now, we will use the information we receive from the tracker to remove cells of the terrain that the tracker reported since we know for certain they do not contain the target. Now, we have a reduced cell matrix. We choose the cell with the highest probability of containing the cell.</p>
 <p>Now, after our first guess reports a failed search - the target has moved. We are told that the target has moved to a neighbor of its previous cell. Since we are not sure where the target was, we cannot assume its neighbors. But what we can do is look into the neighbors of the previous cell and lower some of their probabilities depending on if they have neighbors from the opposite side or not. For example, if the cell is neighbors with a corner cell then you can lower the probability of both the cell and its neighbor since there is no other way of reaching that cell other than through the suspected target cell.</p>
-<p>A lot of this information that we now have access to is useful in the sense we are better off with this information than not and we can leverage the information to find a certain target faster. But, I am not sure how much better the tracker information really is compared to not having it. There isn’t too much use into the tracker since we can never truly be sure where the target is so we must make many assumptions.</p>
+<p>Essentially, what we are doing here is using filtering to find the “most likely path” a target is taking. Since, we know the target is moving from a cell to its neighbors and only its neighbors, we can use arrays to map out the path of a target through filtering the data we receive from the tracker and previous cell searches. Eventually, (this may compound to a  significant amount of searching) we can deduce where the cell is after we have mapped a path that closely or perfectly resembles the path the target took. But there may be more than one path is identical on a map and you must take that into consideration, and account for all “false negatives” in path searching.</p>
+<p>A lot of this information that we now have access to is useful in the sense we are better off with this information than not and we can leverage the information to find a certain target faster. But, we are not sure how much better the tracker information really is compared to not having it. There isn’t too much use into the tracker, since we can never truly be sure where the target is - we must make many assumptions.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="A-moving-target-AND-an-agent-with-restricted-movement">A moving target AND an agent with restricted movement<a class="anchor-link" href="#A-moving-target-AND-an-agent-with-restricted-movement">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<h2 id="A-moving-target-AND-an-agent-with-restricted-movement">A moving target AND an agent with restricted movement<a class="anchor-link" href="#A-moving-target-AND-an-agent-with-restricted-movement">&#182;</a></h2><p>When we take into account a moving target, the idea of restricted movement creates an even more severe problem. Since we can only search neighboring cells, we no longer can use highest probability of finding a target to search. This can be detrimental since after each 1-unit move, the target can relocate.</p>
+<p>There is a large amount of incurred travel cost if we decide to disregard the rule and continue to search preferred cells over neighbors. Yet, after looking through Rule 3 and Rule 4, it almost still seems like doing this is the preferred and more efficient way of searching. On average, almost 31,275 less actions were taken with following Rule 2 and just incurring travel costs (i.e. Rule 3).</p>
+<p>We can try to extrapolate this information to a moving target. The first thing we can conclude for sure is: using filtering, there is still going to be a much much higher number of actions taken.</p>
+<p>Using our belief state, we can conduct a probabilistic model to search a neighbor. And after that we can deduce if it is more efficient to search a neighbor or further move and incur travel cost. But it is true that doing a neighbor search will be more efficient, since if we keep incurring travel costs for a specific cell - the target could have already moved. We conclude that either of these approaches will essentially provide similar results in the long term.</p>
+<p>A better decision rule is a mix of the last two rules created by Rule 3 and Rule 4. We believe the decision rule should be: Run with Rule 2, but Search each Cell on Path. We believe this can provide more efficient results, since if we were to justify a certain cell to be the location of a target at any given point. Then we know that even if we continue searching, the target will continue moving. But the target can only move to its neighbors so if that is the case there is a possibility in our restricted search model, that we run into the target on our search.</p>
+<p>To emphasize again, any decision rule we create will always be very inefficient. Since we cannot justify with a strong probability where a target is, to incur mass travel costs and still not find the target with a false negative will always be difficult. Also, restricted movement for search with a moving target will double the difficulty of the original problem, since our strategy of using filtering relies on us being able to not incur travel costs for searching for a path. But now, we will incur travel costs and still be inept in locating the target using a “path-finder” approach.</p>
 
-    </div>
 </div>
 </div>
-
 </div>
     </div>
   </div>
