@@ -46,8 +46,11 @@ cmat = img_to_cmatrix(img_filename)
 # crop nxm color matrix to nxn where n<=m
 cmat = crop_cmatrix(cmat)
 
+# export cropped color version of image
+cmatrix_to_img(cmat, 'color_' + img_filename)
+
 # convert color matrix to grayscale using: gray_val = 0.21*r + 0.72*g + 0.07*b
 cmat = rgb_to_grayscale_cmatrix(cmat)
 
 # export pre-processed image
-cmatrix_to_img(cmat, 'preprocessed_' + img_filename)
+cmatrix_to_img(cmat, 'grayscale_' + img_filename)
