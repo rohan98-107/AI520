@@ -28,6 +28,11 @@ def rgb_to_grayscale_cmatrix(cmat):
 
     return cmat
 
+# pads image by adding 1px, zero-valued border on all four sides,
+# making an (n,n) image into an (n+2, n+2) image
+def pad_cmatrix(cmat):
+    return np.pad(cmat, ((1,1), (1,1), (0,0)), 'constant')
+
 
 
 
@@ -37,7 +42,6 @@ def rgb_to_grayscale_cmatrix(cmat):
 
 img_filename = 'test1.png'
 
-
 ### IMAGE PRE-PROCESSING ACTIONS ###
 
 # convert image to nxm matrix of (r,g,b) values
@@ -46,11 +50,11 @@ cmat = img_to_cmatrix(img_filename)
 # crop nxm color matrix to nxn where n<=m
 cmat = crop_cmatrix(cmat)
 
-# export cropped color version of image
-cmatrix_to_img(cmat, 'color_' + img_filename)
-
 # convert color matrix to grayscale using: gray_val = 0.21*r + 0.72*g + 0.07*b
 cmat = rgb_to_grayscale_cmatrix(cmat)
 
+# pad image with zeroes on all borders
+cmat = pad_cmatrix(cmat)
+
 # export pre-processed image
-cmatrix_to_img(cmat, 'grayscale_' + img_filename)
+cmatrix_to_img(cmat, 'preprocessed_' + img_filename)
