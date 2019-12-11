@@ -151,6 +151,79 @@ def CNN_Model(grayscale_dataset):
 
     return out6
 
+def CNN_Model2(grayscale_dataset):
+    # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
+    m, _, img_size, img_size = grayscale_dataset.shape
+
+    # ************************************************
+
+    FILTERS = []  # list of filter block matrices (list of 4d filter tensors)
+    F = 5 #spatial extent i.e. filter dimension
+
+    # initialize filters corresponding to layers
+
+    # ----------------Layer 1-----------------------
+    numfilters1 = 15
+    filter1 = np.random.randint(-1, 2, size=(numfilters1, 1, F, F))
+    FILTERS.append(filter1)
+
+    # ----------------Layer 2-----------------------
+    numfilters2 = 30
+    filter2 = np.random.randint(-1, 2, size=(numfilters2, numfilters1, F, F))
+    FILTERS.append(filter2)
+
+    # ----------------Layer 3-----------------------
+    numfilters3 = 45
+    filter3 = np.random.randint(-1, 2, size=(numfilters3, numfilters2, F, F))
+    FILTERS.append(filter3)
+
+    # ----------------Layer 4-----------------------
+    numfilters4 = 15
+    filter4 = np.random.randint(-1, 2, size=(numfilters4, numfilters3, F, F))
+    FILTERS.append(filter4)
+
+    # ----------------Layer 5-----------------------
+    numfilters5 = 3
+    filter5 = np.random.randint(-1, 2, size=(numfilters5, numfilters4, F, F))
+    FILTERS.append(filter5)
+
+    # ************************************************
+
+    # this is gonna be slow as FUCK
+
+    # this is where we feed-forward
+    for index in range(m):
+        example = grayscale_dataset[index, :, :, :]
+
+        # ************************************************
+
+        # ----------------Layer 1-----------------------
+        out1 = convolve(example, filter1, num_filters=numfilters1, spatial_extent=F, stride=1, padding=2, relu=True)
+
+        # ----------------Layer 2-----------------------
+        out2 = convolve(out1, filter2, num_filters=numfilters2, spatial_extent=F, stride=2, padding=2, relu=True)
+
+        # ----------------Layer 3-----------------------
+        out3 = convolve(out2, filter3, num_filters=numfilters3, spatial_extent=F, stride=2, padding=2, relu=True)
+
+        # ----------------Layer 3.5---------------------
+        out3_upsampled = upSampleVolume(out3,2)
+
+        # ----------------Layer 4-----------------------
+        out4 = convolve(out3_upsampled, filter4, num_filters=numfilters4, stride=1, spatial_extent=F, padding=2, relu=True)
+
+        # ----------------Layer 4.5---------------------
+        out4_upsampled = upSampleVolume(out4,2)
+
+        # ----------------Layer 5-----------------------
+        out5 = convolve(out4_upsampled, filter5, num_filters=numfilters5, spatial_extent=F, stride=1, padding=2)
+
+        # ************************************************
+
+    # then what we do with out6 I have no idea...
+
+    return out5
+
 '''
 data = np.random.randint(256, size=(1, 256, 256))
 filters = np.random.randint(-1, 2, size=(64, 1, 5, 5))
