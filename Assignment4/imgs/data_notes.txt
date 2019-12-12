@@ -1,0 +1,17 @@
+10 photos per photo class, 7 reserved for training, 3 reserved for testing
+
+10 photo classes:
+Animals
+Plants
+Police cars
+Fruits
+Mugshots
+Beverages
+Soccer
+Forests
+Mountains
+Construction machines
+
+100 total photos
+70 for training
+30 for testing
