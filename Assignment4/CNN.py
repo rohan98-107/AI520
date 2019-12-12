@@ -1,10 +1,8 @@
 # Convolutional Neural Network from scratch
 import numpy as np
 
-
 def zeroPad(input, pad_val):  # make sure you only pad individual images
     return np.pad(input, ((0, 0), (0, pad_val), (0, pad_val)), mode='constant')
-
 
 def convolve(input, filters, num_filters, spatial_extent, stride, padding, relu=False):
     '''
@@ -73,84 +71,6 @@ def upSampleVolume(vol, factor):
     return res
 
 
-def CNN_Model(grayscale_dataset):
-    # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
-    m, _, img_size, img_size = grayscale_dataset.shape
-
-    # ************************************************
-
-    FILTERS = []  # list of filter block matrices (list of 4d filter tensors)
-
-    # initialize filters corresponding to layers
-
-    # ----------------Layer 1-----------------------
-    numfilters1 = 64
-    filter1 = np.random.randint(-1, 2, size=(numfilters1, 1, 5, img_size))
-    FILTERS.append(filter1)
-
-    # ----------------Layer 2-----------------------
-    numfilters2 = 128
-    filter2 = np.random.randint(-1, 2, size=(numfilters2, numfilters1, 5, 5))
-    FILTERS.append(filter2)
-
-    # ----------------Layer 3-----------------------
-    numfilters3 = 256
-    filter3 = np.random.randint(-1, 2, size=(numfilters3, numfilters2, 5, 5))
-    FILTERS.append(filter3)
-
-    # ----------------Layer 4-----------------------
-    numfilters4 = 512
-    filter4 = np.random.randint(-1, 2, size=(numfilters4, numfilters3, 5, 5))
-    FILTERS.append(filter4)
-
-    # ----------------Layer 5-----------------------
-    numfilters5 = 512
-    filter5 = np.random.randint(-1, 2, size=(numfilters5, numfilters4, 5, 5))
-    FILTERS.append(filter5)
-
-    # ----------------Layer 6-----------------------
-    numfilters6 = 256
-    filter6 = np.random.randint(-1, 2, size=(numfilters6, numfilters5, 5, 5))
-    FILTERS.append(filter6)
-
-    # ************************************************
-
-    # this is gonna be slow as FUCK
-
-    # this is where we feed-forward
-    for index in range(m):
-        example = grayscale_dataset[index, :, :, :]
-
-        # ************************************************
-
-        # ----------------Layer 1-----------------------
-        out1 = convolve(example, filter1, num_filters=numfilters1, spatial_extent=5, stride=1, padding=2, relu=True)
-
-        # ----------------Layer 2-----------------------
-        out2 = convolve(out1, filter2, num_filters=numfilters2, spatial_extent=5, stride=2, padding=2, relu=True)
-
-        # ----------------Layer 3-----------------------
-        out3 = convolve(out2, filter3, num_filters=numfilters3, spatial_extent=5, stride=2, padding=2, relu=True)
-
-        # ----------------Layer 4-----------------------
-        out4 = convolve(out3, filter4, num_filters=numfilters4, spatial_extent=5, stride=2, padding=2, relu=True)
-
-        # ----------------Layer 5-----------------------
-        out5 = convolve(out4, filter5, num_filters=numfilters5, spatial_extent=5, stride=1, padding=2)
-
-        # ----------------Layer 5.5---------------------
-
-        out5_upsampled = upSampleVolume(out5, 2)
-
-        # ----------------Layer 6-----------------------
-        out6 = convolve(out5_upsampled, filter6, num_filters=numfilters6, spatial_extent=5, stride=1, padding=2, relu=True)
-
-        # ************************************************
-
-    # then what we do with out6 I have no idea...
-
-    return out6
-
 def CNN_Model2(grayscale_dataset):
     # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
     m, _, img_size, img_size = grayscale_dataset.shape
@@ -177,10 +97,16 @@ def CNN_Model2(grayscale_dataset):
     filter3 = np.random.randint(-1, 2, size=(numfilters3, numfilters2, F, F))
     FILTERS.append(filter3)
 
+    # ----------------Layer 3.5---------------------
+    FILTERS.append(None)
+
     # ----------------Layer 4-----------------------
     numfilters4 = 15
     filter4 = np.random.randint(-1, 2, size=(numfilters4, numfilters3, F, F))
     FILTERS.append(filter4)
+
+    # ----------------Layer 4.5---------------------
+    FILTERS.append(None)
 
     # ----------------Layer 5-----------------------
     numfilters5 = 3
@@ -189,40 +115,46 @@ def CNN_Model2(grayscale_dataset):
 
     # ************************************************
 
-    # this is gonna be slow as FUCK
-
     # this is where we feed-forward
     for index in range(m):
         example = grayscale_dataset[index, :, :, :]
 
         # ************************************************
-
+        ACTIVATIONS = []
         # ----------------Layer 1-----------------------
         out1 = convolve(example, filter1, num_filters=numfilters1, spatial_extent=F, stride=1, padding=2, relu=True)
-
+        ACTIVATIONS.append(out1)
         # ----------------Layer 2-----------------------
         out2 = convolve(out1, filter2, num_filters=numfilters2, spatial_extent=F, stride=2, padding=2, relu=True)
+        ACTIVATIONS.append(out2)
 
         # ----------------Layer 3-----------------------
         out3 = convolve(out2, filter3, num_filters=numfilters3, spatial_extent=F, stride=2, padding=2, relu=True)
+        ACTIVATIONS.append(out3)
 
         # ----------------Layer 3.5---------------------
         out3_upsampled = upSampleVolume(out3,2)
+        ACTIVATIONS.append(out3_upsampled)
 
         # ----------------Layer 4-----------------------
         out4 = convolve(out3_upsampled, filter4, num_filters=numfilters4, stride=1, spatial_extent=F, padding=2, relu=True)
+        ACTIVATIONS.append(out4)
 
         # ----------------Layer 4.5---------------------
         out4_upsampled = upSampleVolume(out4,2)
+        ACTIVATIONS.append(out4_upsampled)
 
         # ----------------Layer 5-----------------------
         out5 = convolve(out4_upsampled, filter5, num_filters=numfilters5, spatial_extent=F, stride=1, padding=2)
+        ACTIVATIONS.append(out5)
 
         # ************************************************
 
     # then what we do with out6 I have no idea...
 
     return out5
+
+
 
 '''
 data = np.random.randint(256, size=(1, 256, 256))
