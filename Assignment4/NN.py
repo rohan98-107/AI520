@@ -2,7 +2,7 @@ import numpy as np
 import os
 from Preprocessing import *
 
-def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.0025):
+def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.00000025):
     # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
     m, _, img_size, img_size = grayscale_dataset.shape
     print(m)
@@ -19,9 +19,9 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
         for j in range(len(flattened)):
             print("training repeat: {} image: {}".format(i+1, j+1))
             layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened[i]))
-            print(layer_2.shape)
+            # print(layer_2.shape)
             output = np.maximum(0,np.matmul(layer_2_weights, layer_2))
-            print(output.shape)
+            # print(output.shape)
 
             output_losses  = 2*(abs(output- flattened_true[i]))
             layer_2_gradients = np.zeros((img_size**2 * 3, img_size**2 * 3))
@@ -35,25 +35,26 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
             # compute gradient for weight from node at layer1[l] to layer2[m]
             for m in range(img_size**2*3):
                 for l in range(img_size**2):
-                    if m ==0 and l == 0:
-                        print(layer_2_weights[:,m].reshape((1,img_size**2*3)).shape)
-                        print((2*(abs(output- flattened_true[i]))).shape)
+                    # if m ==0 and l == 0:
+                        # print(layer_2_weights[:,m].reshape((1,img_size**2*3)).shape)
+                        # print((2*(abs(output- flattened_true[i]))).shape)
                     layer_1_gradients[m,l] = np.matmul(layer_2_weights[:,m].reshape((1,img_size**2*3)), 2*(abs(output- flattened_true[i])))* flattened[i][l]
 
 
             print("done compute layer 1 gradient")
 
             layer_2_weights -= learning_rate * layer_2_gradients
-            layer_1_weights -= learning_rate * layer_1_gradients
-
+            layer_1_weights -= learning_rate**2 * layer_1_gradients
+    print(layer_1_weights)
+    print(layer_2_weights)
     return layer_1_weights, layer_2_weights
 
 
 def grayscale_to_color_image(grayscale,filename,layer_1_weights,layer_2_weights):
-    _, channels, img_size, img_size = grayscale.shape
-    flattened = grayscale.reshape((1,img_size**2 * channels))
-    layer_2 = np.maximum(0,np.matmul(flattened,layer_1_weights))
-    output = np.minimum(np.maximum(0,np.matmul(layer_2, layer_2_weights)),255)
+    _, img_size, img_size = grayscale.shape
+    flattened = grayscale.reshape((img_size**2,1))
+    layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened))
+    output = np.minimum(np.maximum(0,np.matmul(layer_2_weights, layer_2)),255)
     output_reshaped = output.reshape((3,img_size,img_size))
     out_image = np.zeros((img_size,img_size,3))
     for i in range(img_size):
@@ -70,14 +71,14 @@ cmats = imgs_to_cmatrices(image_files,n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 print(cmats[0].shape)
 
-layer1, layer2 = NN_Model(gmats[:-1,:,:,:],cmats[:-1,:,:,:])
-f = file("tmp.bin","wb")
+layer1, layer2 = NN_Model(gmats[:-1,:,:,:],cmats[:-1,:,:,:],training_repeats=1)
+f = open("tmp.bin","wb")
 np.save(f,layer1)
 np.save(f,layer2)
 f.close()
 
-f = file("tmp.bin","rb")
+f = open("tmp.bin","rb")
 layer1 = np.load(f)
 layer2 = np.load(f)
 f.close()
-grayscale_to_color_image(gmats[-1,:,:,:], "test", layer1, layer2)
+grayscale_to_color_image(gmats[-1,:,:,:], "test1", layer1, layer2)
