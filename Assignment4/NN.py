@@ -13,6 +13,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
 
     for i in range(training_repeats):
         for j in range(len(flattened)):
+            print("training repeat: {} image: {}".format(i+1, j+1))
             layer_2 = np.maximum(0,np.matmul(flattened[i],layer_1_weights))
             output = np.maximum(0,np.matmul(layer_2, layer_2_weights))
 
@@ -30,16 +31,12 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
                 for l in range(img_size**2 * channels):
                     layer_1_gradients[l,m] = 0
                     for y in range(img_size**2 * channels):
-                        layer_1_gradients[k,m] += 2*(abs(output[y]- flattened_true[i][y]))*
+                        layer_1_gradients[l,m] += 2*(abs(output[y]- flattened_true[i][y]))* layer_2_weights[m,y] * layer1[l]
 
-                    * layer1[m] * \
-                            max(0,np.dot(layer_1_weights[k,:], layer_1))
 
             layer_2_weights -= learning_rate * layer_2_gradients
             layer_1_weights -= learning_rate * layer_1_gradients
 
 
-dataset = np.random.randint(4,size= (1,1,2,2))
-true_imgs = np.random.randint(4,size= (1,1,2,2))
 
 NN_Model(dataset,true_imgs)
