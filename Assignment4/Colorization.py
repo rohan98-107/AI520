@@ -9,23 +9,21 @@ n = 64
 
 # converts image to matrix of color values
 def imgs_to_cmatrices(filenames):
-    rets = []
-    for filename in filenames:
-        img = Image.open('./imgs/' + filename)
+    rets = np.zeros((len(filenames), 3, n, n))
+    for f in range(len(filenames)):
+        img = Image.open('./imgs/' + filenames[f])
         tmp = np.array(img)
-
-        ret = np.zeros((n, n, 3))
 
         if tmp.shape[0] >= n and tmp.shape[1] >= n:
             for i in range(n):
                 for j in range(n):
-                    ret[i][j] = np.array([tmp[i][j][0], tmp[i][j][1], tmp[i][j][2]])
-
-            rets.append(ret)
+                    rets[f, 0, i, j] = tmp[i][j][0]
+                    rets[f, 1, i, j] = tmp[i][j][1]
+                    rets[f, 2, i, j] = tmp[i][j][2]
         else:
             return None
 
-    return np.stack(rets, axis=0)
+    return rets
 
 # converts matrix to image and saves to ./imgs/
 def cmatrices_to_imgs(cmats, filenames):
