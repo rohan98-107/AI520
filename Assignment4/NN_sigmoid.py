@@ -49,12 +49,10 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
             intermediate = output_deltas * ((output * (1 - output))/255)
 
             # derivative of sigmoid
-            #layer_2_deltas = np.matmul(np.transpose(layer_2_weights), output_deltas)
             layer_2_deltas = np.matmul(np.transpose(layer_2_weights), intermediate)
 
             # derivative of sigmoid
             layer_2_gradients += np.matmul(intermediate, np.transpose(layer_2))
-            #layer_2_gradients += np.matmul(output_deltas, (d_sigmoid(np.transpose(layer_2))))
 
             layer_1_gradients += np.matmul(layer_2_deltas, (d_sigmoid(np.transpose(flattened[j]))))
 
@@ -80,7 +78,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
                 train_set_error += error[0, 0]
             print()
             print("training repeat: {} average train set error: {}".format(i + 1, train_set_error / len(flattened)))
-            #output_test(img_size, layer_1_weights, layer_2_weights, layer_3_weights)
+            output_test(img_size, layer_1_weights, layer_2_weights, layer_3_weights)
     return layer_1_weights, layer_2_weights
 
 
@@ -148,4 +146,4 @@ layer2 = np.load(f)
 f.close()
 # grayscale_to_color_image(gmats[-30,:,:,:], image_files[-30][6:], layer1, layer2)
 
-output_test(n,layer1,layer2)
+#output_test(n,layer1,layer2)

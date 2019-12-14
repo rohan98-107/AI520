@@ -1,0 +1,13 @@
+Responsibilities for Assignment 4
+
+Concepts & coding:
+NN architecture: Aakash
+NN testing and alternative architectures: Aakash & Alex
+Backprop & gradient math: Aakash & Rohan
+NN brainstorming trial-and-error: Rohan
+Preprocessing: Alex
+
+Report:
+NN explanation: Aakash & Alex
+Backprop math: Rohan
+NN trials, analysis, otherwise: Alex

@@ -4,7 +4,6 @@ from Preprocessing import *
 from math import sqrt
 
 def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.0000025, batch_size = 1, lamda = .01):
-    # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
     m, _, img_size, img_size = grayscale_dataset.shape
     input_nodes = img_size**2
     output_nodes = img_size**2 * 3
