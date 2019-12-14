@@ -21,8 +21,9 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
     layer_2_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
     layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes))
     for i in range(training_repeats):
+        print("training repeat: {}".format(i+1))
         for j in range(len(flattened)):
-            if img_size >= 64 or (j+1) %100 == 0:
+            if img_size >= 40:
                 print("training repeat: {} image: {}".format(i+1, j+1))
             layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened[j]))
 
@@ -44,17 +45,18 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
                 # layer_1_weights -= learning_rate**2 * layer_1_gradients
                 layer_2_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
                 layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes ))
-        train_set_error = 0
-        for j in range(len(flattened)):
-            input = flattened[j]
-            next_layer = np.maximum(0,np.matmul(layer_1_weights, input))
-            output = np.minimum(np.maximum(0,np.matmul(layer_2_weights, next_layer)),255)
-            diffs = output- flattened_true[j]
-            error = np.matmul(np.transpose(diffs),diffs)
-            train_set_error += error[0,0]
-        print()
-        print("training repeat: {} average train set error: {}".format(i+1, train_set_error/len(flattened)))
-        output_test(img_size,layer_1_weights, layer_2_weights)
+        if (i+1) % 5 == 0:
+            train_set_error = 0
+            for j in range(len(flattened)):
+                input = flattened[j]
+                next_layer = np.maximum(0,np.matmul(layer_1_weights, input))
+                output = np.minimum(np.maximum(0,np.matmul(layer_2_weights, next_layer)),255)
+                diffs = output- flattened_true[j]
+                error = np.matmul(np.transpose(diffs),diffs)
+                train_set_error += error[0,0]
+            print()
+            print("training repeat: {} average train set error: {}".format(i+1, train_set_error/len(flattened)))
+            output_test(img_size,layer_1_weights, layer_2_weights)
     return layer_1_weights, layer_2_weights
 
 def output_test(n,layer_1_weights,layer_2_weights):
@@ -92,7 +94,7 @@ def output_test(n,layer_1_weights,layer_2_weights):
 
 n = 16
 image_files = ["train2/" + filename for filename in os.listdir("imgs/train2/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
-cmats = imgs_to_cmatrices(image_files[0:400],n)
+cmats = imgs_to_cmatrices(image_files,n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 # print(gmats[0])
 print("dim " + str(n) + " NN")
