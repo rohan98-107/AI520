@@ -3,16 +3,19 @@ import os
 from Preprocessing import *
 from math import sqrt
 
+training_errors = []
+test_errors = []
+
 def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.0000025, batch_size = 1, lamda = .01):
-    # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
     m, _, img_size, img_size = grayscale_dataset.shape
     input_nodes = img_size**2
     output_nodes = img_size**2 * 3
     middle_layer_multiple  = 5
     nodes_in_middle_layer = output_nodes * middle_layer_multiple
-    print("middle layer multiple = " + str(middle_layer_multiple))
+
     flattened = [ grayscale_dataset[i,:,:,:].reshape((input_nodes,1)) for i in range(m)]
     flattened_true = [true_imgs[i,:,:,:].reshape((output_nodes,1)) for i in range(m)]
+
     layer_1_weight_scale = .2
     layer_2_weight_scale = .2
     layer_1_weights = 2*layer_1_weight_scale*np.random.random_sample((nodes_in_middle_layer, input_nodes))-layer_1_weight_scale
@@ -20,10 +23,9 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
 
     layer_2_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
     layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes))
+
     for i in range(training_repeats):
         for j in range(len(flattened)):
-            if img_size >= 64 or (j+1) %100 == 0:
-                print("training repeat: {} image: {}".format(i+1, j+1))
             layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened[j]))
 
             output = np.minimum(np.maximum(0,np.matmul(layer_2_weights, layer_2)),255)
@@ -54,6 +56,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
             train_set_error += error[0,0]
         print()
         print("training repeat: {} average train set error: {}".format(i+1, train_set_error/len(flattened)))
+        training_errors.append(train_set_error/len(flattened))
         output_test(img_size,layer_1_weights, layer_2_weights)
     return layer_1_weights, layer_2_weights
 
@@ -89,10 +92,11 @@ def output_test(n,layer_1_weights,layer_2_weights):
 
     print("average test set error: {}".format(total_error/m))
     print()
+    test_errors.append(total_error/m)
 
 n = 16
 image_files = ["train2/" + filename for filename in os.listdir("imgs/train2/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
-cmats = imgs_to_cmatrices(image_files[0:400],n)
+cmats = imgs_to_cmatrices(image_files[:100], n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 # print(gmats[0])
 print("dim " + str(n) + " NN")
@@ -109,4 +113,11 @@ layer1 = np.load(f)
 layer2 = np.load(f)
 f.close()
 
-output_test(n,layer1,layer2)
+#output_test(n,layer1,layer2)
+
+import pandas as pd
+df = pd.DataFrame(training_errors)
+df.to_csv('./training_loss.csv')
+
+df2 = pd.DataFrame(test_errors)
+df2.to_csv('./test_loss.csv')

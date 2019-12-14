@@ -23,7 +23,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
     m, _, img_size, img_size = grayscale_dataset.shape
     input_nodes = img_size**2
     output_nodes = img_size**2 * 3
-    nodes_in_middle_layer = output_nodes * 10
+    nodes_in_middle_layer = output_nodes
     flattened = [ grayscale_dataset[i,:,:,:].reshape((input_nodes,1)) for i in range(m)]
     flattened_true = [true_imgs[i,:,:,:].reshape((output_nodes,1)) for i in range(m)]
     layer_1_weight_scale = sqrt(6/(input_nodes+output_nodes))
@@ -39,32 +39,48 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
         for j in range(len(flattened)):
             if (j+1) %10 == 0:
                 print("training repeat: {} image: {}".format(i+1, j+1))
-            layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened[i]))
+            layer_2 = np.maximum(0,np.matmul(layer_1_weights, flattened[j]))
 
             # sigmoid function, scaled
-            output = 255 * sigmoid(np.matmul(layer_2_weights, layer_2))
+            output = 255 * (sigmoid(np.matmul(layer_2_weights, layer_2)))
 
-            output_deltas  = 2*((output- flattened_true[i]))
+            output_deltas  = 2*((output- flattened_true[j]))
+
+            intermediate = output_deltas * ((output * (1 - output))/255)
 
             # derivative of sigmoid
-            layer_2_deltas = d_sigmoid(np.matmul(np.transpose(layer_2_weights),output_deltas))
+            #layer_2_deltas = np.matmul(np.transpose(layer_2_weights), output_deltas)
+            layer_2_deltas = np.matmul(np.transpose(layer_2_weights), intermediate)
 
             # derivative of sigmoid
-            layer_2_gradients += d_sigmoid(np.matmul(output_deltas, np.transpose(layer_2)))
+            layer_2_gradients += np.matmul(intermediate, np.transpose(layer_2))
+            #layer_2_gradients += np.matmul(output_deltas, (d_sigmoid(np.transpose(layer_2))))
 
-            layer_1_gradients += np.matmul(layer_2_deltas,np.transpose(flattened[i]))
+            layer_1_gradients += np.matmul(layer_2_deltas, (d_sigmoid(np.transpose(flattened[j]))))
 
             if batch_size == 1 or (i* len(flattened) + j + 1) % batch_size == 0:
                 # print("Adjusting weights")
 
-                layer_2_weights -= np.minimum(np.maximum(-.01 * batch_size * layer_2_weight_scale, learning_rate * layer_2_gradients * layer_2_weight_scale), .01 * batch_size * layer_2_weight_scale)
-                layer_1_weights -= np.minimum(np.maximum(-.01 * batch_size * layer_1_weight_scale, learning_rate ** 2 * layer_1_gradients * layer_1_weight_scale), .01 * batch_size * layer_1_weight_scale)
+                #layer_2_weights -= np.minimum(np.maximum(-.01 * batch_size * layer_2_weight_scale, learning_rate * layer_2_gradients * layer_2_weight_scale), .01 * batch_size * layer_2_weight_scale)
+                #layer_1_weights -= np.minimum(np.maximum(-.01 * batch_size * layer_1_weight_scale, learning_rate ** 2 * layer_1_gradients * layer_1_weight_scale), .01 * batch_size * layer_1_weight_scale)
                 # layer_2_weights -= np.minimum(np.maximum(-.01*batch_size,learning_rate * layer_2_gradients),.01*batch_size)
                 # layer_1_weights -= np.minimum(np.maximum(-.01*batch_size,learning_rate * layer_1_gradients),.01*batch_size)
-                # layer_2_weights -= learning_rate * layer_2_gradients
-                # layer_1_weights -= learning_rate**2 * layer_1_gradients
+                layer_2_weights -= learning_rate * layer_2_gradients
+                layer_1_weights -= learning_rate**2 * layer_1_gradients
                 layer_2_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
                 layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes ))
+
+            train_set_error = 0
+            for j in range(len(flattened)):
+                input = flattened[j]
+                layer_2 = sigmoid(np.matmul(layer_1_weights, input))
+                output = 255 * sigmoid(np.matmul(layer_2_weights, layer_2))
+                diffs = output - flattened_true[j]
+                error = np.matmul(np.transpose(diffs), diffs)
+                train_set_error += error[0, 0]
+            print()
+            print("training repeat: {} average train set error: {}".format(i + 1, train_set_error / len(flattened)))
+            #output_test(img_size, layer_1_weights, layer_2_weights, layer_3_weights)
     return layer_1_weights, layer_2_weights
 
 
@@ -87,9 +103,8 @@ def grayscale_to_color_image(grayscale,filename,layer_1_weights,layer_2_weights)
     img.save(filename +"-grayscale"+ '.png')
 
 def output_test(n,layer_1_weights,layer_2_weights):
-    f_s = lambda x: 255 * sigmoid(x)
 
-    image_files = ["test/" + filename for filename in os.listdir("imgs/test/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
+    image_files = ["test/" + filename for filename in os.listdir("imgs/test/") if filename[-3:] == "png" or filename[-3:] == "jpg" or filename[-4:] == 'jpeg']
     cmats = imgs_to_cmatrices(image_files,n)
     gmats = rgb_to_grayscale_cmatrices(cmats)
     m,_, img_size, img_size = gmats.shape
@@ -111,17 +126,17 @@ def output_test(n,layer_1_weights,layer_2_weights):
                 out_image[j][k][2] = output_reshaped[2][j][k]
         # print(out_image)
         img = Image.fromarray(out_image, 'RGB')
-        img.save("imgs/"+str(n)+image_files[i] +"-colored"+ '.png')
+        img.save("imgs/"+str(n)+"_sigmoid_"+image_files[i] +"-colored"+ '.png')
         img = Image.fromarray(gmats[i].reshape(img_size,img_size), 'L')
-        img.save("imgs/"+str(n)+image_files[i] +"-grayscale"+ '.png')
+        img.save("imgs/"+str(n)+"_sigmoid_"+image_files[i] +"-grayscale"+ '.png')
 
-n = 32
-image_files = ["train/" + filename for filename in os.listdir("imgs/train/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
+n = 16
+image_files = ["train/" + filename for filename in os.listdir("imgs/train/") if filename[-3:] == "png" or filename[-3:] == "jpg" or filename[-4:] == "jpeg"]
 cmats = imgs_to_cmatrices(image_files,n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 # print(gmats[0])
 
-layer1, layer2 = NN_Model(gmats,cmats,training_repeats=10, batch_size = 1)
+layer1, layer2 = NN_Model(gmats,cmats,training_repeats=100, batch_size = 1)
 f = open("tmp"+str(n)+".bin","wb")
 np.save(f,layer1)
 np.save(f,layer2)

@@ -15,10 +15,17 @@ def d_sigmoid(x):
     #sigmoid(x) * (1 - sigmoid(x)), which is equivalent to:
     return 1 / (np.exp(x) + 2 + np.exp(-x))
 
+def scale_ndarray(x):
+    diff = np.max(x) - np.min(x)
+    if diff != 0:
+        return (x - np.min(x)) / (diff)
+    else:
+        return x
 
 
 
-def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.025, batch_size = 1, lamda = .01):
+
+def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate = 0.0025, batch_size = 1, lamda = .01):
     # use Zhang et. al model architecture with no pooling layers, only conv w/ relu and upsampling
     m, _, img_size, img_size = grayscale_dataset.shape
     input_nodes = img_size**2
@@ -33,13 +40,13 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
     layer_2_weights = 2*layer_2_weight_scale*np.random.random_sample((nodes_in_middle_layer, nodes_in_middle_layer))-layer_2_weight_scale
     layer_3_weights = 2*layer_3_weight_scale*np.random.random_sample((output_nodes, nodes_in_middle_layer))-layer_3_weight_scale
 
-
     layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes))
     layer_2_gradients = np.zeros((nodes_in_middle_layer, nodes_in_middle_layer))
     layer_3_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
     # original_layer_2_gradients = np.zeros((output_nodes, nodes_in_middle_layer))
     # original_layer_1_gradients = np.zeros((nodes_in_middle_layer, input_nodes ))
     for i in range(training_repeats):
+
         for j in range(len(flattened)):
             # if (j+1) %10 == 0:
             #     print("training repeat: {} image: {}".format(i+1, j+1), flush=True)
@@ -51,7 +58,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
             output_deltas  = 2*((output- flattened_true[j]))
 
             # derivative of sigmoid
-            layer_3_intermediate = output_deltas * (output * (1 - output))/255
+            layer_3_intermediate = output_deltas * ((output * (1 - output))/255)
             layer_3_deltas = np.matmul(np.transpose(layer_3_weights),layer_3_intermediate)
 
             layer_2_intermediate = layer_3_deltas * (layer_3 * (1 - layer_3))
@@ -62,8 +69,12 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
 
             layer_3_gradients += np.matmul(layer_3_intermediate, np.transpose(layer_3))
             layer_2_gradients += np.matmul(layer_2_intermediate, np.transpose(layer_2))
+            layer_1_gradients += np.matmul(layer_1_intermediate, np.transpose(flattened[j]))
 
-            layer_1_gradients += np.matmul(layer_1_intermediate,np.transpose(flattened[j]))
+
+            #print("gradients zeroed?: ", layer_3_gradients.all() == 0, layer_2_gradients.all() == 0, layer_1_gradients.all() == 0)
+            #print("intermediates zeroed?: ", layer_3_intermediate.all() == 0, layer_2_intermediate.all() == 0, layer_1_intermediate.all() == 0)
+            #print("deltas zeroed?: ", layer_3_deltas.all() == 0, layer_2_deltas.all() == 0)
 
             if batch_size == 1 or (i* len(flattened) + j + 1) % batch_size == 0:
                 # print("Adjusting weights")
@@ -88,7 +99,7 @@ def NN_Model(grayscale_dataset, true_imgs, training_repeats = 1, learning_rate =
         print()
         print("training repeat: {} average train set error: {}".format(i+1, train_set_error/len(flattened)))
         output_test(img_size,layer_1_weights,layer_2_weights, layer_3_weights)
-    return layer_1_weights, layer_2_weights
+    return layer_1_weights, layer_2_weights, layer_3_weights
 
 def output_test(n,layer_1_weights,layer_2_weights, layer_3_weights):
     f_s = lambda x: 255 * sigmoid(x)
@@ -105,7 +116,7 @@ def output_test(n,layer_1_weights,layer_2_weights, layer_3_weights):
         layer_3 = sigmoid(np.matmul(layer_2_weights, layer_2))
 
         # sigmoid function, scaled
-        output = sigmoid(np.matmul(layer_3_weights, layer_2)) * 255
+        output = sigmoid(np.matmul(layer_3_weights, layer_3)) * 255
         diffs = output- flattened_real[i]
         error = np.matmul(np.transpose(diffs),diffs)
         total_error += error[0,0]
@@ -126,11 +137,11 @@ def output_test(n,layer_1_weights,layer_2_weights, layer_3_weights):
     print()
 n = 16
 image_files = ["train2/" + filename for filename in os.listdir("imgs/train2/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
-cmats = imgs_to_cmatrices(image_files[:10],n)
+cmats = imgs_to_cmatrices(image_files,n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 # print(gmats[0])
 
-layer1, layer2, layer3 = NN_Model(gmats,cmats,training_repeats=100, batch_size = 1)
+layer1, layer2, layer3 = NN_Model(gmats,cmats,training_repeats=30, batch_size = 1)
 f = open("tmp"+str(n)+".bin","wb")
 np.save(f,layer1)
 np.save(f,layer2)

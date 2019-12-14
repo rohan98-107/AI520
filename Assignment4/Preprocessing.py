@@ -8,6 +8,7 @@ def imgs_to_cmatrices(filenames, n):
     rets = np.zeros((len(filenames), 3, n, n))
     for f in range(len(filenames)):
         img = Image.open('./imgs/' + filenames[f])
+        img = img.convert('RGB')
         img = img.resize((n, n), Image.ANTIALIAS)
         tmp = np.array(img)
         for i in range(n):

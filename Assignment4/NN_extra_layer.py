@@ -106,7 +106,7 @@ def output_test(n,layer_1_weights,layer_2_weights,layer_3_weights):
     print()
 n = 16
 image_files = ["train2/" + filename for filename in os.listdir("imgs/train2/") if filename[-3:] == "png" or filename[-3:] == "jpg"]
-cmats = imgs_to_cmatrices(image_files[:100],n)
+cmats = imgs_to_cmatrices(image_files,n)
 gmats = rgb_to_grayscale_cmatrices(cmats)
 # print(gmats[0])
 print("dim " + str(n) + " extra layer NN")
