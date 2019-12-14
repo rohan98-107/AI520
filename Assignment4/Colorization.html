@@ -13183,8 +13183,8 @@ $$I_{rgb} = \begin{bmatrix}
     \dots 
     \begin{bmatrix} r_{0,m} &amp; g_{0,m} &amp; b_{0,m} \end{bmatrix} \\
     {} &amp; \ddots &amp; {} \\
-    \begin{bmatrix} r_{1,0} &amp; g_{1,0} &amp; b_{1,0} \end{bmatrix} &amp;
-    \begin{bmatrix} r_{1,1} &amp; g_{1,1} &amp; b_{1,1} \end{bmatrix} &amp;
+    \begin{bmatrix} r_{n,0} &amp; g_{n,0} &amp; b_{n,0} \end{bmatrix} &amp;
+    \begin{bmatrix} r_{n,1} &amp; g_{n,1} &amp; b_{n,1} \end{bmatrix} &amp;
     \dots 
     \begin{bmatrix} r_{n,m} &amp; g_{n,m} &amp; b_{n,m} \end{bmatrix}
     \end{bmatrix}$$<p>where $r_{i,j}, g_{i,j}, b_{i,j} \in [0,255]$ each represent the $(i,j)$-th pixel's color along the red, green, and blue channels. The reader is likely familiar with the following two colors in RGB:</p>
@@ -13351,7 +13351,7 @@ $$\text{Image} \rightarrow I_{rgb} \rightarrow I_{gray} \xrightarrow{NN} I^{*}_{
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Then, we convert each image to grayscale using the following provided formula:</p>
-$$Gray(r, g, b) = 0.21r + 0.72g + 0.07b)$$
+$$Gray(r, g, b) = 0.21r + 0.72g + 0.07b$$
 </div>
 </div>
 </div>
@@ -13665,7 +13665,7 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Then, we calculated the derivative of the loss with respect to the output  as follows:</p>
+<p>Then we calculate the gradients as the partial derivative of the loss function with respect to the next layer, times the partial derivative of the current layer with respect to its weights.</p>
 
 </div>
 </div>
@@ -13675,51 +13675,16 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">output_deltas</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">output</span> <span class="o">-</span> <span class="n">flattened_true</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># partials w.r.t. next layer</span>
+<span class="n">output_deltas</span>  <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">output</span> <span class="o">-</span> <span class="n">flattened_true</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="n">layer_2_deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">layer_2_weights</span><span class="p">),</span> <span class="n">output_deltas</span><span class="p">)</span>
 
-    </div>
-</div>
-</div>
+<span class="c1"># multiply partials with current layer w.r.t its weights</span>
+<span class="n">layer_2_gradients</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">output_deltas</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">layer_2</span><span class="p">))</span>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>and similarly for the derivative of the loss with respect to the second layer as follows:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">layer_2_deltas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">layer_2_weights</span><span class="p">),</span><span class="n">output_deltas</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Putting this together, we updated the gradients and weights for layers 1 and 2 as follows:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">layer_2_gradients</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">output_deltas</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">layer_2</span><span class="p">))</span>
 <span class="n">layer_1_gradients</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">layer_2_deltas</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">flattened</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
 
+<span class="c1"># update weights</span>
 <span class="n">layer_2_weights</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">batch_size</span><span class="o">*</span><span class="n">layer_2_weight_scale</span><span class="p">,</span>\
                         <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">layer_2_gradients</span><span class="o">*</span><span class="n">layer_2_weight_scale</span><span class="p">),</span><span class="o">.</span><span class="mi">01</span><span class="o">*</span><span class="n">batch_size</span><span class="o">*</span><span class="n">layer_2_weight_scale</span><span class="p">)</span>
 <span class="n">layer_1_weights</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="o">-.</span><span class="mi">01</span><span class="o">*</span><span class="n">batch_size</span><span class="o">*</span><span class="n">layer_1_weight_scale</span><span class="p">,</span>\
@@ -13821,8 +13786,8 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We see the aggregate training and testing losses descending overall, with significant fluctuations as large as $0.3-0.4 \times 1 \times 10^7$. We see that with 300 iterations, the testing loss seems to taper off at around $1 \times 10^7$ after iteration 250, while the training loss continues to descend. This suggests that after 250-300 iterations, we may begin to worry about overfitting to the training data.</p>
-<p>But, with just 300 iterations, we should not suspect overfitting just yet, especially with larger concerns over the visuals of the outputs below.</p>
+<p>We see the aggregate training and testing losses descending overall, with fluctuations as large as $0.3-0.4 \times 1 \times 10^7$ but the overall aggregate loss decreasing by as much as seven times smaller for training, and a 20-30% decrease for the testing data. This is encouraging, because our algorithm did manage to decrease the gradients sequentially and reduce error, meaning the neural network did in fact learn something about the data.</p>
+<p>With 300 iterations, the testing loss seems to taper off at around $1 \times 10^7$ after iteration 250, while the training loss continues to descend. This suggests that after 250-300 iterations, we may begin to worry about overfitting to the training data. But, with just 300 iterations, we should not suspect overfitting just yet, especially with larger concerns over the visuals of the outputs below.</p>
 
 </div>
 </div>
@@ -13853,6 +13818,23 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
     <tr>
         <td>
             <figure>
+                <img src='./imgs/report/02_truth.jpg' alt='missing' />
+            </figure>
+        </td>
+        <td>
+            <figure>
+                <img src='./imgs/report/02_gray.png' alt='missing' />
+            </figure>
+        </td>        
+        <td>
+            <figure>
+                <img src='./imgs/report/02_color.png' alt='missing' />
+            </figure>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <figure>
                 <img src='./imgs/report/01_truth.jpg' alt='missing' />
             </figure>
         </td>
@@ -13867,22 +13849,6 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
             </figure>
         </td>
    </tr>
-    <tr>
-        <td>
-            <figure>
-                <img src='./imgs/report/02_truth.jpg' alt='missing' />
-            </figure>
-        </td>
-        <td>
-            <figure>
-                <img src='./imgs/report/02_gray.png' alt='missing' />
-            </figure>
-        </td>        
-        <td>
-            <figure>
-                <img src='./imgs/report/02_color.png' alt='missing' />
-            </figure>
-        </td>
         <tr>
         <td>
             <figure>
@@ -13917,24 +13883,6 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
             </figure>
         </td>
    </tr>
-       <tr>
-        <td>
-            <figure>
-                <img src='./imgs/report/06_truth.jpg' alt='missing' />
-            </figure>
-        </td>
-        <td>
-            <figure>
-                <img src='./imgs/report/06_gray.png' alt='missing' />
-            </figure>
-        </td>        
-        <td>
-            <figure>
-                <img src='./imgs/report/06_color.png' alt='missing' />
-            </figure>
-        </td>
-   </tr>
-
 </table><p>To see all of our test results, see <code>./imgs/16test2</code> for the grayscale and colorized versions, and <code>./imgs/test2</code> for the corresponding truth images.</p>
 
 </div>
@@ -13957,17 +13905,17 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Obviously, by our metrics and common sense perception, the colorizations are not good.</p>
+<p>Obviously, by our metrics and common perception, the colorizations are not satisfactory.</p>
 <p>The above six examples show a spectrum of various common colorization errors, which we saw frequently-occuring in our trials. These include:</p>
 <ol>
-<li><p><strong>Total lack of feature encoding:</strong> input images' feature shapes were lost in an output image which looks like each pixel was basically colored at random. That is, we obtain a sea of randomly colorized pixels not corresponding to reality.</p>
+<li><p><strong>Lack of feature encoding:</strong> input images' feature shapes were lost in an output image which looks like each pixel was basically colored at random. That is, we obtain a sea of randomly colorized pixels not corresponding to reality.</p>
 </li>
 <li><p><strong>Resolution of feature encoding to stripes:</strong> all of the image's features were encoded as vertical colored stripes running down the image. It is similar to 1., except with some kind of order, although it also does not correspond to reality.</p>
 </li>
 <li><p><strong>Varying levels of unwarranted blackness:</strong> images encoded had significant clusters of black pixels, regardless of how dark the input image was.</p>
 </li>
 </ol>
-<h3 id="Fuzzy-features">Fuzzy features<a class="anchor-link" href="#Fuzzy-features">&#182;</a></h3><p>One can immediately see that the produced output images do a very poor job at preserving the initial shapes of the features in the original images.</p>
+<h3 id="Fuzzy-features">Fuzzy features<a class="anchor-link" href="#Fuzzy-features">&#182;</a></h3><p>One can immediately see that the produced output images do a poor job at preserving the initial shapes of the features in the original images.</p>
 <table>
     <tr>
         <tr>
@@ -14007,6 +13955,7 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 
 </table><p>In some cases, the colorization did capture some of the original image's shape. In the first example above, the bonsai tree outline with approximately three main features - the two triangular-shaped heads and the plant base - is represented roughly in the colorized version as three approximately triangular clusters of colorized pixels. The blackness of the background in comparison to those features is preserved. On the other hand, the colors within these three clusters are totally nonsensical, as the original image had a mostly red color palette.</p>
 <p>In worse cases, the colorization not only failed to capture original input feature shapes, but it also produced new shapes (i.e. not black pixels) that did not correspond to reality. In the second example, the bonsai tree comprises of one major feature appears like a concave arc curving right on a white background. However, the output image has what appears to be three black pixel clusters (in a smiley-face shape) on a vertically-striped color background. This ultimately looks nothing like the original input.</p>
+<p>This could be a result of underlying mathematical errors, or it could be a symptom of (a) a small training dataset and/or (b) low-resolution training images. With small image sizes, there are less pixels to define the border of an image's feature, which means it may be harder to detect these features to begin with.</p>
 <h3 id="Black-pits-of-despair">Black pits of despair<a class="anchor-link" href="#Black-pits-of-despair">&#182;</a></h3><p>One can also see black pixels riddled throughout the predicted images. For example:</p>
 <table>
     <tr>
@@ -14218,29 +14167,29 @@ $$\sigma(x) = tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} \\ \sigma'(x) = 1 - \s
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We recognize that a better colorization neural network should accomplish any or all of the following enhancements:</p>
 <ol>
-<li>More hidden layers to detect/predict more features of images</li>
+<li><strong>More hidden layers</strong> to detect/predict more features of images</li>
 </ol>
 <p>This is extremely crucial to the success of the neural network, but at the same time, it would have made runtimes infeasibly large.</p>
 <ol>
-<li>More appropriate activation functions given the task at hand</li>
+<li><strong>More appropriate activation functions</strong> given the task at hand</li>
 </ol>
 <p>RELU is relatively easy to code and efficient for the machine to execute, but at the same time, we suspect that it is responsible for a majority of images "blacking out." That is, the RELU function may have been zeroing out negative pixel values instead of scaling them or otherwise operating on them to preserve that data.</p>
 <p>While the sigmoid and hyperbolic functions were less efficient in terms of runtime, they seemed to produce images which at least had some sort of shape beyond random scattering of pixels and colors.</p>
 <p>In the future, we would want to see which functions are appropriate for which steps, and analyze why.</p>
 <ol>
-<li>Higher-resolution training and test datasets of images</li>
+<li><strong>Higher-resolution training and test datasets</strong> of images</li>
 </ol>
 <p>One key consideration looming over our training process is the fact that our training images are quite small at $16 \times 16$ pixels. When scaled that small, our training images lost resolution. This might have made it more difficult for our network to learn pixel boundaries of shapes in the images, therefore making the predicted outputs less coherent and representative of reality. Ideally, a successful colorizer should be able to act on images of at least $64 \times 64$ dimension, where shapes are allotted more pixels to define their patterns.</p>
 <ol>
-<li>Larger training datasets</li>
+<li><strong>Larger training datasets</strong></li>
 </ol>
 <p>Although we sourced approximately a thousand images, we only used 100 for training due to runtime constraints. Obviously, we would have wanted a much more substantial training dataset. It would have been preferable to train on the full 1000-sized dataset, and test on only 100-200 images never before seen by the algorithm. But this training would have taken too long on our machines and for our purposes.</p>
 <ol>
-<li>Tweaking the learning rate $\alpha$</li>
+<li>Tweaking the <strong>learning rate $\alpha$</strong></li>
 </ol>
 <p>We experimented with various $\alpha$ as necessary to get our training execution to finish in a reasonable time, but more extensive experimentation should be done to observe how $\alpha$ can change the gradient descent towards avoiding local minima and heading towards true global minima.</p>
 <ol>
-<li>Implementing regularization rate $\lambda$</li>
+<li>Implementing <strong>regularization parameter $\lambda$</strong></li>
 </ol>
 <p>As described earlier, we would have wanted to implement regularization as a way to protect against overfitting. Given that we were chiefly concerned with diagnosing the more pertinent issues of our output images being nonsensical, we did not prioritize overfitting, but this is ideally a must-have.</p>
 
